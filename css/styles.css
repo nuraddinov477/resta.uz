@@ -24,8 +24,9 @@
     --radius-sm:     8px;
     --radius:        14px;
     --radius-lg:     20px;
-    --font-body:     'Inter', 'Roboto', Arial, sans-serif;
+    --font-body:      'Inter', 'Roboto', Arial, sans-serif;
     --base-font-size: 15px;
+    --line-height:    1.6;
 }
 
 html { scroll-behavior: smooth; font-size: var(--base-font-size); }
@@ -34,7 +35,7 @@ body {
     font-family: var(--font-body);
     color: var(--text);
     background: var(--bg);
-    line-height: 1.6;
+    line-height: var(--line-height);
     overflow-x: hidden;
 }
 

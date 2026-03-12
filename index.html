@@ -19,9 +19,21 @@
         try {
             var s = JSON.parse(localStorage.getItem('resta_settings') || '{}');
             var r = document.documentElement;
-            if (s.colorPrimary) r.style.setProperty('--primary', s.colorPrimary);
-            if (s.colorAccent)  r.style.setProperty('--accent',  s.colorAccent);
-            if (s.fontSize)     r.style.setProperty('--base-font-size', s.fontSize + 'px');
+            // Ranglar
+            if (s.color_primary)     r.style.setProperty('--primary',      s.color_primary);
+            if (s.color_accent)      r.style.setProperty('--accent',       s.color_accent);
+            if (s.color_text)        r.style.setProperty('--text',         s.color_text);
+            if (s.color_bg)          r.style.setProperty('--bg',           s.color_bg);
+            if (s.color_dark)        r.style.setProperty('--dark',         s.color_dark);
+            if (s.color_border)      r.style.setProperty('--border',       s.color_border);
+            if (s.color_muted)       r.style.setProperty('--muted',        s.color_muted);
+            if (s.color_bgAlt)       r.style.setProperty('--bg-alt',       s.color_bgAlt);
+            if (s.color_primaryDark) r.style.setProperty('--primary-dark', s.color_primaryDark);
+            // Shrift o'lchamlari
+            var fs = s.fontSizes || {};
+            if (fs.body) r.style.setProperty('--base-font-size', fs.body + 'px');
+            if (fs.lh)   r.style.setProperty('--line-height',    fs.lh);
+            if (fs.ls)   r.style.setProperty('--letter-spacing', fs.ls + 'px');
             if (s.fontFamily && s.fontFamily !== 'Inter') {
                 var fontMap = {
                     'Poppins':           'Poppins:wght@400;500;600;700;800;900',

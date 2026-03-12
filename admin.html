@@ -156,7 +156,7 @@
 
         /* Sidebar */
         .sidebar {
-            width: 220px;
+            width: 230px;
             flex-shrink: 0;
             background: var(--bg2);
             border-right: 1px solid var(--border);
@@ -194,8 +194,8 @@
         .main {
             flex: 1;
             margin-left: 220px;
-            padding: 2rem;
-            max-width: 860px;
+            padding: 2rem 2.5rem;
+            max-width: 1120px;
         }
 
         /* Tab panels */
@@ -403,11 +403,76 @@
         }
         .stat-mini-card .lbl { font-size: .78rem; color: var(--muted); margin-top: 0.25rem; }
 
+        /* Slider grid */
+        .slider-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+        .slider-card {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+        }
+        .slider-card label {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: .78rem; font-weight: 600;
+            color: var(--muted); text-transform: uppercase;
+            letter-spacing: .04em; margin-bottom: 0.6rem;
+        }
+        .slider-card label span {
+            font-size: .9rem; font-weight: 800;
+            color: var(--primary); text-transform: none; letter-spacing: 0;
+        }
+        .slider-card input[type="range"] {
+            width: 100%; accent-color: var(--primary);
+            height: 4px; background: rgba(255,255,255,0.1);
+        }
+        .slider-preview {
+            margin-top: 0.5rem; color: rgba(255,255,255,0.4);
+            font-size: .75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        /* Color grid */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .color-card {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+            display: flex; flex-direction: column; gap: 0.5rem;
+        }
+        .color-card label {
+            font-size: .72rem; font-weight: 700;
+            color: var(--muted); text-transform: uppercase; letter-spacing: .04em;
+        }
+        .color-card-row {
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        .color-card input[type="color"] {
+            width: 40px; height: 36px;
+            border-radius: 8px; border: 1px solid var(--border);
+            background: none; padding: 2px; cursor: pointer;
+        }
+        .color-card .chex {
+            font-size: .78rem; color: var(--muted); font-family: monospace;
+        }
+        .color-card .cswatch {
+            width: 28px; height: 28px; border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.15); flex-shrink: 0;
+        }
+
         /* Responsive */
         @media (max-width: 640px) {
             .sidebar { display: none; }
             .main { margin-left: 0; padding: 1.25rem; }
             .form-row { grid-template-columns: 1fr; }
+            .slider-grid, .color-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -510,37 +575,68 @@
             <div class="tab-panel" id="tab-fonts">
                 <div class="panel-header">
                     <h2>Shriftlar</h2>
-                    <p>Sayt uchun shrift oilasi va o'lchamini tanlang</p>
+                    <p>Sayt uchun shrift oilasi va barcha o'lchamlarni sozlang</p>
                 </div>
 
                 <div class="card">
                     <div class="card-title">Shrift oilasi</div>
-                    <div class="font-grid" id="fontGrid">
-                        <!-- JS renders these -->
-                    </div>
+                    <div class="font-grid" id="fontGrid"></div>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">Ko'rinish</div>
+                    <div class="card-title">Namuna ko'rinish</div>
                     <div class="font-preview" id="fontPreviewBox">
-                        <strong id="fontPreviewTitle">Biznesingizni Tizimlashtiring</strong>
-                        RESTA kompaniyalarga CRM joriy qilish va sotuv bo'limini qurishda yordam beradi.
+                        <strong id="fontPreviewTitle" style="display:block;margin-bottom:0.25rem">Biznesingizni Tizimlashtiring</strong>
+                        <span id="fontPreviewH2" style="display:block;font-size:1.1rem;font-weight:700;margin-bottom:0.35rem;color:rgba(255,255,255,0.7)">RESTA nima qiladi?</span>
+                        RESTA kompaniyalarga CRM joriy qilish va sotuv bo'limini qurishda yordam beradi. Haqiqiy natija — 30 kun ichida.
                     </div>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">Shrift o'lchami</div>
-                    <div class="form-group">
-                        <label>Asosiy matn o'lchami</label>
-                        <div class="size-slider-wrap">
-                            <input type="range" id="fontSizeSlider" min="13" max="20" value="15" oninput="updateSizeVal(this.value)">
-                            <span class="size-val" id="fontSizeVal">15px</span>
+                    <div class="card-title">Sarlavha o'lchamlari</div>
+                    <div class="slider-grid">
+                        <div class="slider-card">
+                            <label>H1 — Asosiy sarlavha <span id="v_h1">72px</span></label>
+                            <input type="range" id="fs_h1" min="40" max="100" value="72"
+                                oninput="updateFsVal('h1',this.value)">
+                            <div class="slider-preview" id="prev_h1" style="font-weight:800;font-size:1.2rem">Biznesingizni Tizimlashtiring</div>
+                        </div>
+                        <div class="slider-card">
+                            <label>H2 — Bo'lim sarlavhasi <span id="v_h2">40px</span></label>
+                            <input type="range" id="fs_h2" min="24" max="60" value="40"
+                                oninput="updateFsVal('h2',this.value)">
+                            <div class="slider-preview" id="prev_h2" style="font-weight:700">RESTA nima qiladi?</div>
+                        </div>
+                        <div class="slider-card">
+                            <label>H3 — Kichik sarlavha <span id="v_h3">22px</span></label>
+                            <input type="range" id="fs_h3" min="16" max="36" value="22"
+                                oninput="updateFsVal('h3',this.value)">
+                            <div class="slider-preview" id="prev_h3" style="font-weight:600">CRM joriy qilish</div>
+                        </div>
+                        <div class="slider-card">
+                            <label>Asosiy matn <span id="v_body">15px</span></label>
+                            <input type="range" id="fs_body" min="13" max="20" value="15"
+                                oninput="updateFsVal('body',this.value)">
+                            <div class="slider-preview" id="prev_body">Haqiqiy kompaniyalar bilan haqiqiy natijalar</div>
+                        </div>
+                        <div class="slider-card">
+                            <label>Qator oralig'i <span id="v_lh">1.6</span></label>
+                            <input type="range" id="fs_lh" min="1.3" max="2.1" step="0.05" value="1.6"
+                                oninput="updateFsVal('lh',this.value)">
+                            <div class="slider-preview">Matn qatorlari orasidagi masofa</div>
+                        </div>
+                        <div class="slider-card">
+                            <label>Harf oralig'i <span id="v_ls">-0.5px</span></label>
+                            <input type="range" id="fs_ls" min="-2" max="2" step="0.5" value="-0.5"
+                                oninput="updateFsVal('ls',this.value)">
+                            <div class="slider-preview" style="letter-spacing:-0.5px">Sarlavha harf oralig'i</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="save-bar">
                     <button class="btn-save" onclick="saveFonts()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
+                    <button class="btn-reset" onclick="resetFonts()"><i class="fa fa-rotate-left"></i> Standart</button>
                     <span class="save-msg" id="fontSaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
                 </div>
             </div>
@@ -549,90 +645,170 @@
             <div class="tab-panel" id="tab-colors">
                 <div class="panel-header">
                     <h2>Ranglar</h2>
-                    <p>Saytning asosiy rang palitrasini o'zgartiring</p>
+                    <p>Saytning to'liq rang palitrasini sozlang</p>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">Asosiy ranglar</div>
-                    <div class="form-row">
-                        <div class="form-group">
+                    <div class="card-title">Barcha ranglar</div>
+                    <div class="color-grid">
+                        <div class="color-card">
                             <label>Asosiy rang (Primary)</label>
-                            <div class="color-row">
-                                <input type="color" id="colorPrimary" value="#1d4ed8" oninput="updateColorSwatch('primary', this.value)">
-                                <div class="color-swatch" id="swatchPrimary" style="background:#1d4ed8"></div>
-                                <span style="color:var(--muted);font-size:.85rem" id="colorPrimaryHex">#1d4ed8</span>
+                            <div class="color-card-row">
+                                <input type="color" id="colorPrimary" value="#1d4ed8" oninput="syncColor('primary',this.value)">
+                                <div class="cswatch" id="swatchPrimary" style="background:#1d4ed8"></div>
+                                <span class="chex" id="hexPrimary">#1d4ed8</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="color-card">
                             <label>Aksent rang (Accent)</label>
-                            <div class="color-row">
-                                <input type="color" id="colorAccent" value="#06b6d4" oninput="updateColorSwatch('accent', this.value)">
-                                <div class="color-swatch" id="swatchAccent" style="background:#06b6d4"></div>
-                                <span style="color:var(--muted);font-size:.85rem" id="colorAccentHex">#06b6d4</span>
+                            <div class="color-card-row">
+                                <input type="color" id="colorAccent" value="#06b6d4" oninput="syncColor('accent',this.value)">
+                                <div class="cswatch" id="swatchAccent" style="background:#06b6d4"></div>
+                                <span class="chex" id="hexAccent">#06b6d4</span>
+                            </div>
+                        </div>
+                        <div class="color-card">
+                            <label>Matn rangi (Text)</label>
+                            <div class="color-card-row">
+                                <input type="color" id="colorText" value="#1e293b" oninput="syncColor('text',this.value)">
+                                <div class="cswatch" id="swatchText" style="background:#1e293b"></div>
+                                <span class="chex" id="hexText">#1e293b</span>
+                            </div>
+                        </div>
+                        <div class="color-card">
+                            <label>Fon rangi (Background)</label>
+                            <div class="color-card-row">
+                                <input type="color" id="colorBg" value="#ffffff" oninput="syncColor('bg',this.value)">
+                                <div class="cswatch" id="swatchBg" style="background:#ffffff"></div>
+                                <span class="chex" id="hexBg">#ffffff</span>
+                            </div>
+                        </div>
+                        <div class="color-card">
+                            <label>Qorong'u fon (Dark)</label>
+                            <div class="color-card-row">
+                                <input type="color" id="colorDark" value="#0f172a" oninput="syncColor('dark',this.value)">
+                                <div class="cswatch" id="swatchDark" style="background:#0f172a"></div>
+                                <span class="chex" id="hexDark">#0f172a</span>
+                            </div>
+                        </div>
+                        <div class="color-card">
+                            <label>Chegara rangi (Border)</label>
+                            <div class="color-card-row">
+                                <input type="color" id="colorBorder" value="#e2e8f0" oninput="syncColor('border',this.value)">
+                                <div class="cswatch" id="swatchBorder" style="background:#e2e8f0"></div>
+                                <span class="chex" id="hexBorder">#e2e8f0</span>
+                            </div>
+                        </div>
+                        <div class="color-card">
+                            <label>Ikkilamchi matn (Muted)</label>
+                            <div class="color-card-row">
+                                <input type="color" id="colorMuted" value="#64748b" oninput="syncColor('muted',this.value)">
+                                <div class="cswatch" id="swatchMuted" style="background:#64748b"></div>
+                                <span class="chex" id="hexMuted">#64748b</span>
+                            </div>
+                        </div>
+                        <div class="color-card">
+                            <label>Alt fon (Section bg)</label>
+                            <div class="color-card-row">
+                                <input type="color" id="colorBgAlt" value="#f8fafc" oninput="syncColor('bgAlt',this.value)">
+                                <div class="cswatch" id="swatchBgAlt" style="background:#f8fafc"></div>
+                                <span class="chex" id="hexBgAlt">#f8fafc</span>
+                            </div>
+                        </div>
+                        <div class="color-card">
+                            <label>Primary dark (Hover)</label>
+                            <div class="color-card-row">
+                                <input type="color" id="colorPrimaryDark" value="#1e3a8a" oninput="syncColor('primaryDark',this.value)">
+                                <div class="cswatch" id="swatchPrimaryDark" style="background:#1e3a8a"></div>
+                                <span class="chex" id="hexPrimaryDark">#1e3a8a</span>
                             </div>
                         </div>
                     </div>
 
                     <div style="margin-top:1.5rem">
-                        <div class="card-title" style="margin-bottom:1rem">Namuna ko'rinish</div>
+                        <div class="card-title" style="margin-bottom:0.75rem">Namuna</div>
                         <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center">
-                            <div id="previewBtn" style="background:#1d4ed8;color:#fff;padding:0.6rem 1.25rem;border-radius:50px;font-size:.85rem;font-weight:700;transition:background 0.3s">Asosiy tugma</div>
-                            <div id="previewAccent" style="background:rgba(6,182,212,0.12);color:#06b6d4;border:1px solid #06b6d4;padding:0.6rem 1.25rem;border-radius:50px;font-size:.85rem;font-weight:700;transition:all 0.3s">Aksent tugma</div>
-                            <div id="previewBadge" style="background:rgba(29,78,216,0.1);color:#1d4ed8;padding:0.3rem 0.8rem;border-radius:50px;font-size:.75rem;font-weight:700;transition:all 0.3s">Badge</div>
+                            <div id="previewBtn" style="background:#1d4ed8;color:#fff;padding:0.55rem 1.1rem;border-radius:50px;font-size:.82rem;font-weight:700;transition:background 0.3s">Asosiy tugma</div>
+                            <div id="previewAccent" style="background:rgba(6,182,212,0.12);color:#06b6d4;border:1px solid #06b6d4;padding:0.55rem 1.1rem;border-radius:50px;font-size:.82rem;font-weight:700">Aksent</div>
+                            <div id="previewBadge" style="background:rgba(29,78,216,0.1);color:#1d4ed8;padding:0.25rem 0.7rem;border-radius:50px;font-size:.72rem;font-weight:700">Badge</div>
+                            <div id="previewText" style="padding:0.4rem 0.8rem;border-radius:8px;font-size:.82rem;color:#1e293b;background:#f8fafc;border:1px solid #e2e8f0">Matn namuna</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="card">
-                    <div class="card-title">Tayyor ranglar seti</div>
-                    <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
-                        <button class="font-opt" onclick="applyColorSet('#1d4ed8','#06b6d4')" title="Ko'k (standart)">
-                            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
-                                <div style="width:20px;height:20px;border-radius:4px;background:#1d4ed8"></div>
-                                <div style="width:20px;height:20px;border-radius:4px;background:#06b6d4"></div>
+                    <div class="card-title">Tayyor rang setlari</div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.75rem">
+                        <button class="font-opt" onclick="applyColorSet('#1d4ed8','#06b6d4','#1e293b','#ffffff','#0f172a','#e2e8f0')">
+                            <div style="display:flex;gap:3px;justify-content:center;margin-bottom:5px">
+                                <div style="width:18px;height:18px;border-radius:4px;background:#1d4ed8"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#06b6d4"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#0f172a"></div>
                             </div>
-                            <div class="font-opt-preview">Ko'k</div>
+                            <div class="font-opt-name" style="font-size:.78rem">Ko'k (standart)</div>
                         </button>
-                        <button class="font-opt" onclick="applyColorSet('#7c3aed','#a78bfa')" title="Binafsha">
-                            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
-                                <div style="width:20px;height:20px;border-radius:4px;background:#7c3aed"></div>
-                                <div style="width:20px;height:20px;border-radius:4px;background:#a78bfa"></div>
+                        <button class="font-opt" onclick="applyColorSet('#7c3aed','#a78bfa','#1e1b4b','#faf5ff','#1e1b4b','#e9d5ff')">
+                            <div style="display:flex;gap:3px;justify-content:center;margin-bottom:5px">
+                                <div style="width:18px;height:18px;border-radius:4px;background:#7c3aed"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#a78bfa"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#1e1b4b"></div>
                             </div>
-                            <div class="font-opt-preview">Binafsha</div>
+                            <div class="font-opt-name" style="font-size:.78rem">Binafsha</div>
                         </button>
-                        <button class="font-opt" onclick="applyColorSet('#059669','#34d399')" title="Yashil">
-                            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
-                                <div style="width:20px;height:20px;border-radius:4px;background:#059669"></div>
-                                <div style="width:20px;height:20px;border-radius:4px;background:#34d399"></div>
+                        <button class="font-opt" onclick="applyColorSet('#059669','#34d399','#064e3b','#f0fdf4','#022c22','#bbf7d0')">
+                            <div style="display:flex;gap:3px;justify-content:center;margin-bottom:5px">
+                                <div style="width:18px;height:18px;border-radius:4px;background:#059669"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#34d399"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#022c22"></div>
                             </div>
-                            <div class="font-opt-preview">Yashil</div>
+                            <div class="font-opt-name" style="font-size:.78rem">Yashil</div>
                         </button>
-                        <button class="font-opt" onclick="applyColorSet('#dc2626','#fb923c')" title="Qizil">
-                            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
-                                <div style="width:20px;height:20px;border-radius:4px;background:#dc2626"></div>
-                                <div style="width:20px;height:20px;border-radius:4px;background:#fb923c"></div>
+                        <button class="font-opt" onclick="applyColorSet('#dc2626','#fb923c','#450a0a','#fff7ed','#1c0606','#fed7aa')">
+                            <div style="display:flex;gap:3px;justify-content:center;margin-bottom:5px">
+                                <div style="width:18px;height:18px;border-radius:4px;background:#dc2626"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#fb923c"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#450a0a"></div>
                             </div>
-                            <div class="font-opt-preview">Qizil</div>
+                            <div class="font-opt-name" style="font-size:.78rem">Qizil</div>
                         </button>
-                        <button class="font-opt" onclick="applyColorSet('#0f766e','#2dd4bf')" title="Moviy-yashil">
-                            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
-                                <div style="width:20px;height:20px;border-radius:4px;background:#0f766e"></div>
-                                <div style="width:20px;height:20px;border-radius:4px;background:#2dd4bf"></div>
+                        <button class="font-opt" onclick="applyColorSet('#0f766e','#2dd4bf','#042f2e','#f0fdfa','#021a19','#99f6e4')">
+                            <div style="display:flex;gap:3px;justify-content:center;margin-bottom:5px">
+                                <div style="width:18px;height:18px;border-radius:4px;background:#0f766e"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#2dd4bf"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#042f2e"></div>
                             </div>
-                            <div class="font-opt-preview">Teal</div>
+                            <div class="font-opt-name" style="font-size:.78rem">Teal</div>
                         </button>
-                        <button class="font-opt" onclick="applyColorSet('#1e293b','#38bdf8')" title="Qora-ko'k">
-                            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
-                                <div style="width:20px;height:20px;border-radius:4px;background:#1e293b"></div>
-                                <div style="width:20px;height:20px;border-radius:4px;background:#38bdf8"></div>
+                        <button class="font-opt" onclick="applyColorSet('#be185d','#fb7185','#4a0020','#fff1f2','#2d0010','#fecdd3')">
+                            <div style="display:flex;gap:3px;justify-content:center;margin-bottom:5px">
+                                <div style="width:18px;height:18px;border-radius:4px;background:#be185d"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#fb7185"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#4a0020"></div>
                             </div>
-                            <div class="font-opt-preview">Qora</div>
+                            <div class="font-opt-name" style="font-size:.78rem">Pushti</div>
+                        </button>
+                        <button class="font-opt" onclick="applyColorSet('#d97706','#fbbf24','#451a03','#fffbeb','#27100a','#fde68a')">
+                            <div style="display:flex;gap:3px;justify-content:center;margin-bottom:5px">
+                                <div style="width:18px;height:18px;border-radius:4px;background:#d97706"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#fbbf24"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#451a03"></div>
+                            </div>
+                            <div class="font-opt-name" style="font-size:.78rem">Amber</div>
+                        </button>
+                        <button class="font-opt" onclick="applyColorSet('#1e293b','#38bdf8','#020617','#f8fafc','#020617','#e2e8f0')">
+                            <div style="display:flex;gap:3px;justify-content:center;margin-bottom:5px">
+                                <div style="width:18px;height:18px;border-radius:4px;background:#1e293b"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#38bdf8"></div>
+                                <div style="width:18px;height:18px;border-radius:4px;background:#020617"></div>
+                            </div>
+                            <div class="font-opt-name" style="font-size:.78rem">Qora</div>
                         </button>
                     </div>
                 </div>
 
                 <div class="save-bar">
                     <button class="btn-save" onclick="saveColors()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
+                    <button class="btn-reset" onclick="resetColors()"><i class="fa fa-rotate-left"></i> Standart</button>
                     <span class="save-msg" id="colorSaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
                 </div>
             </div>
@@ -976,51 +1152,98 @@ function applyFontPreview(name) {
     document.getElementById('fontPreviewTitle').style.fontFamily = `'${name}', sans-serif`;
 }
 
-function updateSizeVal(v) {
-    document.getElementById('fontSizeVal').textContent = v + 'px';
-    settings.fontSize = v;
+// ==================== FONT SIZES ====================
+const FS_DEFAULTS = { h1:'72', h2:'40', h3:'22', body:'15', lh:'1.6', ls:'-0.5' };
+const FS_UNITS    = { h1:'px', h2:'px', h3:'px', body:'px', lh:'', ls:'px' };
+const FS_PREVIEWS = { h1:'Biznesingizni Tizimlashtiring', h2:'RESTA nima qiladi?', h3:'CRM joriy qilish', body:'Haqiqiy kompaniyalar bilan haqiqiy natijalar', lh:'Matn qatorlari orasidagi masofa', ls:'Sarlavha harf oralig\'i' };
+
+function updateFsVal(key, v) {
+    const unit = FS_UNITS[key];
+    document.getElementById('v_' + key).textContent = v + unit;
+    const prev = document.getElementById('prev_' + key);
+    if (prev) {
+        if (key === 'lh')  prev.style.lineHeight = v;
+        else if (key === 'ls') prev.style.letterSpacing = v + 'px';
+        else prev.style.fontSize = (parseFloat(v) * 0.22) + 'rem';
+    }
+    settings.fontSizes = settings.fontSizes || {};
+    settings.fontSizes[key] = v;
 }
 
 function saveFonts() {
-    const slider = document.getElementById('fontSizeSlider');
-    settings.fontSize = slider.value;
+    settings.fontSizes = settings.fontSizes || {};
+    Object.keys(FS_DEFAULTS).forEach(k => {
+        const el = document.getElementById('fs_' + k);
+        if (el) settings.fontSizes[k] = el.value;
+    });
     saveSettings();
     showMsg('fontSaveMsg');
     document.getElementById('ov-font').textContent = settings.fontFamily || 'Inter';
 }
 
-// ==================== COLORS ====================
-function updateColorSwatch(type, val) {
-    if (type === 'primary') {
-        document.getElementById('swatchPrimary').style.background = val;
-        document.getElementById('colorPrimaryHex').textContent = val;
-        document.getElementById('previewBtn').style.background = val;
-        document.getElementById('previewBadge').style.color = val;
-        document.getElementById('previewBadge').style.background = val + '18';
-        settings.colorPrimary = val;
-    } else {
-        document.getElementById('swatchAccent').style.background = val;
-        document.getElementById('colorAccentHex').textContent = val;
-        document.getElementById('previewAccent').style.color = val;
-        document.getElementById('previewAccent').style.borderColor = val;
-        document.getElementById('previewAccent').style.background = val + '18';
-        settings.colorAccent = val;
-    }
+function resetFonts() {
+    settings.fontSizes = { ...FS_DEFAULTS };
+    Object.keys(FS_DEFAULTS).forEach(k => {
+        const el = document.getElementById('fs_' + k);
+        if (el) { el.value = FS_DEFAULTS[k]; updateFsVal(k, FS_DEFAULTS[k]); }
+    });
 }
 
-function applyColorSet(primary, accent) {
-    document.getElementById('colorPrimary').value = primary;
-    document.getElementById('colorAccent').value = accent;
-    updateColorSwatch('primary', primary);
-    updateColorSwatch('accent', accent);
+// ==================== COLORS ====================
+const COLOR_FIELDS = {
+    primary:     { el:'colorPrimary',     swatch:'swatchPrimary',     hex:'hexPrimary',     def:'#1d4ed8' },
+    accent:      { el:'colorAccent',      swatch:'swatchAccent',      hex:'hexAccent',      def:'#06b6d4' },
+    text:        { el:'colorText',        swatch:'swatchText',        hex:'hexText',        def:'#1e293b' },
+    bg:          { el:'colorBg',          swatch:'swatchBg',          hex:'hexBg',          def:'#ffffff' },
+    dark:        { el:'colorDark',        swatch:'swatchDark',        hex:'hexDark',        def:'#0f172a' },
+    border:      { el:'colorBorder',      swatch:'swatchBorder',      hex:'hexBorder',      def:'#e2e8f0' },
+    muted:       { el:'colorMuted',       swatch:'swatchMuted',       hex:'hexMuted',       def:'#64748b' },
+    bgAlt:       { el:'colorBgAlt',       swatch:'swatchBgAlt',       hex:'hexBgAlt',       def:'#f8fafc' },
+    primaryDark: { el:'colorPrimaryDark', swatch:'swatchPrimaryDark', hex:'hexPrimaryDark', def:'#1e3a8a' },
+};
+
+function syncColor(key, val) {
+    const f = COLOR_FIELDS[key]; if (!f) return;
+    document.getElementById(f.swatch).style.background = val;
+    document.getElementById(f.hex).textContent = val;
+    settings['color_' + key] = val;
+    // live preview
+    const p  = document.getElementById('colorPrimary')?.value || '#1d4ed8';
+    const a  = document.getElementById('colorAccent')?.value  || '#06b6d4';
+    const bg = document.getElementById('colorBgAlt')?.value   || '#f8fafc';
+    const tx = document.getElementById('colorText')?.value    || '#1e293b';
+    const bd = document.getElementById('colorBorder')?.value  || '#e2e8f0';
+    const pb = document.getElementById('previewBtn');    if (pb) pb.style.background = p;
+    const pa = document.getElementById('previewAccent'); if (pa) { pa.style.color = a; pa.style.borderColor = a; pa.style.background = a + '18'; }
+    const pg = document.getElementById('previewBadge');  if (pg) { pg.style.color = p; pg.style.background = p + '18'; }
+    const pt = document.getElementById('previewText');   if (pt) { pt.style.color = tx; pt.style.background = bg; pt.style.borderColor = bd; }
+}
+
+function applyColorSet(primary, accent, text, bg, dark, border) {
+    const map = { primary, accent, text: text||'#1e293b', bg: bg||'#ffffff', dark: dark||'#0f172a', border: border||'#e2e8f0' };
+    Object.entries(map).forEach(([k, v]) => {
+        const f = COLOR_FIELDS[k]; if (!f) return;
+        const el = document.getElementById(f.el); if (el) el.value = v;
+        syncColor(k, v);
+    });
 }
 
 function saveColors() {
-    settings.colorPrimary = document.getElementById('colorPrimary').value;
-    settings.colorAccent  = document.getElementById('colorAccent').value;
+    Object.keys(COLOR_FIELDS).forEach(k => {
+        const f = COLOR_FIELDS[k];
+        const el = document.getElementById(f.el);
+        if (el) settings['color_' + k] = el.value;
+    });
     saveSettings();
     showMsg('colorSaveMsg');
-    document.getElementById('ov-primary').textContent = settings.colorPrimary;
+    document.getElementById('ov-primary').textContent = settings.color_primary || '#1d4ed8';
+}
+
+function resetColors() {
+    Object.entries(COLOR_FIELDS).forEach(([k, f]) => {
+        const el = document.getElementById(f.el); if (el) el.value = f.def;
+        syncColor(k, f.def);
+    });
 }
 
 // ==================== CONTENT ====================
@@ -1093,16 +1316,24 @@ function setVal(id, val) {
 function initDashboard() {
     loadSettings();
 
-    // Fonts
-    setVal('fontSizeSlider', settings.fontSize || 15);
-    updateSizeVal(settings.fontSize || 15);
+    // Font family
     renderFontGrid();
 
+    // Font sizes
+    const fs = settings.fontSizes || {};
+    Object.keys(FS_DEFAULTS).forEach(k => {
+        const v = fs[k] || FS_DEFAULTS[k];
+        const el = document.getElementById('fs_' + k); if (el) el.value = v;
+        updateFsVal(k, v);
+    });
+
     // Colors
-    const p = settings.colorPrimary || '#1d4ed8';
-    const a = settings.colorAccent  || '#06b6d4';
-    setVal('colorPrimary', p); updateColorSwatch('primary', p);
-    setVal('colorAccent',  a); updateColorSwatch('accent',  a);
+    Object.keys(COLOR_FIELDS).forEach(k => {
+        const f = COLOR_FIELDS[k];
+        const saved = settings['color_' + k] || f.def;
+        const el = document.getElementById(f.el); if (el) el.value = saved;
+        syncColor(k, saved);
+    });
 
     // Content
     const c = settings.content || {};
@@ -1144,7 +1375,7 @@ function initDashboard() {
 
     // Overview
     document.getElementById('ov-font').textContent    = settings.fontFamily || 'Inter';
-    document.getElementById('ov-primary').textContent = settings.colorPrimary || '#1d4ed8';
+    document.getElementById('ov-primary').textContent = settings.color_primary || '#1d4ed8';
 }
 
 // Auto-login if session active
