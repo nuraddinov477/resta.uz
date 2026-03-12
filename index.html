@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESTA – Tizimli biznes, katta natija</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <meta name="description" content="RESTA biznes jarayonlarini tizimlashtirish, CRM joriy qilish va avtomatizatsiya orqali sotuvlarni oshiradi.">
+    <meta property="og:title" content="RESTA – Tizimli biznes, katta natija">
+    <meta property="og:description" content="Konsalting va avtomatizatsiya bilan biznes faoliyatini tizimlashtiring.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <!-- Scroll progress chiziq -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="#hero" class="logo">RESTA</a>
+        <button class="toggle-menu" aria-label="Menyuni ochish">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#problems">Muammolar</a></li>
+            <li><a href="#solutions">Yechimlar</a></li>
+            <li><a href="#stats">Natijalar</a></li>
+            <li><a href="#workflow">Jarayon</a></li>
+            <li><a href="#cases">Keyslar</a></li>
+            <li><a href="#founder">Asoschi</a></li>
+            <li><a href="#testimonials">Fikrlar</a></li>
+            <li><a href="#contact" class="nav-cta">Konsultatsiya</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <header id="hero" class="hero">
+        <div class="hero-bg">
+            <div class="hero-blob blob-1"></div>
+            <div class="hero-blob blob-2"></div>
+            <div class="hero-blob blob-3"></div>
+            <div class="hero-grid"></div>
+        </div>
+
+        <div class="hero-inner">
+            <!-- Chap: matn -->
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    120+ kompaniya allaqachon tizimda ishlayapti
+                </div>
+                <h1>Xaos emas —<br><span class="hero-gradient">tizim</span> bilan<br>ishlaydigan biznes</h1>
+                <p>RESTA kompaniyalarga CRM joriy qilish, sotuv bo'limini qurish va jarayonlarni avtomatlashtirish orqali o'lchanadigan natijaga erishishga yordam beradi.</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fa fa-calendar-check"></i>
+                        Bepul konsultatsiya olish
+                    </a>
+                    <a href="#solutions" class="btn btn-ghost">
+                        Xizmatlar
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="hero-trust">
+                    <div class="trust-item"><i class="fa fa-check-circle"></i> Bepul audit</div>
+                    <div class="trust-item"><i class="fa fa-check-circle"></i> Natija kafolati</div>
+                    <div class="trust-item"><i class="fa fa-check-circle"></i> 30 kun natija</div>
+                </div>
+            </div>
+
+            <!-- O'ng: dashboard mockup -->
+            <div class="hero-visual" aria-hidden="true">
+                <div class="dashboard">
+                    <!-- Header -->
+                    <div class="dash-header">
+                        <span class="dash-dot red"></span>
+                        <span class="dash-dot yellow"></span>
+                        <span class="dash-dot green"></span>
+                        <span class="dash-title">RESTA CRM Dashboard</span>
+                    </div>
+
+                    <!-- Stats row -->
+                    <div class="dash-stats">
+                        <div class="dash-stat">
+                            <span class="dash-stat-val">+38%</span>
+                            <span class="dash-stat-lbl">Sotuv</span>
+                        </div>
+                        <div class="dash-stat">
+                            <span class="dash-stat-val">142</span>
+                            <span class="dash-stat-lbl">Mijozlar</span>
+                        </div>
+                        <div class="dash-stat">
+                            <span class="dash-stat-val">96%</span>
+                            <span class="dash-stat-lbl">Konversiya</span>
+                        </div>
+                    </div>
+
+                    <!-- Chart -->
+                    <div class="dash-chart">
+                        <div class="chart-label">Oylik sotuv</div>
+                        <div class="chart-bars">
+                            <div class="chart-bar" style="--h:45%"><span>Yan</span></div>
+                            <div class="chart-bar" style="--h:60%"><span>Fev</span></div>
+                            <div class="chart-bar" style="--h:52%"><span>Mar</span></div>
+                            <div class="chart-bar" style="--h:75%"><span>Apr</span></div>
+                            <div class="chart-bar" style="--h:65%"><span>May</span></div>
+                            <div class="chart-bar active" style="--h:90%"><span>Iyn</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Pipeline -->
+                    <div class="dash-pipeline">
+                        <div class="pipeline-label">Sotuv voronkasi</div>
+                        <div class="pipeline-track">
+                            <div class="pipeline-step" style="--w:100%; --c:#3b82f6">
+                                <span>Leads</span><span>48</span>
+                            </div>
+                            <div class="pipeline-step" style="--w:72%; --c:#8b5cf6">
+                                <span>Muzokara</span><span>35</span>
+                            </div>
+                            <div class="pipeline-step" style="--w:48%; --c:#06b6d4">
+                                <span>Taklif</span><span>23</span>
+                            </div>
+                            <div class="pipeline-step" style="--w:28%; --c:#10b981">
+                                <span>Yopildi</span><span>14</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating notification cards -->
+                <div class="hero-notif notif-1">
+                    <div class="notif-icon green"><i class="fa fa-check"></i></div>
+                    <div>
+                        <strong>Sotuv yopildi</strong>
+                        <span>+4,200,000 so'm</span>
+                    </div>
+                </div>
+                <div class="hero-notif notif-2">
+                    <div class="notif-icon blue"><i class="fa fa-user-plus"></i></div>
+                    <div>
+                        <strong>Yangi mijoz</strong>
+                        <span>Aziz Karimov qo'shildi</span>
+                    </div>
+                </div>
+                <div class="hero-notif notif-3">
+                    <div class="notif-icon cyan"><i class="fa fa-chart-line"></i></div>
+                    <div>
+                        <strong>Sotuv +38%</strong>
+                        <span>O'tgan oyga nisbatan</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-scroll-hint">
+            <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+        </div>
+    </header>
+
+    <!-- MUAMMOLAR -->
+    <section id="problems" class="section problems fade-in-section">
+        <div class="section-label">Muammo</div>
+        <h2>Biznesingizda bu muammolar bormi?</h2>
+        <p class="section-subtitle">Ko'plab bizneslar mana shu muammolardan aziyat chekadi. Siz ham taniyapsizmi?</p>
+        <div class="problem-items">
+            <div class="problem-item" data-color="red">
+                <span class="problem-num">01</span>
+                <div class="problem-pulse"></div>
+                <div class="problem-icon"><i class="fa fa-sitemap"></i></div>
+                <div class="problem-text">
+                    <h3>Sotuv bo'limi tizimsiz</h3>
+                    <p>Menejerlar o'z boshicha ishlaydi, natija nazorat qilinmaydi</p>
+                </div>
+                <div class="problem-badge"><i class="fa fa-check"></i> RESTA yechim bor</div>
+            </div>
+            <div class="problem-item" data-color="orange">
+                <span class="problem-num">02</span>
+                <div class="problem-pulse"></div>
+                <div class="problem-icon"><i class="fa fa-database"></i></div>
+                <div class="problem-text">
+                    <h3>CRM ishlatilmaydi</h3>
+                    <p>Mijozlar ma'lumotlari Excel yoki xotirada saqlanadi</p>
+                </div>
+                <div class="problem-badge"><i class="fa fa-check"></i> RESTA yechim bor</div>
+            </div>
+            <div class="problem-item" data-color="yellow">
+                <span class="problem-num">03</span>
+                <div class="problem-pulse"></div>
+                <div class="problem-icon"><i class="fa fa-user-times"></i></div>
+                <div class="problem-text">
+                    <h3>Mijozlar ma'lumotlari yo'qoladi</h3>
+                    <p>Xodim ketganda barcha kontaktlar ham ketadi</p>
+                </div>
+                <div class="problem-badge"><i class="fa fa-check"></i> RESTA yechim bor</div>
+            </div>
+            <div class="problem-item" data-color="purple">
+                <span class="problem-num">04</span>
+                <div class="problem-pulse"></div>
+                <div class="problem-icon"><i class="fa fa-bullhorn"></i></div>
+                <div class="problem-text">
+                    <h3>Reklama bor, lekin sotuv kam</h3>
+                    <p>Leads keladi, lekin sotuv bo'limida yo'qoladi</p>
+                </div>
+                <div class="problem-badge"><i class="fa fa-check"></i> RESTA yechim bor</div>
+            </div>
+            <div class="problem-item" data-color="teal">
+                <span class="problem-num">05</span>
+                <div class="problem-pulse"></div>
+                <div class="problem-icon"><i class="fa fa-users-slash"></i></div>
+                <div class="problem-text">
+                    <h3>Xodimlar nazoratsiz ishlaydi</h3>
+                    <p>Kim nima qilayotgani noma'lum, javobgarlik yo'q</p>
+                </div>
+                <div class="problem-badge"><i class="fa fa-check"></i> RESTA yechim bor</div>
+            </div>
+            <div class="problem-item" data-color="blue">
+                <span class="problem-num">06</span>
+                <div class="problem-pulse"></div>
+                <div class="problem-icon"><i class="fa fa-user-cog"></i></div>
+                <div class="problem-text">
+                    <h3>Biznes egasi hamma ishni o'zi qiladi</h3>
+                    <p>Delegatsiya yo'q, egasi jarayonlarga bog'lanib qolgan</p>
+                </div>
+                <div class="problem-badge"><i class="fa fa-check"></i> RESTA yechim bor</div>
+            </div>
+            <div class="problem-item" data-color="pink">
+                <span class="problem-num">07</span>
+                <div class="problem-pulse"></div>
+                <div class="problem-icon"><i class="fa fa-chart-line"></i></div>
+                <div class="problem-text">
+                    <h3>Analitika va hisobot yo'q</h3>
+                    <p>Qarorlar ma'lumotga emas, his-tuyg'uga asoslanadi</p>
+                </div>
+                <div class="problem-badge"><i class="fa fa-check"></i> RESTA yechim bor</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YECHIMLAR -->
+    <section id="solutions" class="solutions-section fade-in-section">
+        <div class="solutions-inner">
+            <div class="sol-header">
+                <div class="section-label">Yechim</div>
+                <h2>RESTA nima qiladi?</h2>
+                <p class="section-subtitle">Har bir muammoga aniq, o'lchanadigan yechim taklif qilamiz</p>
+            </div>
+
+            <div class="sol-layout">
+
+                <!-- Chapda: xizmatlar ro'yxati -->
+                <div class="sol-tabs">
+                    <div class="sol-tab active" data-sol="0">
+                        <div class="sol-tab-ico" style="--tc:#1d4ed8;--tcs:rgba(29,78,216,0.12)"><i class="fa fa-sitemap"></i></div>
+                        <div class="sol-tab-info">
+                            <strong>Biznesni tizimlashtirish</strong>
+                            <span>Asosiy xizmat</span>
+                        </div>
+                        <i class="fa fa-chevron-right sol-arr"></i>
+                    </div>
+                    <div class="sol-tab" data-sol="1">
+                        <div class="sol-tab-ico" style="--tc:#0891b2;--tcs:rgba(8,145,178,0.12)"><i class="fa fa-database"></i></div>
+                        <div class="sol-tab-info">
+                            <strong>CRM joriy qilish</strong>
+                            <span>Top xizmat</span>
+                        </div>
+                        <i class="fa fa-chevron-right sol-arr"></i>
+                    </div>
+                    <div class="sol-tab" data-sol="2">
+                        <div class="sol-tab-ico" style="--tc:#7c3aed;--tcs:rgba(124,58,237,0.12)"><i class="fa fa-robot"></i></div>
+                        <div class="sol-tab-info">
+                            <strong>AI sotuv analitikasi</strong>
+                            <span class="sol-new">Yangi</span>
+                        </div>
+                        <i class="fa fa-chevron-right sol-arr"></i>
+                    </div>
+                    <div class="sol-tab" data-sol="3">
+                        <div class="sol-tab-ico" style="--tc:#059669;--tcs:rgba(5,150,105,0.12)"><i class="fa fa-rocket"></i></div>
+                        <div class="sol-tab-info">
+                            <strong>Biznes avtomatizatsiyasi</strong>
+                            <span>Jarayonlar</span>
+                        </div>
+                        <i class="fa fa-chevron-right sol-arr"></i>
+                    </div>
+                    <div class="sol-tab" data-sol="4">
+                        <div class="sol-tab-ico" style="--tc:#d97706;--tcs:rgba(217,119,6,0.12)"><i class="fa fa-network-wired"></i></div>
+                        <div class="sol-tab-info">
+                            <strong>Distribyutsiya tizimi</strong>
+                            <span>Agent tarmog'i</span>
+                        </div>
+                        <i class="fa fa-chevron-right sol-arr"></i>
+                    </div>
+                    <div class="sol-tab" data-sol="5">
+                        <div class="sol-tab-ico" style="--tc:#be185d;--tcs:rgba(190,24,93,0.12)"><i class="fa fa-shopping-cart"></i></div>
+                        <div class="sol-tab-info">
+                            <strong>Onlayn savdo tizimi</strong>
+                            <span>Telegram & Web</span>
+                        </div>
+                        <i class="fa fa-chevron-right sol-arr"></i>
+                    </div>
+                    <div class="sol-tab" data-sol="6">
+                        <div class="sol-tab-ico" style="--tc:#0f766e;--tcs:rgba(15,118,110,0.12)"><i class="fa fa-headset"></i></div>
+                        <div class="sol-tab-info">
+                            <strong>AI mijoz yordamchisi</strong>
+                            <span class="sol-new">Yangi</span>
+                        </div>
+                        <i class="fa fa-chevron-right sol-arr"></i>
+                    </div>
+                </div>
+
+                <!-- O'ngda: panel -->
+                <div class="sol-panels">
+
+                    <div class="sol-panel active" data-sol="0">
+                        <div class="sol-panel-top" style="--pc:#1d4ed8;--pcs:rgba(29,78,216,0.08)">
+                            <div class="sol-big-ico"><i class="fa fa-sitemap"></i></div>
+                            <span class="sol-badge">Asosiy xizmat</span>
+                        </div>
+                        <h3>Biznesni tizimlashtirish</h3>
+                        <p>Kompaniyangizda aniq boshqaruv tizimi yaratamiz. Har bir xodim nima qilishi, har bir jarayon qanday ishlashini belgilab, tartibli va o'lchanadigan tizimga o'tamiz.</p>
+                        <ul class="sol-features">
+                            <li><i class="fa fa-check-circle"></i>Biznes jarayonlarini to'liq xaritalash</li>
+                            <li><i class="fa fa-check-circle"></i>Rollar, javobgarliklar va KPI tizimi</li>
+                            <li><i class="fa fa-check-circle"></i>Haftalik hisobot va monitoring tizimi</li>
+                            <li><i class="fa fa-check-circle"></i>Xodimlarni o'qitish va onboarding</li>
+                        </ul>
+                        <div class="sol-result-row">
+                            <div class="sol-result-item"><span class="sol-r-num">3x</span><span class="sol-r-lbl">samaradorlik</span></div>
+                            <div class="sol-result-item"><span class="sol-r-num">30</span><span class="sol-r-lbl">kun ichida natija</span></div>
+                        </div>
+                        <a href="#contact" class="btn btn-primary sol-cta">Boshlash <i class="fa fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="sol-panel" data-sol="1">
+                        <div class="sol-panel-top" style="--pc:#0891b2;--pcs:rgba(8,145,178,0.08)">
+                            <div class="sol-big-ico"><i class="fa fa-database"></i></div>
+                            <span class="sol-badge">Top xizmat</span>
+                        </div>
+                        <h3>CRM joriy qilish</h3>
+                        <p>Mijozlar bazasini tartibga solamiz va sotuv jarayonini to'liq nazorat ostiga olamiz. Har bir qo'ng'iroq, har bir sotuv, har bir mijoz — ko'z oldingizda.</p>
+                        <ul class="sol-features">
+                            <li><i class="fa fa-check-circle"></i>Sotuv voronkasi va pipeline yaratish</li>
+                            <li><i class="fa fa-check-circle"></i>Mijozlar tarixi va segmentatsiyasi</li>
+                            <li><i class="fa fa-check-circle"></i>Avtomatik eslatmalar va follow-up</li>
+                            <li><i class="fa fa-check-circle"></i>Real-time analitik dashboard</li>
+                        </ul>
+                        <div class="sol-result-row">
+                            <div class="sol-result-item"><span class="sol-r-num">85%</span><span class="sol-r-lbl">mijozlarni saqlash</span></div>
+                            <div class="sol-result-item"><span class="sol-r-num">2x</span><span class="sol-r-lbl">sotuv o'sishi</span></div>
+                        </div>
+                        <a href="#contact" class="btn btn-primary sol-cta">Boshlash <i class="fa fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="sol-panel" data-sol="2">
+                        <div class="sol-panel-top" style="--pc:#7c3aed;--pcs:rgba(124,58,237,0.08)">
+                            <div class="sol-big-ico"><i class="fa fa-robot"></i></div>
+                            <span class="sol-badge new">Yangi</span>
+                        </div>
+                        <h3>AI sotuv analitikasi</h3>
+                        <p>Sun'iy intellekt yordamida sotuv qo'ng'iroqlarini tahlil qilib, har bir menejerning kuchli va zaif tomonlarini aniqlaymiz va konversiyani oshiramiz.</p>
+                        <ul class="sol-features">
+                            <li><i class="fa fa-check-circle"></i>Qo'ng'iroqlarni avtomatik tahlil qilish</li>
+                            <li><i class="fa fa-check-circle"></i>Menejer samaradorlik scorecardi</li>
+                            <li><i class="fa fa-check-circle"></i>Sotuv trend bashorati</li>
+                            <li><i class="fa fa-check-circle"></i>Individual coaching tavsiyalari</li>
+                        </ul>
+                        <div class="sol-result-row">
+                            <div class="sol-result-item"><span class="sol-r-num">+40%</span><span class="sol-r-lbl">konversiya</span></div>
+                            <div class="sol-result-item"><span class="sol-r-num">AI</span><span class="sol-r-lbl">powered analitika</span></div>
+                        </div>
+                        <a href="#contact" class="btn btn-primary sol-cta">Boshlash <i class="fa fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="sol-panel" data-sol="3">
+                        <div class="sol-panel-top" style="--pc:#059669;--pcs:rgba(5,150,105,0.08)">
+                            <div class="sol-big-ico"><i class="fa fa-rocket"></i></div>
+                            <span class="sol-badge">Jarayonlar</span>
+                        </div>
+                        <h3>Biznes avtomatizatsiyasi</h3>
+                        <p>Takrorlanuvchi vazifalarni avtomatlashtirib, xodimlaringiz vaqtini asosiy, yaratuvchi ishlarga sarflashini ta'minlaymiz. Kamroq inson xatosi, ko'proq natija.</p>
+                        <ul class="sol-features">
+                            <li><i class="fa fa-check-circle"></i>Workflow va pipeline avtomatizatsiyasi</li>
+                            <li><i class="fa fa-check-circle"></i>Bot va chatbot integratsiyasi</li>
+                            <li><i class="fa fa-check-circle"></i>Hujjat va shartnoma generatsiyasi</li>
+                            <li><i class="fa fa-check-circle"></i>Email/SMS avtomatik yuborish</li>
+                        </ul>
+                        <div class="sol-result-row">
+                            <div class="sol-result-item"><span class="sol-r-num">70%</span><span class="sol-r-lbl">vaqt tejash</span></div>
+                            <div class="sol-result-item"><span class="sol-r-num">0</span><span class="sol-r-lbl">inson xatosi</span></div>
+                        </div>
+                        <a href="#contact" class="btn btn-primary sol-cta">Boshlash <i class="fa fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="sol-panel" data-sol="4">
+                        <div class="sol-panel-top" style="--pc:#d97706;--pcs:rgba(217,119,6,0.08)">
+                            <div class="sol-big-ico"><i class="fa fa-network-wired"></i></div>
+                            <span class="sol-badge">Agent tarmog'i</span>
+                        </div>
+                        <h3>Distribyutsiya tizimi</h3>
+                        <p>Agentlar va dilerlar tarmog'ini real vaqtda boshqarish, buyurtmalarni kuzatish va hisob-kitobni avtomatlashtirish uchun to'liq tizim yaratamiz.</p>
+                        <ul class="sol-features">
+                            <li><i class="fa fa-check-circle"></i>Agent va diler portali</li>
+                            <li><i class="fa fa-check-circle"></i>Buyurtma va yetkazib berish tizimi</li>
+                            <li><i class="fa fa-check-circle"></i>Geografik nazorat va xarita</li>
+                            <li><i class="fa fa-check-circle"></i>Hisob-kitob avtomatizatsiyasi</li>
+                        </ul>
+                        <div class="sol-result-row">
+                            <div class="sol-result-item"><span class="sol-r-num">50+</span><span class="sol-r-lbl">agent nazorati</span></div>
+                            <div class="sol-result-item"><span class="sol-r-num">100%</span><span class="sol-r-lbl">shaffoflik</span></div>
+                        </div>
+                        <a href="#contact" class="btn btn-primary sol-cta">Boshlash <i class="fa fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="sol-panel" data-sol="5">
+                        <div class="sol-panel-top" style="--pc:#be185d;--pcs:rgba(190,24,93,0.08)">
+                            <div class="sol-big-ico"><i class="fa fa-shopping-cart"></i></div>
+                            <span class="sol-badge">Telegram & Web</span>
+                        </div>
+                        <h3>Onlayn savdo tizimi</h3>
+                        <p>Telegram bot va veb-sayt orqali 24/7 ishlaydigan savdo kanalini yaratamiz. Mijozlar tun yarimda ham buyurtma bera oladi, siz esa hamma narsani nazorat qilasiz.</p>
+                        <ul class="sol-features">
+                            <li><i class="fa fa-check-circle"></i>Telegram bot orqali savdo</li>
+                            <li><i class="fa fa-check-circle"></i>Mahsulot katalogi va to'lov tizimi</li>
+                            <li><i class="fa fa-check-circle"></i>Buyurtma kuzatuvi va holati</li>
+                            <li><i class="fa fa-check-circle"></i>CRM va hisobot integratsiyasi</li>
+                        </ul>
+                        <div class="sol-result-row">
+                            <div class="sol-result-item"><span class="sol-r-num">24/7</span><span class="sol-r-lbl">savdo kanali</span></div>
+                            <div class="sol-result-item"><span class="sol-r-num">+60%</span><span class="sol-r-lbl">buyurtmalar</span></div>
+                        </div>
+                        <a href="#contact" class="btn btn-primary sol-cta">Boshlash <i class="fa fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="sol-panel" data-sol="6">
+                        <div class="sol-panel-top" style="--pc:#0f766e;--pcs:rgba(15,118,110,0.08)">
+                            <div class="sol-big-ico"><i class="fa fa-headset"></i></div>
+                            <span class="sol-badge new">Yangi</span>
+                        </div>
+                        <h3>AI mijoz yordamchisi</h3>
+                        <p>Mijozlar savollariga 24/7 javob beradigan, ularni sotuvga yo'naltiruvchi va CRM ga avtomatik kirituvchi sun'iy intellekt assistenti yaratamiz.</p>
+                        <ul class="sol-features">
+                            <li><i class="fa fa-check-circle"></i>Avtomatik savol-javob tizimi</li>
+                            <li><i class="fa fa-check-circle"></i>Lead kvalifikatsiyasi va yo'naltirish</li>
+                            <li><i class="fa fa-check-circle"></i>O'zbek, rus, ingliz tillarida</li>
+                            <li><i class="fa fa-check-circle"></i>CRM va calendar integratsiya</li>
+                        </ul>
+                        <div class="sol-result-row">
+                            <div class="sol-result-item"><span class="sol-r-num">80%</span><span class="sol-r-lbl">avto-javob</span></div>
+                            <div class="sol-result-item"><span class="sol-r-num">24/7</span><span class="sol-r-lbl">ishlaydi</span></div>
+                        </div>
+                        <a href="#contact" class="btn btn-primary sol-cta">Boshlash <i class="fa fa-arrow-right"></i></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATISTIKA -->
+    <section id="stats" class="stats-section fade-in-section">
+        <div class="stats-blob stats-blob-1"></div>
+        <div class="stats-blob stats-blob-2"></div>
+        <div class="stats-blob stats-blob-3"></div>
+        <div class="stats-grid-bg"></div>
+        <div class="stats-inner">
+            <div class="section-label light">Natija</div>
+            <h2 class="stats-title">Raqamlarda natija</h2>
+            <p class="stats-subtitle">Haqiqiy kompaniyalar bilan haqiqiy natijalar</p>
+            <div class="stats-items">
+
+                <div class="stat-card" style="--c:#3b82f6;--cs:rgba(59,130,246,0.2)">
+                    <div class="stat-card-glow"></div>
+                    <div class="stat-icon-top"><i class="fa fa-building"></i></div>
+                    <div class="stat-ring-wrap">
+                        <svg viewBox="0 0 100 100" class="stat-ring">
+                            <circle class="ring-track" cx="50" cy="50" r="40"/>
+                            <circle class="ring-fill" cx="50" cy="50" r="40" data-pct="85"/>
+                        </svg>
+                        <span class="counter stat-num" data-target="120" data-suffix="+">0</span>
+                    </div>
+                    <p class="stat-label">Tizimlashtirilgan kompaniyalar</p>
+                    <div class="stat-spark">
+                        <div class="spark-bar" style="--bh:45%"></div>
+                        <div class="spark-bar" style="--bh:60%"></div>
+                        <div class="spark-bar" style="--bh:55%"></div>
+                        <div class="spark-bar" style="--bh:72%"></div>
+                        <div class="spark-bar" style="--bh:78%"></div>
+                        <div class="spark-bar" style="--bh:88%"></div>
+                        <div class="spark-bar" style="--bh:100%"></div>
+                    </div>
+                    <div class="stat-trend"><i class="fa fa-arrow-trend-up"></i> +34% o'sish</div>
+                </div>
+
+                <div class="stat-card" style="--c:#06b6d4;--cs:rgba(6,182,212,0.2)">
+                    <div class="stat-card-glow"></div>
+                    <div class="stat-icon-top"><i class="fa fa-database"></i></div>
+                    <div class="stat-ring-wrap">
+                        <svg viewBox="0 0 100 100" class="stat-ring">
+                            <circle class="ring-track" cx="50" cy="50" r="40"/>
+                            <circle class="ring-fill" cx="50" cy="50" r="40" data-pct="70"/>
+                        </svg>
+                        <span class="counter stat-num" data-target="85" data-suffix="+">0</span>
+                    </div>
+                    <p class="stat-label">Joriy qilingan CRM tizimlari</p>
+                    <div class="stat-spark">
+                        <div class="spark-bar" style="--bh:50%"></div>
+                        <div class="spark-bar" style="--bh:58%"></div>
+                        <div class="spark-bar" style="--bh:48%"></div>
+                        <div class="spark-bar" style="--bh:65%"></div>
+                        <div class="spark-bar" style="--bh:72%"></div>
+                        <div class="spark-bar" style="--bh:80%"></div>
+                        <div class="spark-bar" style="--bh:100%"></div>
+                    </div>
+                    <div class="stat-trend"><i class="fa fa-arrow-trend-up"></i> +28% o'sish</div>
+                </div>
+
+                <div class="stat-card" style="--c:#8b5cf6;--cs:rgba(139,92,246,0.2)">
+                    <div class="stat-card-glow"></div>
+                    <div class="stat-icon-top"><i class="fa fa-users"></i></div>
+                    <div class="stat-ring-wrap">
+                        <svg viewBox="0 0 100 100" class="stat-ring">
+                            <circle class="ring-track" cx="50" cy="50" r="40"/>
+                            <circle class="ring-fill" cx="50" cy="50" r="40" data-pct="60"/>
+                        </svg>
+                        <span class="counter stat-num" data-target="60" data-suffix="+">0</span>
+                    </div>
+                    <p class="stat-label">Qurilgan sotuv bo'limlari</p>
+                    <div class="stat-spark">
+                        <div class="spark-bar" style="--bh:40%"></div>
+                        <div class="spark-bar" style="--bh:50%"></div>
+                        <div class="spark-bar" style="--bh:62%"></div>
+                        <div class="spark-bar" style="--bh:55%"></div>
+                        <div class="spark-bar" style="--bh:70%"></div>
+                        <div class="spark-bar" style="--bh:80%"></div>
+                        <div class="spark-bar" style="--bh:100%"></div>
+                    </div>
+                    <div class="stat-trend"><i class="fa fa-arrow-trend-up"></i> +45% o'sish</div>
+                </div>
+
+                <div class="stat-card" style="--c:#f59e0b;--cs:rgba(245,158,11,0.2)">
+                    <div class="stat-card-glow"></div>
+                    <div class="stat-icon-top"><i class="fa fa-bolt"></i></div>
+                    <div class="stat-ring-wrap">
+                        <svg viewBox="0 0 100 100" class="stat-ring">
+                            <circle class="ring-track" cx="50" cy="50" r="40"/>
+                            <circle class="ring-fill" cx="50" cy="50" r="40" data-pct="95"/>
+                        </svg>
+                        <span class="counter stat-num" data-target="200" data-suffix="+">0</span>
+                    </div>
+                    <p class="stat-label">Avtomatlashtirilgan jarayonlar</p>
+                    <div class="stat-spark">
+                        <div class="spark-bar" style="--bh:55%"></div>
+                        <div class="spark-bar" style="--bh:65%"></div>
+                        <div class="spark-bar" style="--bh:70%"></div>
+                        <div class="spark-bar" style="--bh:82%"></div>
+                        <div class="spark-bar" style="--bh:88%"></div>
+                        <div class="spark-bar" style="--bh:94%"></div>
+                        <div class="spark-bar" style="--bh:100%"></div>
+                    </div>
+                    <div class="stat-trend"><i class="fa fa-arrow-trend-up"></i> +52% o'sish</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- JARAYON -->
+    <section id="workflow" class="section workflow fade-in-section">
+        <div class="section-label">Jarayon</div>
+        <h2>Qanday ishlashimiz</h2>
+        <p class="section-subtitle">7 bosqichli tizimli yondashuv — auditan natijagacha</p>
+        <div class="workflow-steps">
+            <div class="workflow-row workflow-row-4">
+                <div class="workflow-step">
+                    <div class="step-icon"><i class="fa fa-search"></i></div>
+                    <div class="step-num">01</div>
+                    <h3>Biznes audit</h3>
+                    <p>Kompaniya holatini to'liq tahlil qilish</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-icon"><i class="fa fa-exclamation-circle"></i></div>
+                    <div class="step-num">02</div>
+                    <h3>Muammolarni aniqlash</h3>
+                    <p>Asosiy to'siqlarni aniqlashtirish</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-icon"><i class="fa fa-lightbulb"></i></div>
+                    <div class="step-num">03</div>
+                    <h3>Strategiya</h3>
+                    <p>Individual yechim rejasi tuzish</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-icon"><i class="fa fa-layer-group"></i></div>
+                    <div class="step-num">04</div>
+                    <h3>Tizim joriy qilish</h3>
+                    <p>Tizimni amaliyotga tatbiq etish</p>
+                </div>
+            </div>
+            <div class="workflow-row workflow-row-3">
+                <div class="workflow-step">
+                    <div class="step-icon"><i class="fa fa-cog"></i></div>
+                    <div class="step-num">05</div>
+                    <h3>CRM & Avtomatizatsiya</h3>
+                    <p>Raqamli vositalarni ulash</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-icon"><i class="fa fa-graduation-cap"></i></div>
+                    <div class="step-num">06</div>
+                    <h3>Jamoani o'qitish</h3>
+                    <p>Xodimlarni yangi tizimda ishlashga o'rgatish</p>
+                </div>
+                <div class="workflow-step workflow-step-last">
+                    <div class="step-icon"><i class="fa fa-chart-bar"></i></div>
+                    <div class="step-num">07</div>
+                    <h3>Natija nazorati</h3>
+                    <p>KPI va ko'rsatkichlarni kuzatish</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEYSLAR -->
+    <section id="cases" class="section cases fade-in-section">
+        <div class="section-label">Keysy</div>
+        <h2>Muvaffaqiyatli keyslar</h2>
+        <p class="section-subtitle">Real kompaniyalar, real natijalar</p>
+        <div class="case-items">
+            <div class="case-item">
+                <div class="case-icon"><i class="fa fa-chart-line"></i></div>
+                <div class="case-tag">Savdo</div>
+                <h3>Savdo kompaniyasi</h3>
+                <p class="case-result">+130%</p>
+                <p class="case-label">sotuv o'sishi</p>
+                <p class="case-desc">Sotuv bo'limi tizimlashtirildi, CRM joriy qilindi, menejerlar ishi avtomatlashtirildi. 3 oyda sotuvlar ikki baravar oshdi.</p>
+                <div class="case-meta">
+                    <span><i class="fa fa-clock"></i> 3 oy</span>
+                    <span><i class="fa fa-users"></i> 12 xodim</span>
+                </div>
+            </div>
+            <div class="case-item">
+                <div class="case-icon"><i class="fa fa-robot"></i></div>
+                <div class="case-tag">Avtomatizatsiya</div>
+                <h3>Xizmat ko'rsatish kompaniyasi</h3>
+                <p class="case-result">70%</p>
+                <p class="case-label">vaqt tejaldi</p>
+                <p class="case-desc">Mijozlar bilan muloqot AI-assistant orqali avtomatlashtirildi. Operatorlar yuklamasi sezilarli kamaydi.</p>
+                <div class="case-meta">
+                    <span><i class="fa fa-clock"></i> 6 hafta</span>
+                    <span><i class="fa fa-users"></i> 8 xodim</span>
+                </div>
+            </div>
+            <div class="case-item">
+                <div class="case-icon"><i class="fa fa-network-wired"></i></div>
+                <div class="case-tag">Distribyutsiya</div>
+                <h3>Distribyutor kompaniya</h3>
+                <p class="case-result">50+</p>
+                <p class="case-label">agent nazorat ostida</p>
+                <p class="case-desc">Distribyutsiya tizimi qurildi, agentlar ishi dashboard orqali real vaqtda nazorat qilinadigan bo'ldi.</p>
+                <div class="case-meta">
+                    <span><i class="fa fa-clock"></i> 2 oy</span>
+                    <span><i class="fa fa-users"></i> 50+ agent</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ASOSCHI -->
+    <section id="founder" class="founder-section fade-in-section">
+        <div class="founder-wrap">
+            <div class="section-label">Ekspert</div>
+            <h2 class="founder-heading">Sizning biznesni kim tizimlashtiradi?</h2>
+
+            <div class="founder-layout">
+
+                <!-- Chap: Profil -->
+                <div class="founder-left">
+                    <div class="founder-avatar-wrap">
+                        <div class="founder-avatar-ring"></div>
+                        <div class="founder-avatar-circle">
+                            <span class="founder-initials">UQ</span>
+                        </div>
+                        <div class="founder-verified">
+                            <i class="fa fa-check"></i>
+                        </div>
+                    </div>
+
+                    <h3 class="founder-name">Umidjon Qodirov</h3>
+                    <p class="founder-role">Biznes tizimlashtirish eksperti</p>
+                    <p class="founder-company">RESTA asoschisi va bosh konsultant</p>
+
+                    <div class="founder-skills">
+                        <span class="skill-tag"><i class="fa fa-sitemap"></i> Biznes tizimlari</span>
+                        <span class="skill-tag"><i class="fa fa-database"></i> CRM</span>
+                        <span class="skill-tag"><i class="fa fa-users"></i> Sotuv boshqaruvi</span>
+                        <span class="skill-tag"><i class="fa fa-bolt"></i> Avtomatizatsiya</span>
+                        <span class="skill-tag"><i class="fa fa-robot"></i> AI integratsiya</span>
+                    </div>
+
+                    <a href="#contact" class="btn btn-primary founder-cta">
+                        <i class="fa fa-calendar-check"></i>
+                        Konsultatsiya olish
+                    </a>
+                </div>
+
+                <!-- O'ng: Ma'lumotlar -->
+                <div class="founder-right">
+
+                    <!-- Yutuqlar -->
+                    <div class="founder-achievements">
+                        <div class="achievement-card">
+                            <span class="ach-num">120+</span>
+                            <span class="ach-label">Tizimlashtirilgan kompaniya</span>
+                        </div>
+                        <div class="achievement-card">
+                            <span class="ach-num">7+</span>
+                            <span class="ach-label">Yil tajriba</span>
+                        </div>
+                        <div class="achievement-card">
+                            <span class="ach-num">85+</span>
+                            <span class="ach-label">Joriy qilingan CRM</span>
+                        </div>
+                        <div class="achievement-card">
+                            <span class="ach-num">60+</span>
+                            <span class="ach-label">Qurilgan sotuv bo'limi</span>
+                        </div>
+                    </div>
+
+                    <!-- Bio -->
+                    <div class="founder-bio">
+                        <div class="bio-quote-mark">"</div>
+                        <p>Biznes egalari ko'pincha kuchli mahsulot yoki xizmatga ega bo'lishadi — lekin tizim yo'qligi sababli o'sishdan to'xtab qoladi. Men 7 yildan beri aynan shu muammoni hal qilaman: jarayonlarni tartibga solib, CRM joriy qilib, sotuv bo'limlarini noldan qurib, kompaniyalar o'z potentsialini to'liq ro'yobga chiqarishiga yordam beraman.</p>
+                    </div>
+
+                    <!-- Ishonch belgilari -->
+                    <div class="founder-trust-row">
+                        <div class="founder-trust-item">
+                            <div class="trust-icon"><i class="fa fa-shield-alt"></i></div>
+                            <div>
+                                <strong>Natija kafolati</strong>
+                                <span>30 kun ichida o'lchanadigan natija</span>
+                            </div>
+                        </div>
+                        <div class="founder-trust-item">
+                            <div class="trust-icon"><i class="fa fa-handshake"></i></div>
+                            <div>
+                                <strong>Individual yondashuv</strong>
+                                <span>Har bir kompaniya uchun alohida strategiya</span>
+                            </div>
+                        </div>
+                        <div class="founder-trust-item">
+                            <div class="trust-icon"><i class="fa fa-chart-line"></i></div>
+                            <div>
+                                <strong>Raqamlarda natija</strong>
+                                <span>Har bir qaror ma'lumotga asoslanadi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FIKRLAR -->
+    <section id="testimonials" class="testimonials-section fade-in-section">
+
+        <div class="testimonials-header">
+            <div class="section-label">Ishonch</div>
+            <h2>Mijozlar nima deydi?</h2>
+            <p class="section-subtitle">Haqiqiy biznes egalari, haqiqiy natijalar</p>
+            <div class="t-summary">
+                <div class="t-summary-item">
+                    <span class="t-sum-num">120+</span>
+                    <span class="t-sum-lbl">Mamnun mijoz</span>
+                </div>
+                <div class="t-summary-sep"></div>
+                <div class="t-summary-item">
+                    <i class="fa fa-star" style="color:#f59e0b;font-size:.9rem"></i>
+                    <span class="t-sum-num">4.9</span>
+                    <span class="t-sum-lbl">O'rtacha baho</span>
+                </div>
+                <div class="t-summary-sep"></div>
+                <div class="t-summary-item">
+                    <span class="t-sum-num">98%</span>
+                    <span class="t-sum-lbl">Qayta murojaat</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Track 1: chapga -->
+        <div class="t-track-wrap">
+            <div class="t-track t-track-left">
+
+                <div class="t-card">
+                    <div class="t-quote-mark">"</div>
+                    <div class="t-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <p>3 oyda sotuvlarimiz ikki barobar oshdi. RESTA bilan ishlash biznesimizni tubdan o'zgartirdi. Hech qachon bunchalik tez natijaini kutmagan edim.</p>
+                    <div class="t-result" style="--rc:#16a34a;--rcs:rgba(22,163,74,0.12)">+180% sotuv</div>
+                    <div class="t-author">
+                        <div class="t-avatar" style="--av1:#1d4ed8;--av2:#06b6d4">AK</div>
+                        <div>
+                            <strong>Aziz Karimov</strong>
+                            <span>Savdo kompaniyasi direktori · Toshkent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="t-card">
+                    <div class="t-quote-mark">"</div>
+                    <div class="t-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <p>CRM joriy qilingandan keyin har bir mijoz, har bir sotuv ko'z oldimizda. Nazorat to'liq qo'limda — bu ishonch bilan uxlashga imkon beradi.</p>
+                    <div class="t-result" style="--rc:#1d4ed8;--rcs:rgba(29,78,216,0.12)">To'liq nazorat</div>
+                    <div class="t-author">
+                        <div class="t-avatar" style="--av1:#7c3aed;--av2:#a78bfa">SY</div>
+                        <div>
+                            <strong>Sarvinoz Yusupova</strong>
+                            <span>Xizmat ko'rsatish kompaniyasi · Namangan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="t-card">
+                    <div class="t-quote-mark">"</div>
+                    <div class="t-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <p>Avval hamma narsa tartibsiz edi. Endi jarayonlar avtomatlashdi, xodimlar nima qilayotgani aniq. RESTA bu ishni professional darajada amalga oshirdi.</p>
+                    <div class="t-result" style="--rc:#7c3aed;--rcs:rgba(124,58,237,0.12)">+3x samaradorlik</div>
+                    <div class="t-author">
+                        <div class="t-avatar" style="--av1:#0369a1;--av2:#38bdf8">JT</div>
+                        <div>
+                            <strong>Jasur Toshmatov</strong>
+                            <span>Qurilish kompaniyasi · Samarqand</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Duplicate for seamless loop -->
+                <div class="t-card">
+                    <div class="t-quote-mark">"</div>
+                    <div class="t-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <p>3 oyda sotuvlarimiz ikki barobar oshdi. RESTA bilan ishlash biznesimizni tubdan o'zgartirdi. Hech qachon bunchalik tez natijaini kutmagan edim.</p>
+                    <div class="t-result" style="--rc:#16a34a;--rcs:rgba(22,163,74,0.12)">+180% sotuv</div>
+                    <div class="t-author">
+                        <div class="t-avatar" style="--av1:#1d4ed8;--av2:#06b6d4">AK</div>
+                        <div>
+                            <strong>Aziz Karimov</strong>
+                            <span>Savdo kompaniyasi direktori · Toshkent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="t-card">
+                    <div class="t-quote-mark">"</div>
+                    <div class="t-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <p>CRM joriy qilingandan keyin har bir mijoz, har bir sotuv ko'z oldimizda. Nazorat to'liq qo'limda — bu ishonch bilan uxlashga imkon beradi.</p>
+                    <div class="t-result" style="--rc:#1d4ed8;--rcs:rgba(29,78,216,0.12)">To'liq nazorat</div>
+                    <div class="t-author">
+                        <div class="t-avatar" style="--av1:#7c3aed;--av2:#a78bfa">SY</div>
+                        <div>
+                            <strong>Sarvinoz Yusupova</strong>
+                            <span>Xizmat ko'rsatish kompaniyasi · Namangan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="t-card">
+                    <div class="t-quote-mark">"</div>
+                    <div class="t-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <p>Avval hamma narsa tartibsiz edi. Endi jarayonlar avtomatlashdi, xodimlar nima qilayotgani aniq. RESTA bu ishni professional darajada amalga oshirdi.</p>
+                    <div class="t-result" style="--rc:#7c3aed;--rcs:rgba(124,58,237,0.12)">+3x samaradorlik</div>
+                    <div class="t-author">
+                        <div class="t-avatar" style="--av1:#0369a1;--av2:#38bdf8">JT</div>
+                        <div>
+                            <strong>Jasur Toshmatov</strong>
+                            <span>Qurilish kompaniyasi · Samarqand</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Track 2: o'ngga -->
+        <div class="t-track-wrap">
+            <div class="t-track t-track-right">
+
+                <div class="t-card">
+                    <div class="t-quote-mark">"</div>
+                    <div class="t-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <p>Sotuv bo'limini noldan qurdik. 2 oyda 12 ta yangi shartnoma. RESTA jamoasi har bir bosqichda yonimizda bo'ldi, bu juda muhim edi.</p>
+                    <div class="t-result" style="--rc:#0891b2;--rcs:rgba(8,145,178,0.12)">12 yangi shartnoma</div>
+                    <div class="t-author">
+                        <div class="t-avatar" style="--av1:#be185d;--av2:#f472b6">MR</div>
+                        <div>
+                            <strong>Malika Rahimova</strong>
+                            <span>Restoran tarmog'i egasi · Toshkent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="t-card">
+                    <div class="t-quote-mark">"</div>
+                    <div class="t-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <p>Audit jarayonida biznesimizning 5 ta asosiy muammosini topdik va hal qildik. Hozir kompaniyam oldin bilan solishtirib bo'lmaydi. Tavsiya qilaman!</p>
+                    <div class="t-result" style="--rc:#d97706;--rcs:rgba(217,119,6,0.12)">5 muammo hal qilindi</div>
+                    <div class="t-author">
+                        <div class="t-avatar" style="--av1:#1d4ed8;--av2:#818cf8">BN</div>
+                        <div>
+                            <strong>Bobur Nazarov</strong>
+                            <span>IT xizmatlar kompaniyasi · Toshkent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="t-card">
+                    <div class="t-quote-mark">"</div>
+                    <div class="t-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <p>Menejerlarimiz endi o'z boshlariga ishlamaydi. Tizim boshqaradi, men nazorat qilaman. Bunga erishish uchun 6 yil kutdim — RESTA 2 oyda hal qildi.</p>
+                    <div class="t-result" style="--rc:#16a34a;--rcs:rgba(22,163,74,0.12)">2x konversiya</div>
+                    <div class="t-author">
+                        <div class="t-avatar" style="--av1:#0f766e;--av2:#2dd4bf">DX</div>
+                        <div>
+                            <strong>Dilnoza Xasanova</strong>
+                            <span>Onlayn savdo · Farg'ona</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Duplicate for seamless loop -->
+                <div class="t-card">
+                    <div class="t-quote-mark">"</div>
+                    <div class="t-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <p>Sotuv bo'limini noldan qurdik. 2 oyda 12 ta yangi shartnoma. RESTA jamoasi har bir bosqichda yonimizda bo'ldi, bu juda muhim edi.</p>
+                    <div class="t-result" style="--rc:#0891b2;--rcs:rgba(8,145,178,0.12)">12 yangi shartnoma</div>
+                    <div class="t-author">
+                        <div class="t-avatar" style="--av1:#be185d;--av2:#f472b6">MR</div>
+                        <div>
+                            <strong>Malika Rahimova</strong>
+                            <span>Restoran tarmog'i egasi · Toshkent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="t-card">
+                    <div class="t-quote-mark">"</div>
+                    <div class="t-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <p>Audit jarayonida biznesimizning 5 ta asosiy muammosini topdik va hal qildik. Hozir kompaniyam oldin bilan solishtirib bo'lmaydi. Tavsiya qilaman!</p>
+                    <div class="t-result" style="--rc:#d97706;--rcs:rgba(217,119,6,0.12)">5 muammo hal qilindi</div>
+                    <div class="t-author">
+                        <div class="t-avatar" style="--av1:#1d4ed8;--av2:#818cf8">BN</div>
+                        <div>
+                            <strong>Bobur Nazarov</strong>
+                            <span>IT xizmatlar kompaniyasi · Toshkent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="t-card">
+                    <div class="t-quote-mark">"</div>
+                    <div class="t-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                    <p>Menejerlarimiz endi o'z boshlariga ishlamaydi. Tizim boshqaradi, men nazorat qilaman. Bunga erishish uchun 6 yil kutdim — RESTA 2 oyda hal qildi.</p>
+                    <div class="t-result" style="--rc:#16a34a;--rcs:rgba(22,163,74,0.12)">2x konversiya</div>
+                    <div class="t-author">
+                        <div class="t-avatar" style="--av1:#0f766e;--av2:#2dd4bf">DX</div>
+                        <div>
+                            <strong>Dilnoza Xasanova</strong>
+                            <span>Onlayn savdo · Farg'ona</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="cta-section fade-in-section">
+        <div class="cta-inner">
+            <div class="cta-blob"></div>
+            <p class="cta-label">Hozir boshlang</p>
+            <h2>Biznesingizni<br>tizimlashtirishni bugun boshlang</h2>
+            <p>Bepul audit bilan boshlang — 30 daqiqa ichida biznesingizdagi asosiy muammolarni aniqlaymiz.</p>
+            <a href="#contact" class="btn btn-white">
+                <i class="fa fa-calendar-check"></i>
+                Bepul konsultatsiya olish
+            </a>
+        </div>
+    </section>
+
+    <!-- ALOQA -->
+    <section id="contact" class="section contact fade-in-section">
+        <div class="section-label">Aloqa</div>
+        <h2>Bog'laning</h2>
+        <p class="section-subtitle">Formani to'ldiring — 1 soat ichida siz bilan bog'lanamiz</p>
+        <div class="contact-layout">
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Ismingiz <span>*</span></label>
+                    <input type="text" id="name" name="name" placeholder="Aziz Karimov" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefon <span>*</span></label>
+                    <input type="tel" id="phone" name="phone" placeholder="+998 90 123 45 67" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Kompaniya nomi</label>
+                    <input type="text" id="company" name="company" placeholder="Kompaniya LLC">
+                </div>
+                <div class="form-group">
+                    <label for="message">Xabar</label>
+                    <textarea id="message" name="message" placeholder="Biznesingizdagi asosiy muammo haqida yozing..." rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fa fa-paper-plane"></i>
+                    Yuborish
+                </button>
+                <p class="form-note"><i class="fa fa-lock"></i> Ma'lumotlaringiz xavfsiz saqlanadi</p>
+            </form>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fa fa-clock"></i>
+                    <div>
+                        <strong>Javob vaqti</strong>
+                        <p>1 soat ichida bog'lanamiz</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <i class="fa fa-gift"></i>
+                    <div>
+                        <strong>Bepul audit</strong>
+                        <p>Birinchi konsultatsiya bepul</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <i class="fa fa-shield-alt"></i>
+                    <div>
+                        <strong>Natija kafolati</strong>
+                        <p>30 kun ichida o'lchanadigan natija</p>
+                    </div>
+                </div>
+                <div class="contact-socials">
+                    <a href="https://t.me/yourbot" target="_blank" class="social-btn telegram">
+                        <i class="fa-brands fa-telegram"></i>
+                        Telegram
+                    </a>
+                    <a href="https://wa.me/yourphone" target="_blank" class="social-btn whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo">RESTA</span>
+                <p>Biznesni tizimlashtirish va raqamli transformatsiya konsalting kompaniyasi.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#problems">Muammolar</a>
+                <a href="#solutions">Yechimlar</a>
+                <a href="#cases">Keyslar</a>
+                <a href="#contact">Aloqa</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 RESTA. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <!-- Floating CTA -->
+    <div class="float-cta-wrap" id="floatCta">
+        <a href="#contact" class="float-cta">
+            <i class="fa fa-comments"></i>
+            <span>Konsultatsiya</span>
+        </a>
+    </div>
+
+    <script>
+    // Scroll progress bar
+    const progressBar = document.getElementById('scrollProgress');
+    const navbar = document.getElementById('navbar');
+    const floatCta = document.getElementById('floatCta');
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = progress + '%';
+
+        // Navbar scroll effect
+        navbar.classList.toggle('scrolled', scrollTop > 60);
+
+        // Float CTA ko'rsatish
+        floatCta.classList.toggle('visible', scrollTop > 400);
+
+        // Active nav link
+        let current = '';
+        document.querySelectorAll('section[id], header[id]').forEach(sec => {
+            if (window.scrollY >= sec.offsetTop - 100) current = sec.getAttribute('id');
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+        });
+    });
+
+    // Mobile menu
+    const toggle = document.querySelector('.toggle-menu');
+    const navLinks = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => {
+        toggle.classList.toggle('open');
+        navLinks.classList.toggle('open');
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        a.addEventListener('click', () => {
+            toggle.classList.remove('open');
+            navLinks.classList.remove('open');
+        });
+    });
+
+    // Counter animatsiyasi — scroll trigger
+    const counters = document.querySelectorAll('.counter');
+    const counterObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = +el.getAttribute('data-target');
+            const suffix = el.getAttribute('data-suffix') || '';
+            let count = 0;
+            const step = target / 80;
+            const timer = setInterval(() => {
+                count = Math.min(count + step, target);
+                el.textContent = Math.ceil(count) + suffix;
+                if (count >= target) clearInterval(timer);
+            }, 20);
+            observer.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterObserver.observe(c));
+
+    // SVG ring animatsiyasi — scroll trigger
+    const circumference = 251.33;
+    const rings = document.querySelectorAll('.ring-fill');
+    const ringObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const ring = entry.target;
+            const pct = parseFloat(ring.getAttribute('data-pct')) || 0;
+            const offset = circumference * (1 - pct / 100);
+            ring.style.strokeDashoffset = offset;
+            observer.unobserve(ring);
+        });
+    }, { threshold: 0.4 });
+    rings.forEach(r => ringObserver.observe(r));
+
+    // Scroll reveal
+    const faders = document.querySelectorAll('.fade-in-section');
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    faders.forEach(f => revealObserver.observe(f));
+
+    // Contact form submit
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('button[type=submit]');
+        btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
+        btn.style.background = '#16a34a';
+        btn.disabled = true;
+    });
+
+    // Solutions tabs
+    document.querySelectorAll('.sol-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const idx = tab.getAttribute('data-sol');
+            document.querySelectorAll('.sol-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.sol-panel').forEach(p => p.classList.remove('active'));
+            tab.classList.add('active');
+            document.querySelector(`.sol-panel[data-sol="${idx}"]`).classList.add('active');
+        });
+    });
+
+    // Hero mouse parallax
+    document.querySelector('.hero').addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        const x = (clientX / window.innerWidth - 0.5) * 20;
+        const y = (clientY / window.innerHeight - 0.5) * 20;
+        document.querySelectorAll('.hero-blob').forEach((blob, i) => {
+            const factor = (i + 1) * 0.4;
+            blob.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+        });
+    });
+    </script>
+</body>
+</html>
