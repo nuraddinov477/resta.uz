@@ -4,15 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RESTA – Tizimli biznes, katta natija</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css" id="mainStyles">
     <meta name="description" content="RESTA biznes jarayonlarini tizimlashtirish, CRM joriy qilish va avtomatizatsiya orqali sotuvlarni oshiradi.">
     <meta property="og:title" content="RESTA – Tizimli biznes, katta natija">
     <meta property="og:description" content="Konsalting va avtomatizatsiya bilan biznes faoliyatini tizimlashtiring.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" id="gfInter">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Admin sozlamalari (localStorage) dan oldin qo'llaniladi -->
+    <script>
+    (function(){
+        try {
+            var s = JSON.parse(localStorage.getItem('resta_settings') || '{}');
+            var r = document.documentElement;
+            if (s.colorPrimary) r.style.setProperty('--primary', s.colorPrimary);
+            if (s.colorAccent)  r.style.setProperty('--accent',  s.colorAccent);
+            if (s.fontSize)     r.style.setProperty('--base-font-size', s.fontSize + 'px');
+            if (s.fontFamily && s.fontFamily !== 'Inter') {
+                var fontMap = {
+                    'Poppins':           'Poppins:wght@400;500;600;700;800;900',
+                    'Outfit':            'Outfit:wght@400;500;600;700;800;900',
+                    'Plus Jakarta Sans': 'Plus+Jakarta+Sans:wght@400;500;600;700;800',
+                    'Montserrat':        'Montserrat:wght@400;500;600;700;800;900',
+                    'Nunito':            'Nunito:wght@400;500;600;700;800;900',
+                    'DM Sans':           'DM+Sans:wght@400;500;600;700;800',
+                    'Raleway':           'Raleway:wght@400;500;600;700;800;900',
+                };
+                var gf = fontMap[s.fontFamily];
+                if (gf) {
+                    var lnk = document.createElement('link');
+                    lnk.rel = 'stylesheet';
+                    lnk.href = 'https://fonts.googleapis.com/css2?family=' + gf + '&display=swap';
+                    document.head.appendChild(lnk);
+                }
+                r.style.setProperty('--font-body', "'" + s.fontFamily + "', sans-serif");
+            }
+        } catch(e) {}
+    })();
+    </script>
 </head>
 <body>
 
@@ -1021,34 +1052,45 @@
             </form>
             <div class="contact-info">
                 <div class="contact-card">
+                    <i class="fa fa-phone"></i>
+                    <div>
+                        <strong>Telefon</strong>
+                        <p data-contact="phone">+998 90 123 45 67</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <i class="fa fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong>
+                        <p data-contact="email">info@resta.uz</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <i class="fa fa-location-dot"></i>
+                    <div>
+                        <strong>Manzil</strong>
+                        <p data-contact="address">Toshkent, O'zbekiston</p>
+                    </div>
+                </div>
+                <div class="contact-card">
                     <i class="fa fa-clock"></i>
                     <div>
-                        <strong>Javob vaqti</strong>
-                        <p>1 soat ichida bog'lanamiz</p>
-                    </div>
-                </div>
-                <div class="contact-card">
-                    <i class="fa fa-gift"></i>
-                    <div>
-                        <strong>Bepul audit</strong>
-                        <p>Birinchi konsultatsiya bepul</p>
-                    </div>
-                </div>
-                <div class="contact-card">
-                    <i class="fa fa-shield-alt"></i>
-                    <div>
-                        <strong>Natija kafolati</strong>
-                        <p>30 kun ichida o'lchanadigan natija</p>
+                        <strong>Ish vaqti</strong>
+                        <p data-contact="hours">Dushanba–Juma: 09:00 – 18:00</p>
                     </div>
                 </div>
                 <div class="contact-socials">
-                    <a href="https://t.me/yourbot" target="_blank" class="social-btn telegram">
+                    <a href="https://t.me/yourbot" target="_blank" class="social-btn telegram" data-social="telegram">
                         <i class="fa-brands fa-telegram"></i>
                         Telegram
                     </a>
-                    <a href="https://wa.me/yourphone" target="_blank" class="social-btn whatsapp">
+                    <a href="https://wa.me/yourphone" target="_blank" class="social-btn whatsapp" data-social="whatsapp">
                         <i class="fa-brands fa-whatsapp"></i>
                         WhatsApp
+                    </a>
+                    <a href="#" target="_blank" class="social-btn" style="background:rgba(225,48,108,0.1);color:#e1306c;border-color:rgba(225,48,108,0.2)" data-social="instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                        Instagram
                     </a>
                 </div>
             </div>
@@ -1071,6 +1113,7 @@
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 RESTA. Barcha huquqlar himoyalangan.</p>
+            <a href="admin.html" style="color:rgba(255,255,255,0.2);font-size:.75rem;text-decoration:none;margin-left:1rem" title="Admin panel">&#9881;</a>
         </div>
     </footer>
 
@@ -1200,6 +1243,58 @@
             blob.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
         });
     });
+
+    // Admin sozlamalaridan kontent va aloqa ma'lumotlarini qo'llash
+    (function applyAdminContent() {
+        try {
+            const s = JSON.parse(localStorage.getItem('resta_settings') || '{}');
+
+            // Rang va shrift CSS o'zgaruvchilar (body ga ham)
+            if (s.colorPrimary) document.documentElement.style.setProperty('--primary', s.colorPrimary);
+            if (s.colorAccent)  document.documentElement.style.setProperty('--accent', s.colorAccent);
+
+            // Kontent
+            const c = s.content || {};
+            const set = (sel, val) => { const el = document.querySelector(sel); if (el && val) el.textContent = val; };
+            const setHtml = (sel, val) => { const el = document.querySelector(sel); if (el && val) el.innerHTML = val; };
+            const setAttr = (sel, attr, val) => { const el = document.querySelector(sel); if (el && val) el.setAttribute(attr, val); };
+
+            if (c.title)      document.title = c.title;
+            if (c.company)    document.querySelectorAll('.logo, .footer-brand').forEach(el => el.textContent = c.company);
+            if (c.hero_title) set('#hero h1', c.hero_title);
+            if (c.hero_sub)   set('.hero-content > p', c.hero_sub);
+            if (c.hero_cta1)  set('.hero-cta .btn-primary', c.hero_cta1);
+            if (c.hero_cta2)  set('.hero-cta .btn-ghost', c.hero_cta2);
+            if (c.prob_title) set('#problems h2', c.prob_title);
+            if (c.stats_title) set('.stats-title', c.stats_title);
+            if (c.stats_sub)   set('.stats-subtitle', c.stats_sub);
+
+            // Aloqa
+            const ct = s.contact || {};
+            if (ct.phone)   document.querySelectorAll('[data-contact="phone"]').forEach(el => el.textContent = ct.phone);
+            if (ct.email)   document.querySelectorAll('[data-contact="email"]').forEach(el => el.textContent = ct.email);
+            if (ct.address) document.querySelectorAll('[data-contact="address"]').forEach(el => el.textContent = ct.address);
+            if (ct.hours)   document.querySelectorAll('[data-contact="hours"]').forEach(el => el.textContent = ct.hours);
+            if (ct.telegram)  setAttr('a[data-social="telegram"]', 'href', ct.telegram);
+            if (ct.instagram) setAttr('a[data-social="instagram"]', 'href', ct.instagram);
+            if (ct.youtube)   setAttr('a[data-social="youtube"]', 'href', ct.youtube);
+            if (ct.linkedin)  setAttr('a[data-social="linkedin"]', 'href', ct.linkedin);
+
+            // Statistika raqamlari
+            const st = s.stats || {};
+            const statCards = document.querySelectorAll('.stat-card');
+            [1,2,3,4].forEach((i, idx) => {
+                const d = st['s' + i];
+                if (!d || !statCards[idx]) return;
+                const counter = statCards[idx].querySelector('.counter');
+                const label   = statCards[idx].querySelector('.stat-label');
+                const trend   = statCards[idx].querySelector('.stat-trend');
+                if (counter && d.num)   counter.setAttribute('data-target', d.num);
+                if (label   && d.label) label.textContent = d.label;
+                if (trend   && d.trend) trend.innerHTML = `<i class="fa fa-arrow-trend-up"></i> ${d.trend}`;
+            });
+        } catch(e) {}
+    })();
     </script>
 </body>
 </html>

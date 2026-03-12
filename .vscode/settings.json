@@ -1,0 +1,13 @@
+{
+    "remote.portsAttributes": {
+        "8080": {
+            "label": "RESTA Sayt",
+            "onAutoForward": "openBrowser"
+        },
+        "8081": {
+            "label": "RESTA Admin",
+            "onAutoForward": "openBrowser"
+        }
+    },
+    "remote.autoForwardPorts": true
+}

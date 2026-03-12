@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RESTA – Admin Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg:      #0f172a;
+            --bg2:     #1e293b;
+            --bg3:     #334155;
+            --border:  rgba(255,255,255,0.08);
+            --text:    #f1f5f9;
+            --muted:   #94a3b8;
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --accent:  #06b6d4;
+            --success: #22c55e;
+            --radius:  12px;
+        }
+
+        html { font-size: 15px; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ======= LOGIN SCREEN ======= */
+        #loginScreen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: var(--bg);
+        }
+        .login-box {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+        }
+        .login-logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.25rem;
+        }
+        .login-sub {
+            color: var(--muted);
+            font-size: .85rem;
+            margin-bottom: 2rem;
+        }
+        .login-box label {
+            display: block;
+            text-align: left;
+            font-size: .8rem;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 0.4rem;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+        .login-box input {
+            width: 100%;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: .95rem;
+            margin-bottom: 1.25rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .login-box input:focus { border-color: var(--primary); }
+        .btn-login {
+            width: 100%;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem;
+            font-size: .95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+        }
+        .btn-login:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .login-err {
+            color: #f87171;
+            font-size: .82rem;
+            margin-top: 0.75rem;
+            display: none;
+        }
+
+        /* ======= DASHBOARD ======= */
+        #dashboard { display: none; min-height: 100vh; }
+
+        /* Top bar */
+        .topbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            height: 56px;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center;
+            padding: 0 1.5rem;
+            gap: 1rem;
+            z-index: 100;
+        }
+        .topbar-logo {
+            font-size: 1.1rem; font-weight: 900;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-right: auto;
+        }
+        .topbar-logo span { color: var(--muted); font-weight: 400; font-size: .85rem; -webkit-text-fill-color: var(--muted); }
+        .topbar-btn {
+            display: flex; align-items: center; gap: 0.4rem;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            padding: 0.4rem 0.9rem;
+            font-size: .82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+        .topbar-btn:hover { background: rgba(255,255,255,0.1); }
+        .topbar-btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+        .topbar-btn.primary:hover { background: var(--primary-dark); }
+
+        /* Layout */
+        .layout {
+            display: flex;
+            padding-top: 56px;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            flex-shrink: 0;
+            background: var(--bg2);
+            border-right: 1px solid var(--border);
+            padding: 1.25rem 0.75rem;
+            position: fixed;
+            top: 56px; bottom: 0; left: 0;
+            overflow-y: auto;
+        }
+        .sidebar-section {
+            font-size: .7rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            padding: 0 0.75rem;
+            margin: 1rem 0 0.5rem;
+        }
+        .sidebar-section:first-child { margin-top: 0; }
+        .nav-item {
+            display: flex; align-items: center; gap: 0.65rem;
+            padding: 0.6rem 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--muted);
+            font-size: .875rem;
+            font-weight: 500;
+            transition: background 0.15s, color 0.15s;
+            border: none; background: none; width: 100%; text-align: left;
+        }
+        .nav-item i { width: 16px; text-align: center; font-size: .85rem; }
+        .nav-item:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+        .nav-item.active { background: rgba(59,130,246,0.15); color: var(--primary); }
+
+        /* Main content */
+        .main {
+            flex: 1;
+            margin-left: 220px;
+            padding: 2rem;
+            max-width: 860px;
+        }
+
+        /* Tab panels */
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* Panel header */
+        .panel-header { margin-bottom: 2rem; }
+        .panel-header h2 {
+            font-size: 1.4rem; font-weight: 800;
+            color: var(--text); margin-bottom: 0.3rem;
+        }
+        .panel-header p { color: var(--muted); font-size: .875rem; }
+
+        /* Card */
+        .card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+        .card-title {
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Form controls */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .form-row.single { grid-template-columns: 1fr; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+        .form-group label {
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            padding: 0.65rem 0.9rem;
+            font-size: .9rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+            width: 100%;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus { border-color: var(--primary); }
+        .form-group textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+        .form-group select { cursor: pointer; }
+        .form-group input[type="color"] {
+            padding: 0.3rem;
+            height: 42px;
+            cursor: pointer;
+        }
+
+        /* Font preview */
+        .font-preview {
+            margin-top: 0.6rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255,255,255,0.04);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            color: rgba(255,255,255,0.5);
+            font-size: .8rem;
+        }
+        .font-preview strong {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+
+        /* Size slider */
+        .size-slider-wrap {
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .size-slider-wrap input[type="range"] {
+            flex: 1; padding: 0; height: 4px;
+            accent-color: var(--primary);
+            background: var(--bg3);
+        }
+        .size-val {
+            min-width: 40px; text-align: right;
+            font-size: .85rem; font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Color swatch row */
+        .color-row {
+            display: flex; align-items: center; gap: 1rem;
+        }
+        .color-swatch {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.15);
+            flex-shrink: 0;
+        }
+
+        /* Font grid */
+        .font-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 0.75rem;
+        }
+        .font-opt {
+            background: var(--bg3);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 0.9rem 1rem;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            text-align: center;
+        }
+        .font-opt:hover { border-color: var(--primary); background: rgba(59,130,246,0.08); }
+        .font-opt.selected { border-color: var(--primary); background: rgba(59,130,246,0.12); }
+        .font-opt-name {
+            font-size: .85rem; font-weight: 700; color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+        .font-opt-preview { font-size: .75rem; color: var(--muted); }
+
+        /* Save bar */
+        .save-bar {
+            display: flex; align-items: center; gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .btn-save {
+            display: flex; align-items: center; gap: 0.5rem;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.65rem 1.5rem;
+            font-size: .9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            font-family: inherit;
+        }
+        .btn-save:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .btn-reset {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            border-radius: 8px;
+            padding: 0.65rem 1.25rem;
+            font-size: .875rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-reset:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+        .save-msg {
+            display: flex; align-items: center; gap: 0.4rem;
+            color: var(--success);
+            font-size: .85rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .save-msg.show { opacity: 1; }
+
+        /* Stats card row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .stat-mini-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+        }
+        .stat-mini-card .num {
+            font-size: 1.6rem; font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-mini-card .lbl { font-size: .78rem; color: var(--muted); margin-top: 0.25rem; }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; padding: 1.25rem; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div id="loginScreen">
+    <div class="login-box">
+        <div class="login-logo">RESTA</div>
+        <p class="login-sub">Admin boshqaruv paneli</p>
+        <label>Parol</label>
+        <input type="password" id="pwdInput" placeholder="Parolni kiriting..." onkeydown="if(event.key==='Enter') doLogin()">
+        <button class="btn-login" onclick="doLogin()"><i class="fa fa-lock"></i> Kirish</button>
+        <p class="login-err" id="loginErr"><i class="fa fa-circle-xmark"></i> Parol noto'g'ri</p>
+    </div>
+</div>
+
+<!-- ============ DASHBOARD ============ -->
+<div id="dashboard">
+
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="topbar-logo">RESTA <span>/ Admin</span></div>
+        <a href="index.html" target="_blank" class="topbar-btn">
+            <i class="fa fa-eye"></i> Ko'rib chiqish
+        </a>
+        <button class="topbar-btn primary" onclick="saveAll()">
+            <i class="fa fa-floppy-disk"></i> Saqlash
+        </button>
+        <button class="topbar-btn" onclick="doLogout()">
+            <i class="fa fa-arrow-right-from-bracket"></i> Chiqish
+        </button>
+    </div>
+
+    <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">Boshqaruv</div>
+            <button class="nav-item active" onclick="switchTab('overview', this)">
+                <i class="fa fa-chart-pie"></i> Umumiy
+            </button>
+
+            <div class="sidebar-section">Dizayn</div>
+            <button class="nav-item" onclick="switchTab('fonts', this)">
+                <i class="fa fa-font"></i> Shriftlar
+            </button>
+            <button class="nav-item" onclick="switchTab('colors', this)">
+                <i class="fa fa-palette"></i> Ranglar
+            </button>
+
+            <div class="sidebar-section">Kontent</div>
+            <button class="nav-item" onclick="switchTab('content', this)">
+                <i class="fa fa-heading"></i> Asosiy matn
+            </button>
+            <button class="nav-item" onclick="switchTab('contact', this)">
+                <i class="fa fa-address-card"></i> Aloqa ma'lumotlari
+            </button>
+            <button class="nav-item" onclick="switchTab('stats_edit', this)">
+                <i class="fa fa-chart-bar"></i> Natijalar raqamlari
+            </button>
+        </aside>
+
+        <!-- Main -->
+        <main class="main">
+
+            <!-- OVERVIEW -->
+            <div class="tab-panel active" id="tab-overview">
+                <div class="panel-header">
+                    <h2>Xush kelibsiz!</h2>
+                    <p>RESTA saytining kontent va dizaynini bu yerdan boshqaring</p>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-mini-card">
+                        <div class="num" id="ov-font">Inter</div>
+                        <div class="lbl">Joriy shrift</div>
+                    </div>
+                    <div class="stat-mini-card">
+                        <div class="num" style="font-size:1.2rem" id="ov-primary">#1d4ed8</div>
+                        <div class="lbl">Asosiy rang</div>
+                    </div>
+                    <div class="stat-mini-card">
+                        <div class="num" id="ov-sections">7</div>
+                        <div class="lbl">Tahrirlash bo'limlari</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Tezkor amallar</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.75rem">
+                        <button class="topbar-btn" onclick="switchTab('fonts', document.querySelector('.nav-item:nth-child(5)'))"><i class="fa fa-font"></i> Shriftni o'zgartirish</button>
+                        <button class="topbar-btn" onclick="switchTab('colors', document.querySelector('.nav-item:nth-child(6)'))"><i class="fa fa-palette"></i> Ranglarni o'zgartirish</button>
+                        <button class="topbar-btn" onclick="switchTab('content', document.querySelector('.nav-item:nth-child(8)'))"><i class="fa fa-heading"></i> Asosiy matnni tahrirlash</button>
+                        <button class="topbar-btn" onclick="switchTab('contact', document.querySelector('.nav-item:nth-child(9)'))"><i class="fa fa-phone"></i> Aloqa ma'lumotlarini tahrirlash</button>
+                        <button class="topbar-btn primary" onclick="resetAll()"><i class="fa fa-rotate-left"></i> Standartga qaytarish</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FONTS -->
+            <div class="tab-panel" id="tab-fonts">
+                <div class="panel-header">
+                    <h2>Shriftlar</h2>
+                    <p>Sayt uchun shrift oilasi va o'lchamini tanlang</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Shrift oilasi</div>
+                    <div class="font-grid" id="fontGrid">
+                        <!-- JS renders these -->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Ko'rinish</div>
+                    <div class="font-preview" id="fontPreviewBox">
+                        <strong id="fontPreviewTitle">Biznesingizni Tizimlashtiring</strong>
+                        RESTA kompaniyalarga CRM joriy qilish va sotuv bo'limini qurishda yordam beradi.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Shrift o'lchami</div>
+                    <div class="form-group">
+                        <label>Asosiy matn o'lchami</label>
+                        <div class="size-slider-wrap">
+                            <input type="range" id="fontSizeSlider" min="13" max="20" value="15" oninput="updateSizeVal(this.value)">
+                            <span class="size-val" id="fontSizeVal">15px</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="save-bar">
+                    <button class="btn-save" onclick="saveFonts()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
+                    <span class="save-msg" id="fontSaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
+                </div>
+            </div>
+
+            <!-- COLORS -->
+            <div class="tab-panel" id="tab-colors">
+                <div class="panel-header">
+                    <h2>Ranglar</h2>
+                    <p>Saytning asosiy rang palitrasini o'zgartiring</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Asosiy ranglar</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Asosiy rang (Primary)</label>
+                            <div class="color-row">
+                                <input type="color" id="colorPrimary" value="#1d4ed8" oninput="updateColorSwatch('primary', this.value)">
+                                <div class="color-swatch" id="swatchPrimary" style="background:#1d4ed8"></div>
+                                <span style="color:var(--muted);font-size:.85rem" id="colorPrimaryHex">#1d4ed8</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Aksent rang (Accent)</label>
+                            <div class="color-row">
+                                <input type="color" id="colorAccent" value="#06b6d4" oninput="updateColorSwatch('accent', this.value)">
+                                <div class="color-swatch" id="swatchAccent" style="background:#06b6d4"></div>
+                                <span style="color:var(--muted);font-size:.85rem" id="colorAccentHex">#06b6d4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:1.5rem">
+                        <div class="card-title" style="margin-bottom:1rem">Namuna ko'rinish</div>
+                        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center">
+                            <div id="previewBtn" style="background:#1d4ed8;color:#fff;padding:0.6rem 1.25rem;border-radius:50px;font-size:.85rem;font-weight:700;transition:background 0.3s">Asosiy tugma</div>
+                            <div id="previewAccent" style="background:rgba(6,182,212,0.12);color:#06b6d4;border:1px solid #06b6d4;padding:0.6rem 1.25rem;border-radius:50px;font-size:.85rem;font-weight:700;transition:all 0.3s">Aksent tugma</div>
+                            <div id="previewBadge" style="background:rgba(29,78,216,0.1);color:#1d4ed8;padding:0.3rem 0.8rem;border-radius:50px;font-size:.75rem;font-weight:700;transition:all 0.3s">Badge</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Tayyor ranglar seti</div>
+                    <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
+                        <button class="font-opt" onclick="applyColorSet('#1d4ed8','#06b6d4')" title="Ko'k (standart)">
+                            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
+                                <div style="width:20px;height:20px;border-radius:4px;background:#1d4ed8"></div>
+                                <div style="width:20px;height:20px;border-radius:4px;background:#06b6d4"></div>
+                            </div>
+                            <div class="font-opt-preview">Ko'k</div>
+                        </button>
+                        <button class="font-opt" onclick="applyColorSet('#7c3aed','#a78bfa')" title="Binafsha">
+                            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
+                                <div style="width:20px;height:20px;border-radius:4px;background:#7c3aed"></div>
+                                <div style="width:20px;height:20px;border-radius:4px;background:#a78bfa"></div>
+                            </div>
+                            <div class="font-opt-preview">Binafsha</div>
+                        </button>
+                        <button class="font-opt" onclick="applyColorSet('#059669','#34d399')" title="Yashil">
+                            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
+                                <div style="width:20px;height:20px;border-radius:4px;background:#059669"></div>
+                                <div style="width:20px;height:20px;border-radius:4px;background:#34d399"></div>
+                            </div>
+                            <div class="font-opt-preview">Yashil</div>
+                        </button>
+                        <button class="font-opt" onclick="applyColorSet('#dc2626','#fb923c')" title="Qizil">
+                            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
+                                <div style="width:20px;height:20px;border-radius:4px;background:#dc2626"></div>
+                                <div style="width:20px;height:20px;border-radius:4px;background:#fb923c"></div>
+                            </div>
+                            <div class="font-opt-preview">Qizil</div>
+                        </button>
+                        <button class="font-opt" onclick="applyColorSet('#0f766e','#2dd4bf')" title="Moviy-yashil">
+                            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
+                                <div style="width:20px;height:20px;border-radius:4px;background:#0f766e"></div>
+                                <div style="width:20px;height:20px;border-radius:4px;background:#2dd4bf"></div>
+                            </div>
+                            <div class="font-opt-preview">Teal</div>
+                        </button>
+                        <button class="font-opt" onclick="applyColorSet('#1e293b','#38bdf8')" title="Qora-ko'k">
+                            <div style="display:flex;gap:4px;justify-content:center;margin-bottom:4px">
+                                <div style="width:20px;height:20px;border-radius:4px;background:#1e293b"></div>
+                                <div style="width:20px;height:20px;border-radius:4px;background:#38bdf8"></div>
+                            </div>
+                            <div class="font-opt-preview">Qora</div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="save-bar">
+                    <button class="btn-save" onclick="saveColors()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
+                    <span class="save-msg" id="colorSaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
+                </div>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="tab-panel" id="tab-content">
+                <div class="panel-header">
+                    <h2>Asosiy matn</h2>
+                    <p>Saytning sarlavhalari va asosiy matnlarini tahrirlang</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Brend nomi</div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label>Kompaniya nomi (navbar va footer)</label>
+                            <input type="text" id="c_company" placeholder="RESTA">
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label>Brauzer tab sarlavhasi</label>
+                            <input type="text" id="c_title" placeholder="RESTA – Tizimli biznes, katta natija">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Bosh sahifa (Hero)</div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label>Asosiy sarlavha</label>
+                            <input type="text" id="c_hero_title" placeholder="Biznesingizni Tizimlashtiring">
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label>Qo'shimcha matn (subtitle)</label>
+                            <textarea id="c_hero_sub" placeholder="RESTA kompaniyalarga CRM joriy qilish..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Asosiy tugma matni</label>
+                            <input type="text" id="c_hero_cta1" placeholder="Bepul konsultatsiya">
+                        </div>
+                        <div class="form-group">
+                            <label>Ikkinchi tugma matni</label>
+                            <input type="text" id="c_hero_cta2" placeholder="Xizmatlarni ko'rish">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Muammolar bo'limi (header)</div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label>Bo'lim sarlavhasi</label>
+                            <input type="text" id="c_prob_title" placeholder="Ko'p biznesda uchraydigan muammolar">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Natijalar bo'limi</div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label>Sarlavha</label>
+                            <input type="text" id="c_stats_title" placeholder="Raqamlarda natija">
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label>Subtitle</label>
+                            <input type="text" id="c_stats_sub" placeholder="Haqiqiy kompaniyalar bilan haqiqiy natijalar">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="save-bar">
+                    <button class="btn-save" onclick="saveContent()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
+                    <span class="save-msg" id="contentSaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
+                </div>
+            </div>
+
+            <!-- CONTACT -->
+            <div class="tab-panel" id="tab-contact">
+                <div class="panel-header">
+                    <h2>Aloqa ma'lumotlari</h2>
+                    <p>Telefon, email, manzil va ijtimoiy tarmoq havolalarini yangilang</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Asosiy aloqa</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Telefon raqami</label>
+                            <input type="text" id="c_phone" placeholder="+998 90 123 45 67">
+                        </div>
+                        <div class="form-group">
+                            <label>Email manzil</label>
+                            <input type="text" id="c_email" placeholder="info@resta.uz">
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label>Ofis manzili</label>
+                            <input type="text" id="c_address" placeholder="Toshkent, O'zbekiston">
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label>Ish vaqti</label>
+                            <input type="text" id="c_hours" placeholder="Dushanba–Juma: 09:00 – 18:00">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Ijtimoiy tarmoqlar</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fab fa-telegram" style="color:#0088cc"></i> Telegram</label>
+                            <input type="text" id="c_telegram" placeholder="https://t.me/resta_uz">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fab fa-instagram" style="color:#e1306c"></i> Instagram</label>
+                            <input type="text" id="c_instagram" placeholder="https://instagram.com/resta_uz">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fab fa-youtube" style="color:#ff0000"></i> YouTube</label>
+                            <input type="text" id="c_youtube" placeholder="https://youtube.com/@resta">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fab fa-linkedin" style="color:#0077b5"></i> LinkedIn</label>
+                            <input type="text" id="c_linkedin" placeholder="https://linkedin.com/company/resta">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="save-bar">
+                    <button class="btn-save" onclick="saveContact()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
+                    <span class="save-msg" id="contactSaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
+                </div>
+            </div>
+
+            <!-- STATS EDIT -->
+            <div class="tab-panel" id="tab-stats_edit">
+                <div class="panel-header">
+                    <h2>Natijalar raqamlari</h2>
+                    <p>Statistika bo'limidagi raqamlar va tavsiflarni yangilang</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">1-raqam — Tizimlashtirilgan kompaniyalar</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Raqam (target)</label>
+                            <input type="number" id="s1_num" placeholder="120">
+                        </div>
+                        <div class="form-group">
+                            <label>Tavsif</label>
+                            <input type="text" id="s1_label" placeholder="Tizimlashtirilgan kompaniyalar">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Trend matni</label>
+                            <input type="text" id="s1_trend" placeholder="+34% o'sish">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">2-raqam — CRM tizimlari</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Raqam</label>
+                            <input type="number" id="s2_num" placeholder="85">
+                        </div>
+                        <div class="form-group">
+                            <label>Tavsif</label>
+                            <input type="text" id="s2_label" placeholder="Joriy qilingan CRM tizimlari">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Trend matni</label>
+                            <input type="text" id="s2_trend" placeholder="+28% o'sish">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">3-raqam — Sotuv bo'limlari</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Raqam</label>
+                            <input type="number" id="s3_num" placeholder="60">
+                        </div>
+                        <div class="form-group">
+                            <label>Tavsif</label>
+                            <input type="text" id="s3_label" placeholder="Qurilgan sotuv bo'limlari">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Trend matni</label>
+                            <input type="text" id="s3_trend" placeholder="+45% o'sish">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">4-raqam — Avtomatlashtirilgan jarayonlar</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Raqam</label>
+                            <input type="number" id="s4_num" placeholder="200">
+                        </div>
+                        <div class="form-group">
+                            <label>Tavsif</label>
+                            <input type="text" id="s4_label" placeholder="Avtomatlashtirilgan jarayonlar">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Trend matni</label>
+                            <input type="text" id="s4_trend" placeholder="+52% o'sish">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="save-bar">
+                    <button class="btn-save" onclick="saveStats()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
+                    <span class="save-msg" id="statsSaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<script>
+// ==================== CONFIG ====================
+const PASSWORD = 'resta2024';
+const STORAGE_KEY = 'resta_settings';
+
+const FONTS = [
+    { name: 'Inter',             gf: 'Inter:wght@400;500;600;700;800;900',       preview: 'AaBbCc' },
+    { name: 'Poppins',           gf: 'Poppins:wght@400;500;600;700;800;900',      preview: 'AaBbCc' },
+    { name: 'Outfit',            gf: 'Outfit:wght@400;500;600;700;800;900',       preview: 'AaBbCc' },
+    { name: 'Plus Jakarta Sans', gf: 'Plus+Jakarta+Sans:wght@400;500;600;700;800',preview: 'AaBbCc' },
+    { name: 'Montserrat',        gf: 'Montserrat:wght@400;500;600;700;800;900',   preview: 'AaBbCc' },
+    { name: 'Nunito',            gf: 'Nunito:wght@400;500;600;700;800;900',       preview: 'AaBbCc' },
+    { name: 'DM Sans',           gf: 'DM+Sans:wght@400;500;600;700;800',          preview: 'AaBbCc' },
+    { name: 'Raleway',           gf: 'Raleway:wght@400;500;600;700;800;900',      preview: 'AaBbCc' },
+];
+
+// ==================== STATE ====================
+let settings = {};
+
+function loadSettings() {
+    try { settings = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch(e) { settings = {}; }
+}
+
+function saveSettings() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+}
+
+// ==================== LOGIN ====================
+function doLogin() {
+    const val = document.getElementById('pwdInput').value;
+    if (val === PASSWORD) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        sessionStorage.setItem('resta_auth', '1');
+        initDashboard();
+    } else {
+        document.getElementById('loginErr').style.display = 'block';
+        document.getElementById('pwdInput').focus();
+    }
+}
+
+function doLogout() {
+    sessionStorage.removeItem('resta_auth');
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('pwdInput').value = '';
+}
+
+// ==================== TAB SWITCH ====================
+function switchTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    if (btn) btn.classList.add('active');
+}
+
+// ==================== FONTS ====================
+function renderFontGrid() {
+    const grid = document.getElementById('fontGrid');
+    const current = settings.fontFamily || 'Inter';
+    grid.innerHTML = '';
+    FONTS.forEach(f => {
+        loadGoogleFont(f.gf);
+        const div = document.createElement('div');
+        div.className = 'font-opt' + (f.name === current ? ' selected' : '');
+        div.style.fontFamily = `'${f.name}', sans-serif`;
+        div.innerHTML = `<div class="font-opt-name">${f.name}</div><div class="font-opt-preview">${f.preview} 123</div>`;
+        div.onclick = () => selectFont(f.name, div);
+        grid.appendChild(div);
+    });
+    applyFontPreview(current);
+}
+
+function loadGoogleFont(gf) {
+    const id = 'gf-' + gf.split(':')[0].replace(/\+/g, '-');
+    if (!document.getElementById(id)) {
+        const link = document.createElement('link');
+        link.id = id;
+        link.rel = 'stylesheet';
+        link.href = `https://fonts.googleapis.com/css2?family=${gf}&display=swap`;
+        document.head.appendChild(link);
+    }
+}
+
+function selectFont(name, el) {
+    document.querySelectorAll('.font-opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    settings.fontFamily = name;
+    applyFontPreview(name);
+}
+
+function applyFontPreview(name) {
+    const box = document.getElementById('fontPreviewBox');
+    box.style.fontFamily = `'${name}', sans-serif`;
+    document.getElementById('fontPreviewTitle').style.fontFamily = `'${name}', sans-serif`;
+}
+
+function updateSizeVal(v) {
+    document.getElementById('fontSizeVal').textContent = v + 'px';
+    settings.fontSize = v;
+}
+
+function saveFonts() {
+    const slider = document.getElementById('fontSizeSlider');
+    settings.fontSize = slider.value;
+    saveSettings();
+    showMsg('fontSaveMsg');
+    document.getElementById('ov-font').textContent = settings.fontFamily || 'Inter';
+}
+
+// ==================== COLORS ====================
+function updateColorSwatch(type, val) {
+    if (type === 'primary') {
+        document.getElementById('swatchPrimary').style.background = val;
+        document.getElementById('colorPrimaryHex').textContent = val;
+        document.getElementById('previewBtn').style.background = val;
+        document.getElementById('previewBadge').style.color = val;
+        document.getElementById('previewBadge').style.background = val + '18';
+        settings.colorPrimary = val;
+    } else {
+        document.getElementById('swatchAccent').style.background = val;
+        document.getElementById('colorAccentHex').textContent = val;
+        document.getElementById('previewAccent').style.color = val;
+        document.getElementById('previewAccent').style.borderColor = val;
+        document.getElementById('previewAccent').style.background = val + '18';
+        settings.colorAccent = val;
+    }
+}
+
+function applyColorSet(primary, accent) {
+    document.getElementById('colorPrimary').value = primary;
+    document.getElementById('colorAccent').value = accent;
+    updateColorSwatch('primary', primary);
+    updateColorSwatch('accent', accent);
+}
+
+function saveColors() {
+    settings.colorPrimary = document.getElementById('colorPrimary').value;
+    settings.colorAccent  = document.getElementById('colorAccent').value;
+    saveSettings();
+    showMsg('colorSaveMsg');
+    document.getElementById('ov-primary').textContent = settings.colorPrimary;
+}
+
+// ==================== CONTENT ====================
+function saveContent() {
+    settings.content = settings.content || {};
+    ['company','title','hero_title','hero_sub','hero_cta1','hero_cta2','prob_title','stats_title','stats_sub'].forEach(k => {
+        const el = document.getElementById('c_' + k);
+        if (el) settings.content[k] = el.value;
+    });
+    saveSettings();
+    showMsg('contentSaveMsg');
+}
+
+function saveContact() {
+    settings.contact = settings.contact || {};
+    ['phone','email','address','hours','telegram','instagram','youtube','linkedin'].forEach(k => {
+        const el = document.getElementById('c_' + k);
+        if (el) settings.contact[k] = el.value;
+    });
+    saveSettings();
+    showMsg('contactSaveMsg');
+}
+
+function saveStats() {
+    settings.stats = settings.stats || {};
+    [1,2,3,4].forEach(i => {
+        const num   = document.getElementById('s' + i + '_num');
+        const label = document.getElementById('s' + i + '_label');
+        const trend = document.getElementById('s' + i + '_trend');
+        settings.stats['s' + i] = {
+            num:   num   ? num.value   : '',
+            label: label ? label.value : '',
+            trend: trend ? trend.value : '',
+        };
+    });
+    saveSettings();
+    showMsg('statsSaveMsg');
+}
+
+function saveAll() {
+    saveFonts();
+    saveColors();
+    saveContent();
+    saveContact();
+    saveStats();
+}
+
+// ==================== RESET ====================
+function resetAll() {
+    if (!confirm('Barcha sozlamalar standartga qaytariladi. Davom etasizmi?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    settings = {};
+    initDashboard();
+    alert('Standart sozlamalar tiklandi. Saytni yangilang.');
+}
+
+// ==================== HELPERS ====================
+function showMsg(id) {
+    const el = document.getElementById(id);
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+function setVal(id, val) {
+    const el = document.getElementById(id);
+    if (el && val !== undefined && val !== '') el.value = val;
+}
+
+// ==================== INIT ====================
+function initDashboard() {
+    loadSettings();
+
+    // Fonts
+    setVal('fontSizeSlider', settings.fontSize || 15);
+    updateSizeVal(settings.fontSize || 15);
+    renderFontGrid();
+
+    // Colors
+    const p = settings.colorPrimary || '#1d4ed8';
+    const a = settings.colorAccent  || '#06b6d4';
+    setVal('colorPrimary', p); updateColorSwatch('primary', p);
+    setVal('colorAccent',  a); updateColorSwatch('accent',  a);
+
+    // Content
+    const c = settings.content || {};
+    setVal('c_company',    c.company    || 'RESTA');
+    setVal('c_title',      c.title      || 'RESTA – Tizimli biznes, katta natija');
+    setVal('c_hero_title', c.hero_title || 'Biznesingizni Tizimlashtiring');
+    setVal('c_hero_sub',   c.hero_sub   || '');
+    setVal('c_hero_cta1',  c.hero_cta1  || 'Bepul konsultatsiya');
+    setVal('c_hero_cta2',  c.hero_cta2  || 'Xizmatlarni ko\'rish');
+    setVal('c_prob_title', c.prob_title || 'Ko\'p biznesda uchraydigan muammolar');
+    setVal('c_stats_title',c.stats_title|| 'Raqamlarda natija');
+    setVal('c_stats_sub',  c.stats_sub  || 'Haqiqiy kompaniyalar bilan haqiqiy natijalar');
+
+    // Contact
+    const ct = settings.contact || {};
+    setVal('c_phone',     ct.phone     || '+998 90 123 45 67');
+    setVal('c_email',     ct.email     || 'info@resta.uz');
+    setVal('c_address',   ct.address   || 'Toshkent, O\'zbekiston');
+    setVal('c_hours',     ct.hours     || 'Dushanba–Juma: 09:00 – 18:00');
+    setVal('c_telegram',  ct.telegram  || '');
+    setVal('c_instagram', ct.instagram || '');
+    setVal('c_youtube',   ct.youtube   || '');
+    setVal('c_linkedin',  ct.linkedin  || '');
+
+    // Stats
+    const st = settings.stats || {};
+    const defaults = [
+        { num:'120', label:'Tizimlashtirilgan kompaniyalar', trend:'+34% o\'sish' },
+        { num:'85',  label:'Joriy qilingan CRM tizimlari',   trend:'+28% o\'sish' },
+        { num:'60',  label:'Qurilgan sotuv bo\'limlari',      trend:'+45% o\'sish' },
+        { num:'200', label:'Avtomatlashtirilgan jarayonlar',  trend:'+52% o\'sish' },
+    ];
+    [1,2,3,4].forEach((i,idx) => {
+        const d = st['s' + i] || defaults[idx];
+        setVal('s' + i + '_num',   d.num);
+        setVal('s' + i + '_label', d.label);
+        setVal('s' + i + '_trend', d.trend);
+    });
+
+    // Overview
+    document.getElementById('ov-font').textContent    = settings.fontFamily || 'Inter';
+    document.getElementById('ov-primary').textContent = settings.colorPrimary || '#1d4ed8';
+}
+
+// Auto-login if session active
+window.addEventListener('DOMContentLoaded', () => {
+    if (sessionStorage.getItem('resta_auth') === '1') {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        initDashboard();
+    }
+    document.getElementById('pwdInput').focus();
+});
+</script>
+</body>
+</html>
