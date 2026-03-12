@@ -2259,6 +2259,7 @@ body {
     .navbar.scrolled { padding: 0.7rem 1.25rem; }
 
     .toggle-menu { display: flex; }
+    .toggle-menu { display: flex; }
 
     .nav-links {
         display: none;
