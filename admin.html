@@ -467,6 +467,85 @@
             border: 1px solid rgba(255,255,255,0.15); flex-shrink: 0;
         }
 
+        /* Upload zone */
+        .upload-zone {
+            border: 2px dashed rgba(255,255,255,0.14);
+            border-radius: 14px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s, background 0.3s;
+            background: rgba(255,255,255,0.02);
+            position: relative;
+        }
+        .upload-zone:hover { border-color: var(--primary); background: rgba(59,130,246,0.05); }
+        .upload-zone input[type="file"] {
+            position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 2;
+        }
+        .upload-ico { font-size: 2rem; color: var(--muted); margin-bottom: 0.5rem; }
+        .upload-zone p { color: var(--muted); font-size: .82rem; margin-top: 0.25rem; }
+        .upload-zone strong { color: var(--text); font-size: .9rem; }
+
+        /* Image preview box */
+        .img-preview-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex; align-items: center; justify-content: center; gap: 1rem;
+            flex-direction: column;
+            min-height: 80px;
+        }
+        .img-preview-box img {
+            max-width: 100%; max-height: 130px;
+            object-fit: contain; border-radius: 8px;
+        }
+        .img-preview-box.hero-preview { min-height: 140px; background-size: cover; background-position: center; border-radius: 12px; }
+        .img-empty { color: var(--muted); font-size: .82rem; }
+
+        /* Logo preview */
+        .logo-preview-wrap {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .logo-preview-text {
+            font-size: 1.5rem; font-weight: 900;
+            letter-spacing: -0.5px;
+        }
+        .logo-preview-img { max-height: 44px; object-fit: contain; }
+
+        /* Toggle switch */
+        .toggle-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+        .toggle-lbl { font-size: .82rem; font-weight: 600; color: var(--muted); }
+        .toggle-switch { display: flex; background: var(--bg3); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+        .toggle-switch button {
+            padding: 0.4rem 1rem; font-size: .8rem; font-weight: 600;
+            background: none; color: var(--muted); border: none; cursor: pointer; transition: all 0.2s;
+        }
+        .toggle-switch button.active { background: var(--primary); color: #fff; }
+
+        /* Btn remove */
+        .btn-remove {
+            background: rgba(220,38,38,0.1); color: #f87171;
+            border: 1px solid rgba(220,38,38,0.2);
+            border-radius: 8px; padding: 0.35rem 0.8rem;
+            font-size: .78rem; font-weight: 600; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-remove:hover { background: rgba(220,38,38,0.2); }
+        .btn-reset {
+            background: rgba(255,255,255,0.05); color: var(--muted);
+            border: 1px solid var(--border);
+            border-radius: 8px; padding: 0.55rem 1.1rem;
+            font-size: .85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+        }
+        .btn-reset:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+
+        /* Image grid */
+        .img-section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
         /* Responsive */
         @media (max-width: 640px) {
             .sidebar { display: none; }
@@ -522,6 +601,12 @@
             </button>
             <button class="nav-item" onclick="switchTab('colors', this)">
                 <i class="fa fa-palette"></i> Ranglar
+            </button>
+            <button class="nav-item" onclick="switchTab('logo', this)">
+                <i class="fa fa-star"></i> Logo
+            </button>
+            <button class="nav-item" onclick="switchTab('images', this)">
+                <i class="fa fa-image"></i> Rasmlar
             </button>
 
             <div class="sidebar-section">Kontent</div>
@@ -1050,6 +1135,223 @@
                 </div>
             </div>
 
+            <!-- LOGO -->
+            <div class="tab-panel" id="tab-logo">
+                <div class="panel-header">
+                    <h2>Logo</h2>
+                    <p>Kompaniya logosi va nomini sozlang</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Logo turi</div>
+                    <div class="toggle-row">
+                        <span class="toggle-lbl">Ko'rsatish:</span>
+                        <div class="toggle-switch">
+                            <button id="logoTypeText" class="active" onclick="setLogoType('text')"><i class="fa fa-font"></i> Matn</button>
+                            <button id="logoTypeImg"  onclick="setLogoType('image')"><i class="fa fa-image"></i> Rasm</button>
+                        </div>
+                    </div>
+
+                    <!-- Text logo -->
+                    <div id="logoTextSection">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Kompaniya nomi</label>
+                                <input type="text" id="logoText" placeholder="RESTA" value="RESTA"
+                                    oninput="updateLogoPreview()">
+                            </div>
+                            <div class="form-group">
+                                <label>Logo rangi</label>
+                                <div class="color-card-row" style="margin-top:0.35rem">
+                                    <input type="color" id="logoColor" value="#ffffff"
+                                        oninput="updateLogoPreview()">
+                                    <div class="cswatch" id="logoColorSwatch" style="background:#ffffff"></div>
+                                    <span class="chex" id="logoColorHex">#ffffff</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Shrift o'lchami</label>
+                                <div class="slider-card" style="margin-top:0">
+                                    <label>O'lcham <span id="v_logoSize">1.5rem</span></label>
+                                    <input type="range" id="logoSizeSlider" min="1" max="3" step="0.1" value="1.5"
+                                        oninput="updateLogoSizeVal(this.value)">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Og'irlik (Weight)</label>
+                                <select id="logoWeight" onchange="updateLogoPreview()"
+                                    style="width:100%;background:var(--bg3);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:0.55rem;font-size:.85rem">
+                                    <option value="700">700 — Bold</option>
+                                    <option value="800">800 — ExtraBold</option>
+                                    <option value="900" selected>900 — Black</option>
+                                    <option value="600">600 — SemiBold</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image logo -->
+                    <div id="logoImageSection" style="display:none">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Logo rasmi yuklash</label>
+                                <div class="upload-zone" onclick="document.getElementById('logoFileInput').click()">
+                                    <input type="file" id="logoFileInput" accept="image/*"
+                                        onchange="handleLogoUpload(this)">
+                                    <div class="upload-ico"><i class="fa fa-cloud-arrow-up"></i></div>
+                                    <strong>Rasmni yuklash</strong>
+                                    <p>PNG, SVG, JPG — maks 2MB. Shaffof fon tavsiya etiladi.</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Ko'rinish</label>
+                                <div class="img-preview-box" id="logoImgPreview">
+                                    <span class="img-empty"><i class="fa fa-image"></i> Logo yuklanmagan</span>
+                                </div>
+                                <button class="btn-remove" style="margin-top:0.5rem" onclick="removeLogo()">
+                                    <i class="fa fa-trash"></i> O'chirish
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Logo kengligi (px)</label>
+                            <div class="slider-card" style="margin-top:0">
+                                <label>Kenglik <span id="v_logoWidth">120px</span></label>
+                                <input type="range" id="logoWidthSlider" min="60" max="240" value="120"
+                                    oninput="updateLogoWidthVal(this.value)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Navbarda ko'rinish</div>
+                    <div class="logo-preview-wrap">
+                        <div id="logoNavPreview" class="logo-preview-text" style="color:#fff">RESTA</div>
+                    </div>
+                </div>
+
+                <div class="save-bar">
+                    <button class="btn-save" onclick="saveLogo()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
+                    <button class="btn-reset" onclick="resetLogo()"><i class="fa fa-rotate-left"></i> Standart</button>
+                    <span class="save-msg" id="logoSaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
+                </div>
+            </div>
+
+            <!-- IMAGES -->
+            <div class="tab-panel" id="tab-images">
+                <div class="panel-header">
+                    <h2>Rasmlar</h2>
+                    <p>Saytdagi rasmlar va fon tasvirlarini boshqaring</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Hero bo'limi — fon rasmi</div>
+                    <p style="color:var(--muted);font-size:.82rem;margin-bottom:1rem">Sahifaning asosiy qismiga fon rasm qo'shing (gradient ustiga qo'shiladi)</p>
+                    <div class="img-section-grid">
+                        <div>
+                            <label class="form-group" style="display:block;margin-bottom:0.5rem;font-size:.8rem;font-weight:600;color:var(--muted)">Rasm yuklash</label>
+                            <div class="upload-zone" onclick="document.getElementById('heroBgInput').click()">
+                                <input type="file" id="heroBgInput" accept="image/*" onchange="handleImgUpload('heroBg', this)">
+                                <div class="upload-ico"><i class="fa fa-panorama"></i></div>
+                                <strong>Hero fon rasmi</strong>
+                                <p>JPG, PNG, WebP — maks 4MB</p>
+                            </div>
+                            <div class="form-group" style="margin-top:0.75rem">
+                                <label>Shaffoflik (opacity)</label>
+                                <div class="slider-card" style="margin-top:0">
+                                    <label>Qiymat <span id="v_heroBgOpacity">30%</span></label>
+                                    <input type="range" id="heroBgOpacity" min="5" max="100" value="30"
+                                        oninput="document.getElementById('v_heroBgOpacity').textContent=this.value+'%'">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label style="display:block;margin-bottom:0.5rem;font-size:.8rem;font-weight:600;color:var(--muted)">Ko'rinish</label>
+                            <div class="img-preview-box hero-preview" id="heroBgPreview" style="min-height:160px">
+                                <span class="img-empty" id="heroBgEmpty"><i class="fa fa-panorama"></i> Rasm yuklanmagan</span>
+                            </div>
+                            <button class="btn-remove" style="margin-top:0.5rem" onclick="removeImg('heroBg')">
+                                <i class="fa fa-trash"></i> O'chirish
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Asoschi / Jamoa foto</div>
+                    <p style="color:var(--muted);font-size:.82rem;margin-bottom:1rem">"Asoschi" bo'limidagi avatar rasmini o'zgartiring</p>
+                    <div class="img-section-grid">
+                        <div>
+                            <div class="upload-zone" onclick="document.getElementById('founderImgInput').click()">
+                                <input type="file" id="founderImgInput" accept="image/*" onchange="handleImgUpload('founderImg', this)">
+                                <div class="upload-ico"><i class="fa fa-user-circle"></i></div>
+                                <strong>Asoschi rasmi</strong>
+                                <p>Kvadrat format tavsiya etiladi — JPG, PNG</p>
+                            </div>
+                        </div>
+                        <div>
+                            <label style="display:block;margin-bottom:0.5rem;font-size:.8rem;font-weight:600;color:var(--muted)">Ko'rinish</label>
+                            <div class="img-preview-box" id="founderImgPreview" style="min-height:140px">
+                                <span class="img-empty" id="founderImgEmpty"><i class="fa fa-user-circle"></i> Rasm yuklanmagan</span>
+                            </div>
+                            <button class="btn-remove" style="margin-top:0.5rem" onclick="removeImg('founderImg')">
+                                <i class="fa fa-trash"></i> O'chirish
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Favicon (sayt ikonkasi)</div>
+                    <div class="img-section-grid">
+                        <div>
+                            <div class="upload-zone" onclick="document.getElementById('faviconInput').click()">
+                                <input type="file" id="faviconInput" accept="image/png,image/x-icon,image/svg+xml" onchange="handleImgUpload('favicon', this)">
+                                <div class="upload-ico"><i class="fa fa-globe"></i></div>
+                                <strong>Favicon yuklash</strong>
+                                <p>32×32 yoki 64×64 px PNG/ICO</p>
+                            </div>
+                        </div>
+                        <div>
+                            <label style="display:block;margin-bottom:0.5rem;font-size:.8rem;font-weight:600;color:var(--muted)">Ko'rinish</label>
+                            <div class="img-preview-box" id="faviconPreview" style="min-height:80px">
+                                <span class="img-empty" id="faviconEmpty"><i class="fa fa-globe"></i> Favicon yuklanmagan</span>
+                            </div>
+                            <button class="btn-remove" style="margin-top:0.5rem" onclick="removeImg('favicon')">
+                                <i class="fa fa-trash"></i> O'chirish
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">OG Image (ijtimoiy tarmoqlar uchun)</div>
+                    <div class="form-group">
+                        <label>OG Image URL</label>
+                        <input type="url" id="ogImageUrl" placeholder="https://resta.uz/og-image.jpg"
+                            style="width:100%">
+                    </div>
+                    <div class="form-row" style="margin-top:0.75rem">
+                        <div class="form-group">
+                            <label>OG Title</label>
+                            <input type="text" id="ogTitle" placeholder="RESTA – Tizimli biznes, katta natija">
+                        </div>
+                        <div class="form-group">
+                            <label>OG Description</label>
+                            <input type="text" id="ogDesc" placeholder="Biznesingizni tizimlashtiring...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="save-bar">
+                    <button class="btn-save" onclick="saveImages()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
+                    <span class="save-msg" id="imgSaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
+                </div>
+            </div>
+
         </main>
     </div>
 </div>
@@ -1246,6 +1548,128 @@ function resetColors() {
     });
 }
 
+// ==================== LOGO ====================
+function setLogoType(type) {
+    settings.logoType = type;
+    document.getElementById('logoTypeText').classList.toggle('active', type === 'text');
+    document.getElementById('logoTypeImg').classList.toggle('active',  type === 'image');
+    document.getElementById('logoTextSection').style.display  = type === 'text'  ? '' : 'none';
+    document.getElementById('logoImageSection').style.display = type === 'image' ? '' : 'none';
+}
+
+function updateLogoPreview() {
+    const text  = document.getElementById('logoText')?.value || 'RESTA';
+    const color = document.getElementById('logoColor')?.value || '#ffffff';
+    const size  = document.getElementById('logoSizeSlider')?.value || 1.5;
+    const wt    = document.getElementById('logoWeight')?.value || '900';
+    const prev  = document.getElementById('logoNavPreview');
+    const hex   = document.getElementById('logoColorHex');
+    const sw    = document.getElementById('logoColorSwatch');
+    if (prev) { prev.textContent = text; prev.style.color = color; prev.style.fontSize = size + 'rem'; prev.style.fontWeight = wt; }
+    if (hex) hex.textContent = color;
+    if (sw)  sw.style.background = color;
+}
+
+function updateLogoSizeVal(v) {
+    document.getElementById('v_logoSize').textContent = v + 'rem';
+    updateLogoPreview();
+}
+
+function updateLogoWidthVal(v) {
+    document.getElementById('v_logoWidth').textContent = v + 'px';
+    const img = document.querySelector('#logoImgPreview img');
+    if (img) img.style.maxWidth = v + 'px';
+}
+
+function handleLogoUpload(input) {
+    const file = input.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        settings.logoImg = e.target.result;
+        const box = document.getElementById('logoImgPreview');
+        box.innerHTML = `<img src="${e.target.result}" style="max-height:60px;object-fit:contain">`;
+        // Update navbar preview
+        const prev = document.getElementById('logoNavPreview');
+        prev.innerHTML = `<img src="${e.target.result}" style="max-height:44px;object-fit:contain">`;
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeLogo() {
+    settings.logoImg = null;
+    document.getElementById('logoImgPreview').innerHTML = '<span class="img-empty"><i class="fa fa-image"></i> Logo yuklanmagan</span>';
+    document.getElementById('logoNavPreview').innerHTML = '<span class="logo-preview-text" style="color:#fff">RESTA</span>';
+}
+
+function saveLogo() {
+    settings.logoType   = settings.logoType || 'text';
+    settings.logoText   = document.getElementById('logoText')?.value || 'RESTA';
+    settings.logoColor  = document.getElementById('logoColor')?.value || '#ffffff';
+    settings.logoSize   = document.getElementById('logoSizeSlider')?.value || '1.5';
+    settings.logoWeight = document.getElementById('logoWeight')?.value || '900';
+    settings.logoWidth  = document.getElementById('logoWidthSlider')?.value || '120';
+    saveSettings(); showMsg('logoSaveMsg');
+}
+
+function resetLogo() {
+    settings.logoType = 'text'; settings.logoText = 'RESTA';
+    settings.logoColor = '#ffffff'; settings.logoSize = '1.5';
+    settings.logoWeight = '900'; settings.logoImg = null;
+    setLogoType('text');
+    document.getElementById('logoText').value = 'RESTA';
+    document.getElementById('logoColor').value = '#ffffff';
+    document.getElementById('logoSizeSlider').value = 1.5;
+    document.getElementById('logoWeight').value = '900';
+    updateLogoPreview();
+}
+
+// ==================== IMAGES ====================
+function handleImgUpload(key, input) {
+    const file = input.files[0]; if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { alert('Fayl hajmi 5MB dan oshmasligi kerak!'); return; }
+    const reader = new FileReader();
+    reader.onload = e => {
+        settings['img_' + key] = e.target.result;
+        refreshImgPreview(key, e.target.result);
+    };
+    reader.readAsDataURL(file);
+}
+
+function refreshImgPreview(key, src) {
+    const box = document.getElementById(key + 'Preview');
+    const empty = document.getElementById(key + 'Empty');
+    if (!box) return;
+    if (key === 'heroBg') {
+        box.style.backgroundImage = `url(${src})`;
+        box.style.backgroundSize = 'cover';
+        box.style.backgroundPosition = 'center';
+        if (empty) empty.style.display = 'none';
+    } else {
+        if (empty) empty.style.display = 'none';
+        const existing = box.querySelector('img');
+        if (existing) { existing.src = src; }
+        else { const img = document.createElement('img'); img.src = src; box.appendChild(img); }
+    }
+}
+
+function removeImg(key) {
+    settings['img_' + key] = null;
+    const box   = document.getElementById(key + 'Preview');
+    const empty = document.getElementById(key + 'Empty');
+    if (key === 'heroBg' && box) { box.style.backgroundImage = ''; }
+    const img = box?.querySelector('img'); if (img) img.remove();
+    if (empty) empty.style.display = '';
+}
+
+function saveImages() {
+    settings.heroBgOpacity = document.getElementById('heroBgOpacity')?.value || 30;
+    settings.logoImgWidth  = document.getElementById('logoWidthSlider')?.value || 120;
+    settings.ogImageUrl    = document.getElementById('ogImageUrl')?.value || '';
+    settings.ogTitle       = document.getElementById('ogTitle')?.value || '';
+    settings.ogDesc        = document.getElementById('ogDesc')?.value || '';
+    saveSettings(); showMsg('imgSaveMsg');
+}
+
 // ==================== CONTENT ====================
 function saveContent() {
     settings.content = settings.content || {};
@@ -1372,6 +1796,25 @@ function initDashboard() {
         setVal('s' + i + '_label', d.label);
         setVal('s' + i + '_trend', d.trend);
     });
+
+    // Logo
+    setLogoType(settings.logoType || 'text');
+    if (settings.logoText) document.getElementById('logoText').value = settings.logoText;
+    if (settings.logoColor) { document.getElementById('logoColor').value = settings.logoColor; }
+    if (settings.logoSize)  document.getElementById('logoSizeSlider').value = settings.logoSize;
+    if (settings.logoWeight) document.getElementById('logoWeight').value = settings.logoWeight;
+    updateLogoPreview();
+    if (settings.logoImg) {
+        document.getElementById('logoImgPreview').innerHTML = `<img src="${settings.logoImg}" style="max-height:60px;object-fit:contain">`;
+    }
+
+    // Images
+    const imgKeys = ['heroBg', 'founderImg', 'favicon'];
+    imgKeys.forEach(k => { if (settings['img_' + k]) refreshImgPreview(k, settings['img_' + k]); });
+    if (settings.heroBgOpacity) document.getElementById('heroBgOpacity').value = settings.heroBgOpacity;
+    if (settings.ogImageUrl) document.getElementById('ogImageUrl').value = settings.ogImageUrl;
+    if (settings.ogTitle)    document.getElementById('ogTitle').value    = settings.ogTitle;
+    if (settings.ogDesc)     document.getElementById('ogDesc').value     = settings.ogDesc;
 
     // Overview
     document.getElementById('ov-font').textContent    = settings.fontFamily || 'Inter';
