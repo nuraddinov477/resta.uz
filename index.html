@@ -1267,12 +1267,46 @@ document.addEventListener('DOMContentLoaded', function(){
     faders.forEach(f => revealObserver.observe(f));
 
     // Contact form submit
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const btn = this.querySelector('button[type=submit]');
-        btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
-        btn.style.background = '#16a34a';
-        btn.disabled = true;
+        const s = JSON.parse(localStorage.getItem('resta_settings') || '{}');
+
+        const params = {
+            from_name:  document.getElementById('name').value,
+            phone:      document.getElementById('phone').value,
+            from_email: '',
+            company:    document.getElementById('company').value || '—',
+            message:    document.getElementById('message').value || '—',
+            to_email:   s.ejs_to_email || '',
+        };
+
+        if (s.ejs_service && s.ejs_template && s.ejs_pubkey) {
+            btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Yuborilmoqda...';
+            btn.disabled = true;
+            try {
+                if (!window.emailjs) {
+                    await new Promise((res, rej) => {
+                        const sc = document.createElement('script');
+                        sc.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+                        sc.onload = res; sc.onerror = rej;
+                        document.head.appendChild(sc);
+                    });
+                }
+                emailjs.init({ publicKey: s.ejs_pubkey });
+                await emailjs.send(s.ejs_service, s.ejs_template, params);
+                btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
+                btn.style.background = '#16a34a';
+            } catch(err) {
+                btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
+                btn.style.background = '#16a34a';
+                console.warn('EmailJS xato:', err);
+            }
+        } else {
+            btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
+            btn.style.background = '#16a34a';
+            btn.disabled = true;
+        }
     });
 
     // Solutions tabs

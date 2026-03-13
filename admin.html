@@ -594,6 +594,9 @@
             <button class="nav-item active" onclick="switchTab('overview', this)">
                 <i class="fa fa-chart-pie"></i> Umumiy
             </button>
+            <button class="nav-item" onclick="switchTab('notify', this)">
+                <i class="fa fa-bell"></i> Xabarnoma
+            </button>
 
             <div class="sidebar-section">Dizayn</div>
             <button class="nav-item" onclick="switchTab('fonts', this)">
@@ -1136,6 +1139,80 @@
             </div>
 
             <!-- LOGO -->
+            <!-- XABARNOMA -->
+            <div class="tab-panel" id="tab-notify">
+                <div class="panel-header">
+                    <h2>Xabarnoma sozlamalari</h2>
+                    <p>Forma yuborilganda emailingizga xabar keladi</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Qanday ishlaydi?</div>
+                    <div style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:1.25rem;font-size:.85rem;line-height:1.7;color:var(--text)">
+                        <p style="margin-bottom:0.75rem">Saytdagi aloqa formasiga kimdir ma'lumot yuborganda, siz ko'rsatgan emailga avtomatik xabar keladi.</p>
+                        <p style="color:var(--muted)">Buning uchun <strong style="color:var(--primary)">EmailJS</strong> xizmatidan foydalanamiz (oyiga 200 ta xabar — bepul).</p>
+                        <ol style="padding-left:1.25rem;margin-top:0.75rem;color:var(--muted)">
+                            <li style="margin-bottom:0.4rem"><a href="https://www.emailjs.com" target="_blank" style="color:var(--accent)">emailjs.com</a> ga kiring va ro'yxatdan o'ting</li>
+                            <li style="margin-bottom:0.4rem"><strong style="color:var(--text)">Email Services</strong> bo'limida Gmail/Outlook bog'lang</li>
+                            <li style="margin-bottom:0.4rem"><strong style="color:var(--text)">Email Templates</strong> bo'limida shablon yarating</li>
+                            <li><strong style="color:var(--text)">Account → API Keys</strong> dan Public Key oling</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">EmailJS sozlamalari</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Service ID <span style="color:var(--muted);font-weight:400">(Email Services dan)</span></label>
+                            <input type="text" id="ejs_service" placeholder="service_xxxxxxx">
+                        </div>
+                        <div class="form-group">
+                            <label>Template ID <span style="color:var(--muted);font-weight:400">(Email Templates dan)</span></label>
+                            <input type="text" id="ejs_template" placeholder="template_xxxxxxx">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Public Key <span style="color:var(--muted);font-weight:400">(Account → API Keys)</span></label>
+                            <input type="text" id="ejs_pubkey" placeholder="XXXXXXXXXXXXXXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label>Xabar keladigan email</label>
+                            <input type="email" id="ejs_to_email" placeholder="siz@gmail.com">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Email shabloni (Template Variables)</div>
+                    <div style="background:var(--bg3);border-radius:10px;padding:1rem 1.25rem;font-family:monospace;font-size:.82rem;color:var(--muted);line-height:2">
+                        <div>Saytdan yangi so'rov!</div>
+                        <div>—————————————</div>
+                        <div><span style="color:var(--accent)">Ism:</span> <span style="color:#fff">{{from_name}}</span></div>
+                        <div><span style="color:var(--accent)">Telefon:</span> <span style="color:#fff">{{phone}}</span></div>
+                        <div><span style="color:var(--accent)">Email:</span> <span style="color:#fff">{{from_email}}</span></div>
+                        <div><span style="color:var(--accent)">Kompaniya:</span> <span style="color:#fff">{{company}}</span></div>
+                        <div><span style="color:var(--accent)">Xabar:</span> <span style="color:#fff">{{message}}</span></div>
+                    </div>
+                    <p style="color:var(--muted);font-size:.78rem;margin-top:0.75rem">EmailJS Template da yuqoridagi o'zgaruvchilarni ishlating</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Test xabar yuborish</div>
+                    <p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">Sozlamalarni saqlash keyin test qiling</p>
+                    <button class="btn-save" onclick="testEmailJS()" id="testEmailBtn">
+                        <i class="fa fa-paper-plane"></i> Test xabar yuborish
+                    </button>
+                    <span class="save-msg" id="testEmailMsg"></span>
+                </div>
+
+                <div class="save-bar">
+                    <button class="btn-save" onclick="saveNotify()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
+                    <span class="save-msg" id="notifySaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
+                </div>
+            </div>
+
             <div class="tab-panel" id="tab-logo">
                 <div class="panel-header">
                     <h2>Logo</h2>
@@ -1670,6 +1747,54 @@ function saveImages() {
     saveSettings(); showMsg('imgSaveMsg');
 }
 
+// ==================== NOTIFY / EMAILJS ====================
+function saveNotify() {
+    settings.ejs_service  = document.getElementById('ejs_service').value.trim();
+    settings.ejs_template = document.getElementById('ejs_template').value.trim();
+    settings.ejs_pubkey   = document.getElementById('ejs_pubkey').value.trim();
+    settings.ejs_to_email = document.getElementById('ejs_to_email').value.trim();
+    saveSettings();
+    showMsg('notifySaveMsg');
+}
+
+async function testEmailJS() {
+    const btn = document.getElementById('testEmailBtn');
+    const msg = document.getElementById('testEmailMsg');
+    const svc = document.getElementById('ejs_service').value.trim();
+    const tpl = document.getElementById('ejs_template').value.trim();
+    const key = document.getElementById('ejs_pubkey').value.trim();
+    const to  = document.getElementById('ejs_to_email').value.trim();
+    if (!svc || !tpl || !key) {
+        msg.style.color = '#f87171'; msg.style.opacity = '1';
+        msg.innerHTML = '<i class="fa fa-circle-xmark"></i> Avval barcha maydonlarni to\'ldiring!';
+        return;
+    }
+    btn.disabled = true; btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Yuborilmoqda...';
+    try {
+        if (!window.emailjs) {
+            const s = document.createElement('script');
+            s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+            document.head.appendChild(s);
+            await new Promise(r => s.onload = r);
+        }
+        emailjs.init({ publicKey: key });
+        await emailjs.send(svc, tpl, {
+            from_name:  'Admin Test',
+            phone:      '+998 90 000 00 00',
+            from_email: to,
+            company:    'RESTA test',
+            message:    'Bu test xabari — EmailJS sozlamalari ishlayapti!',
+            to_email:   to,
+        });
+        msg.style.color = '#4ade80'; msg.style.opacity = '1';
+        msg.innerHTML = '<i class="fa fa-circle-check"></i> Xabar yuborildi! Emailni tekshiring.';
+    } catch(e) {
+        msg.style.color = '#f87171'; msg.style.opacity = '1';
+        msg.innerHTML = '<i class="fa fa-circle-xmark"></i> Xato: ' + (e.text || e.message || JSON.stringify(e));
+    }
+    btn.disabled = false; btn.innerHTML = '<i class="fa fa-paper-plane"></i> Test xabar yuborish';
+}
+
 // ==================== CONTENT ====================
 function saveContent() {
     settings.content = settings.content || {};
@@ -1798,6 +1923,12 @@ function initDashboard() {
     });
 
     // Logo
+    // Notify
+    if (settings.ejs_service)  document.getElementById('ejs_service').value  = settings.ejs_service;
+    if (settings.ejs_template) document.getElementById('ejs_template').value = settings.ejs_template;
+    if (settings.ejs_pubkey)   document.getElementById('ejs_pubkey').value   = settings.ejs_pubkey;
+    if (settings.ejs_to_email) document.getElementById('ejs_to_email').value = settings.ejs_to_email;
+
     setLogoType(settings.logoType || 'text');
     if (settings.logoText) document.getElementById('logoText').value = settings.logoText;
     if (settings.logoColor) { document.getElementById('logoColor').value = settings.logoColor; }
