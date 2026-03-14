@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
-        <a href="#hero" class="logo">RESTA</a>
+        <a href="#hero" class="logo"><img src="images/Лого 1.jpg" alt="RESTA" style="height:44px;object-fit:contain;vertical-align:middle;border-radius:6px;"></a>
         <button class="toggle-menu" aria-label="Menyuni ochish">
             <span></span><span></span><span></span>
         </button>
@@ -847,6 +847,7 @@ document.addEventListener('DOMContentLoaded', function(){
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -1064,6 +1065,36 @@ document.addEventListener('DOMContentLoaded', function(){
 
     </section>
 
+    <!-- HAMKORLAR -->
+    <section id="partners" class="partners-section fade-in-section">
+        <div class="partners-inner">
+            <h2 class="partners-title">Hamkorlarimiz</h2>
+            <div class="partners-track-wrap">
+                <div class="partners-track">
+                    <div class="partner-logo"><img src="images/partners/logo_png_1.png" alt="Hamkor 1"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_2.jpg" alt="Hamkor 2"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_3.jpg" alt="Hamkor 3"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_4.png" alt="Hamkor 4"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_5.png" alt="Hamkor 5"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_6.png" alt="Hamkor 6"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_7.png" alt="Hamkor 7"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_8.png" alt="Hamkor 8"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_9.jpg" alt="Hamkor 9"></div>
+                    <!-- Scroll uchun dublikat -->
+                    <div class="partner-logo"><img src="images/partners/logo_png_1.png" alt="Hamkor 1"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_2.jpg" alt="Hamkor 2"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_3.jpg" alt="Hamkor 3"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_4.png" alt="Hamkor 4"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_5.png" alt="Hamkor 5"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_6.png" alt="Hamkor 6"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_7.png" alt="Hamkor 7"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_8.png" alt="Hamkor 8"></div>
+                    <div class="partner-logo"><img src="images/partners/logo_png_9.jpg" alt="Hamkor 9"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA -->
     <section id="cta" class="cta-section fade-in-section">
         <div class="cta-inner">
@@ -1154,7 +1185,7 @@ document.addEventListener('DOMContentLoaded', function(){
     <footer class="footer">
         <div class="footer-inner">
             <div class="footer-brand">
-                <span class="logo">RESTA</span>
+                <img src="images/Лого 1.jpg" alt="RESTA" style="height:90px;object-fit:contain;border-radius:6px;">
                 <p>Biznesni tizimlashtirish va raqamli transformatsiya konsalting kompaniyasi.</p>
             </div>
             <div class="footer-links">
@@ -1162,6 +1193,20 @@ document.addEventListener('DOMContentLoaded', function(){
                 <a href="#solutions">Yechimlar</a>
                 <a href="#cases">Keyslar</a>
                 <a href="#contact">Aloqa</a>
+            </div>
+            <div class="footer-certs">
+                <a href="images/sertifikat.png" target="_blank" class="footer-cert-item">
+                    <img src="images/sertifikat.png" alt="amoCRM sertifikat">
+                    <span>amoCRM partner</span>
+                </a>
+                <a href="images/sertifikat.png.1.jpg" target="_blank" class="footer-cert-item">
+                    <img src="images/sertifikat.png.1.jpg" alt="Linko sertifikat">
+                    <span>Linko partner</span>
+                </a>
+                <a href="images/Resta.png" target="_blank" class="footer-cert-item">
+                    <img src="images/Resta.png" alt="RESTA sertifikat">
+                    <span>amoCRM RESTA</span>
+                </a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -1347,7 +1392,7 @@ document.addEventListener('DOMContentLoaded', function(){
             const setAttr = (sel, attr, val) => { const el = document.querySelector(sel); if (el && val) el.setAttribute(attr, val); };
 
             if (c.title)      document.title = c.title;
-            if (c.company)    document.querySelectorAll('.logo, .footer-brand').forEach(el => el.textContent = c.company);
+            if (c.company)    document.querySelectorAll('.logo').forEach(el => { if (!el.querySelector('img')) el.textContent = c.company; });
             if (c.hero_title) set('#hero h1', c.hero_title);
             if (c.hero_sub)   set('.hero-content > p', c.hero_sub);
             if (c.hero_cta1)  set('.hero-cta .btn-primary', c.hero_cta1);
