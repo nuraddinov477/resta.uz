@@ -2112,10 +2112,19 @@ function saveFaq() {
 // ==================== GITHUB ====================
 function loadGithubSettings() {
     const gh = JSON.parse(localStorage.getItem('resta_github') || '{}');
-    if (gh.token) document.getElementById('ghToken').value = gh.token;
-    if (gh.owner) document.getElementById('ghOwner').value = gh.owner;
-    if (gh.repo)  document.getElementById('ghRepo').value  = gh.repo;
-    if (gh.branch)document.getElementById('ghBranch').value= gh.branch;
+    document.getElementById('ghToken').value  = gh.token  || '';
+    document.getElementById('ghOwner').value  = gh.owner  || 'nuraddinov477';
+    document.getElementById('ghRepo').value   = gh.repo   || 'resta.uz';
+    document.getElementById('ghBranch').value = gh.branch || 'main';
+    // Agar sozlamalar yo'q bo'lsa, standartlarni saqlaylik (token tashqari)
+    if (!gh.owner) {
+        localStorage.setItem('resta_github', JSON.stringify({
+            token: gh.token || '',
+            owner: 'nuraddinov477',
+            repo: 'resta.uz',
+            branch: 'main'
+        }));
+    }
 }
 
 function saveGithubSettings() {
