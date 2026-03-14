@@ -1515,6 +1515,22 @@ document.addEventListener('DOMContentLoaded', function(){
             document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
             if (!isOpen) item.classList.add('open');
         });
+
+        // Admin o'zgartirsa avtomatik yangilansin (storage event)
+        window.addEventListener('storage', function(e) {
+            if (e.key !== 'resta_settings') return;
+            var s = JSON.parse(e.newValue || '{}');
+            if (s.faqItems && s.faqItems.length) {
+                var faqList = document.querySelector('.faq-list');
+                if (faqList) {
+                    faqList.innerHTML = s.faqItems.map(function(item) {
+                        return '<div class="faq-item"><button class="faq-question">' +
+                            item.q + '<i class="fa fa-chevron-down"></i></button>' +
+                            '<div class="faq-answer"><p>' + item.a + '</p></div></div>';
+                    }).join('');
+                }
+            }
+        });
     </script>
 </body>
 </html>
