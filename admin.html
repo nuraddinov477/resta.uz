@@ -2034,7 +2034,15 @@ function addFaqItem() {
 }
 
 function saveFaq() {
-    if (!settings.faqItems) settings.faqItems = JSON.parse(JSON.stringify(DEFAULT_FAQ));
+    // DOM dan barcha qiymatlarni to'g'ridan o'qib olamiz
+    const cards = document.querySelectorAll('#faqAdminList > div');
+    const items = [];
+    cards.forEach(card => {
+        const q = card.querySelector('input') ? card.querySelector('input').value.trim() : '';
+        const a = card.querySelector('textarea') ? card.querySelector('textarea').value.trim() : '';
+        if (q || a) items.push({ q, a });
+    });
+    settings.faqItems = items.length ? items : JSON.parse(JSON.stringify(DEFAULT_FAQ));
     saveSettings();
     const msg = document.getElementById('faqSaveMsg');
     msg.style.display = 'inline-flex';
