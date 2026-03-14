@@ -1449,6 +1449,9 @@
                     <button class="btn-save" onclick="saveFaq()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
                     <span class="save-msg" id="faqSaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
                 </div>
+                <div style="margin-top:1rem;padding:1rem;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px;font-size:.82rem;color:#fbbf24;line-height:1.6;">
+                    <i class="fa fa-triangle-exclamation"></i> <strong>Muhim:</strong> Saqlashdan keyin saytni yangilash (<kbd style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;">F5</kbd>) kerak. Agar o'zgarmasa, brauzerda <kbd style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;">Ctrl+Shift+R</kbd> bosing.
+                </div>
             </div>
 
         </main>
@@ -2054,7 +2057,13 @@ function saveFaq() {
         }
         settings.faqItems = items;
         saveSettings();
-        showToast('Muvaffaqiyatli saqlandi! (' + items.length + ' ta savol)', 'success');
+        // Tekshirish: localStorage ga yozildimi?
+        const check = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        if (!check.faqItems || check.faqItems.length !== items.length) {
+            showToast('Xato: localStorage ga yozilmadi. Brauzer ruxsat bermasligi mumkin.', 'error');
+            return;
+        }
+        showToast('Muvaffaqiyatli saqlandi! (' + items.length + ' ta savol) — Saytni F5 bilan yangilang', 'success');
     } catch(e) {
         showToast('Xato yuz berdi: ' + e.message, 'error');
     }
