@@ -1,0 +1,24 @@
+{
+  "faqItems": [
+    {
+      "q": "Biznesni tizimlashtirish deganda nima tushuniladi?",
+      "a": "Biznesni tizimlashtirish — bu barcha jarayonlarni tartibga solib, har bir xodim nima qilishi kerakligini aniq bilishi, natijalar o'lchanishi va biznes sizga bog'liq bo'lmagan holda ishlashini ta'minlash."
+    },
+    {
+      "q": "Qaysi CRM tizimlari bilan ishlaydi?",
+      "a": "Biz asosan amoCRM, Bitrix24 va MoySklad tizimlari bilan ishlaymiz. Mijoz talabiga ko'ra boshqa tizimlarni ham joriy qila olamiz."
+    },
+    {
+      "q": "Natija kafolati bormi?",
+      "a": "Ha, biz 30 kunlik natija kafolatini beramiz. Agar belgilangan natijaga erisha olmasak, pulni qaytaramiz."
+    },
+    {
+      "q": "Xizmat narxi qancha?",
+      "a": "Narx biznesingiz hajmi va xizmat turiga qarab farqlanadi. Bepul konsultatsiyada aniq narxni aytamiz."
+    },
+    {
+      "q": "Jarayon boshlangandan keyin qo'llab-quvvatlash bo'ladimi?",
+      "a": "Ha, loyiha tugaganidan keyin ham 3 oy davomida texnik yordam va maslahat xizmatini bepul taqdim etamiz."
+    }
+  ]
+}

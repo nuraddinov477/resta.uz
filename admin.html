@@ -625,6 +625,10 @@
             <button class="nav-item" onclick="switchTab('faq', this)">
                 <i class="fa fa-circle-question"></i> FAQ savollar
             </button>
+            <div class="sidebar-section">Sozlamalar</div>
+            <button class="nav-item" onclick="switchTab('github', this)">
+                <i class="fa fa-code-branch"></i> GitHub sozlama
+            </button>
         </aside>
 
         <!-- Main -->
@@ -1454,6 +1458,42 @@
                 </div>
             </div>
 
+            <!-- GITHUB -->
+            <div class="tab-panel" id="tab-github">
+                <div class="card">
+                    <h2><i class="fa fa-code-branch"></i> GitHub sozlamalar</h2>
+                    <p style="color:var(--text-muted);font-size:.875rem;margin-bottom:1.5rem;">Bu sozlamalar faqat sizning brauzeringizda saqlanadi. Hech qachon GitHub ga yuklanmaydi.</p>
+
+                    <div style="display:flex;flex-direction:column;gap:1rem;">
+                        <div>
+                            <label style="font-size:.8rem;font-weight:600;color:var(--text-muted);display:block;margin-bottom:.4rem;">GitHub Personal Access Token</label>
+                            <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx"
+                                style="width:100%;padding:.7rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:.875rem;font-family:monospace;">
+                            <div style="font-size:.75rem;color:var(--text-muted);margin-top:.35rem;">github.com/settings/tokens → Tokens (classic) → repo ruxsati bilan</div>
+                        </div>
+                        <div>
+                            <label style="font-size:.8rem;font-weight:600;color:var(--text-muted);display:block;margin-bottom:.4rem;">GitHub Username</label>
+                            <input type="text" id="ghOwner" placeholder="nuraddinovsarvarbek05-prog"
+                                style="width:100%;padding:.7rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:.875rem;">
+                        </div>
+                        <div>
+                            <label style="font-size:.8rem;font-weight:600;color:var(--text-muted);display:block;margin-bottom:.4rem;">Repo nomi</label>
+                            <input type="text" id="ghRepo" placeholder="resta.uz"
+                                style="width:100%;padding:.7rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:.875rem;">
+                        </div>
+                        <div>
+                            <label style="font-size:.8rem;font-weight:600;color:var(--text-muted);display:block;margin-bottom:.4rem;">Branch</label>
+                            <input type="text" id="ghBranch" placeholder="main" value="main"
+                                style="width:100%;padding:.7rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:.875rem;">
+                        </div>
+                    </div>
+                </div>
+                <div class="save-bar">
+                    <button class="btn-save" onclick="saveGithubSettings()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
+                    <button onclick="testGithubConnection()" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#10b981;padding:.6rem 1.25rem;border-radius:8px;font-weight:600;cursor:pointer;font-size:.875rem;"><i class="fa fa-plug"></i> Ulanishni tekshir</button>
+                </div>
+            </div>
+
         </main>
     </div>
 </div>
@@ -1978,6 +2018,9 @@ function initDashboard() {
 
     // FAQ
     renderFaqAdmin();
+
+    // GitHub
+    loadGithubSettings();
 }
 
 // ==================== FAQ ====================
@@ -2057,15 +2100,90 @@ function saveFaq() {
         }
         settings.faqItems = items;
         saveSettings();
-        // Tekshirish: localStorage ga yozildimi?
-        const check = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-        if (!check.faqItems || check.faqItems.length !== items.length) {
-            showToast('Xato: localStorage ga yozilmadi. Brauzer ruxsat bermasligi mumkin.', 'error');
-            return;
-        }
-        showToast('Muvaffaqiyatli saqlandi! (' + items.length + ' ta savol) — Saytni F5 bilan yangilang', 'success');
+        showToast('Yuklanmoqda... GitHub ga yuborilmoqda', 'info');
+        pushDataJson({ faqItems: items }).then(function(ok) {
+            if (ok) showToast('✅ Saqlandi! Sayt 30 soniyada yangilanadi.', 'success');
+        });
     } catch(e) {
         showToast('Xato yuz berdi: ' + e.message, 'error');
+    }
+}
+
+// ==================== GITHUB ====================
+function loadGithubSettings() {
+    const gh = JSON.parse(localStorage.getItem('resta_github') || '{}');
+    if (gh.token) document.getElementById('ghToken').value = gh.token;
+    if (gh.owner) document.getElementById('ghOwner').value = gh.owner;
+    if (gh.repo)  document.getElementById('ghRepo').value  = gh.repo;
+    if (gh.branch)document.getElementById('ghBranch').value= gh.branch;
+}
+
+function saveGithubSettings() {
+    const gh = {
+        token:  document.getElementById('ghToken').value.trim(),
+        owner:  document.getElementById('ghOwner').value.trim(),
+        repo:   document.getElementById('ghRepo').value.trim(),
+        branch: document.getElementById('ghBranch').value.trim() || 'main'
+    };
+    if (!gh.token || !gh.owner || !gh.repo) {
+        showToast('Token, username va repo nomini kiriting!', 'error'); return;
+    }
+    localStorage.setItem('resta_github', JSON.stringify(gh));
+    showToast('GitHub sozlamalari saqlandi!', 'success');
+}
+
+async function testGithubConnection() {
+    const gh = JSON.parse(localStorage.getItem('resta_github') || '{}');
+    if (!gh.token) { showToast('Avval GitHub sozlamalarini saqlang!', 'error'); return; }
+    showToast('Ulanish tekshirilmoqda...', 'info');
+    try {
+        const r = await fetch(`https://api.github.com/repos/${gh.owner}/${gh.repo}`, {
+            headers: { 'Authorization': 'token ' + gh.token }
+        });
+        const d = await r.json();
+        if (r.ok) showToast('✅ Ulandi: ' + d.full_name, 'success');
+        else showToast('Xato: ' + (d.message || 'Ulanmadi'), 'error');
+    } catch(e) { showToast('Tarmoq xatosi: ' + e.message, 'error'); }
+}
+
+async function pushDataJson(data) {
+    const gh = JSON.parse(localStorage.getItem('resta_github') || '{}');
+    if (!gh.token || !gh.owner || !gh.repo) {
+        showToast('GitHub sozlanmagan! "GitHub sozlama" bo\'limiga boring.', 'error');
+        return false;
+    }
+    const apiUrl = `https://api.github.com/repos/${gh.owner}/${gh.repo}/contents/data.json`;
+    const branch = gh.branch || 'main';
+    try {
+        // Joriy SHA ni olamiz
+        const getRes = await fetch(`${apiUrl}?ref=${branch}`, {
+            headers: { 'Authorization': 'token ' + gh.token }
+        });
+        const getJson = await getRes.json();
+        const sha = getJson.sha;
+
+        // Yangilangan content
+        const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+        const putRes = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'token ' + gh.token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: 'Admin: data.json yangilandi',
+                content: content,
+                sha: sha,
+                branch: branch
+            })
+        });
+        if (putRes.ok) return true;
+        const err = await putRes.json();
+        showToast('GitHub xato: ' + (err.message || 'Noma\'lum'), 'error');
+        return false;
+    } catch(e) {
+        showToast('Tarmoq xatosi: ' + e.message, 'error');
+        return false;
     }
 }
 
