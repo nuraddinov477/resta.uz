@@ -2034,19 +2034,55 @@ function addFaqItem() {
 }
 
 function saveFaq() {
-    // DOM dan barcha qiymatlarni to'g'ridan o'qib olamiz
-    const cards = document.querySelectorAll('#faqAdminList > div');
-    const items = [];
-    cards.forEach(card => {
-        const q = card.querySelector('input') ? card.querySelector('input').value.trim() : '';
-        const a = card.querySelector('textarea') ? card.querySelector('textarea').value.trim() : '';
-        if (q || a) items.push({ q, a });
-    });
-    settings.faqItems = items.length ? items : JSON.parse(JSON.stringify(DEFAULT_FAQ));
-    saveSettings();
-    const msg = document.getElementById('faqSaveMsg');
-    msg.style.display = 'inline-flex';
-    setTimeout(() => msg.style.display = 'none', 2500);
+    try {
+        const cards = document.querySelectorAll('#faqAdminList > div');
+        const items = [];
+        let hasEmpty = false;
+        cards.forEach((card, idx) => {
+            const q = card.querySelector('input') ? card.querySelector('input').value.trim() : '';
+            const a = card.querySelector('textarea') ? card.querySelector('textarea').value.trim() : '';
+            if (q && !a) hasEmpty = true;
+            if (q || a) items.push({ q, a });
+        });
+        if (hasEmpty) {
+            showToast('Xato: Barcha savollarga javob yozing!', 'error');
+            return;
+        }
+        if (!items.length) {
+            showToast('Xato: Kamida 1 ta savol bo\'lishi kerak!', 'error');
+            return;
+        }
+        settings.faqItems = items;
+        saveSettings();
+        showToast('Muvaffaqiyatli saqlandi! (' + items.length + ' ta savol)', 'success');
+    } catch(e) {
+        showToast('Xato yuz berdi: ' + e.message, 'error');
+    }
+}
+
+function showToast(msg, type) {
+    let toast = document.getElementById('adminToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'adminToast';
+        toast.style.cssText = 'position:fixed;bottom:2rem;right:2rem;z-index:9999;padding:.85rem 1.4rem;border-radius:12px;font-size:.875rem;font-weight:600;display:flex;align-items:center;gap:.6rem;box-shadow:0 8px 32px rgba(0,0,0,0.3);transition:all .3s;max-width:360px;';
+        document.body.appendChild(toast);
+    }
+    if (type === 'success') {
+        toast.style.background = '#166534';
+        toast.style.border = '1px solid #22c55e';
+        toast.style.color = '#4ade80';
+        toast.innerHTML = '<i class="fa fa-circle-check"></i> ' + msg;
+    } else {
+        toast.style.background = '#7f1d1d';
+        toast.style.border = '1px solid #ef4444';
+        toast.style.color = '#fca5a5';
+        toast.innerHTML = '<i class="fa fa-circle-xmark"></i> ' + msg;
+    }
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateY(10px)'; }, 3000);
 }
 
 // Auto-login if session active

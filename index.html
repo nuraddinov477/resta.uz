@@ -1507,13 +1507,13 @@ document.addEventListener('DOMContentLoaded', function(){
             window.addEventListener('resize', () => { current = Math.min(current, max()); update(); });
         })();
 
-        document.querySelectorAll('.faq-question').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const item = btn.closest('.faq-item');
-                const isOpen = item.classList.contains('open');
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-                if (!isOpen) item.classList.add('open');
-            });
+        document.querySelector('.faq-list') && document.querySelector('.faq-list').addEventListener('click', function(e) {
+            const btn = e.target.closest('.faq-question');
+            if (!btn) return;
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
         });
     </script>
 </body>
