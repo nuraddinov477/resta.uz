@@ -2509,6 +2509,46 @@ body {
     animation-play-state: paused;
 }
 
+.clients-row-1 { animation-duration: 100s !important; }
+.clients-row-1:hover { animation-play-state: paused; }
+.clients-row-2 {
+    animation: clientsScrollRight 100s linear infinite !important;
+}
+.clients-row-2:hover { animation-play-state: paused !important; }
+
+#testimonials .partner-logo {
+    border: none;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+#testimonials .partner-logo img {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+    filter: none;
+    opacity: 1;
+}
+
+@keyframes clientsScrollRight {
+    0%   { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+.clients-marquee-section {
+    background: #fff;
+    padding: 4rem 1.5rem 3.5rem;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.clients-marquee-section .partners-track-wrap {
+    margin-bottom: 1.5rem;
+}
+
 @keyframes partnersScroll {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
