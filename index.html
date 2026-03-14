@@ -93,6 +93,17 @@ document.addEventListener('DOMContentLoaded', function(){
                 hero.style.setProperty('--hero-bg-opacity', opacity);
             }
         }
+        // FAQ items
+        if (s.faqItems && s.faqItems.length) {
+            var faqList = document.querySelector('.faq-list');
+            if (faqList) {
+                faqList.innerHTML = s.faqItems.map(function(item) {
+                    return '<div class="faq-item"><button class="faq-question">' +
+                        item.q + '<i class="fa fa-chevron-down"></i></button>' +
+                        '<div class="faq-answer"><p>' + item.a + '</p></div></div>';
+                }).join('');
+            }
+        }
         // Founder photo
         if (s.img_founderImg) {
             var avatar = document.querySelector('.founder-ring-wrap, .founder-avatar');
@@ -142,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     120+ kompaniya allaqachon tizimda ishlayapti
                 </div>
                 <h1><span class="h1-pre"><span class="h1-dot"></span>RESTA bilan</span> biznesingizni <span class="hero-gradient">tizimlashtiring</span></h1>
-                <p>RESTA kompaniyalarga CRM joriy qilish, sotuv bo'limini qurish va jarayonlarni avtomatlashtirish orqali o'lchanadigan natijaga erishishga yordam beradi.</p>
+                <p>Biznesingizni boshidan oxirigacha tizimlashtiramiz — jarayonlarni tartibga solamiz, sotuv bo'limini quramiz, xodimlarni boshqaruvni avtomatlashtirамiz va raqamli transformatsiyaga olib chiqamiz.</p>
                 <div class="hero-cta">
                     <a href="#contact" class="btn btn-primary">
                         <i class="fa fa-calendar-check"></i>
@@ -160,88 +171,78 @@ document.addEventListener('DOMContentLoaded', function(){
                 </div>
             </div>
 
-            <!-- O'ng: dashboard mockup -->
+            <!-- O'ng: vizual -->
             <div class="hero-visual" aria-hidden="true">
-                <div class="dashboard">
+                <div class="hero-founder-wrap">
+                    <!-- Asoschi rasmi -->
+                    <div class="hero-founder-img">
+                        <img src="images/asoschi2.jpg.JPG" alt="Umidjon Qodirov">
+                        <!-- Pastki badge -->
+                        <div class="hero-founder-badge">
+                            <i class="fa fa-circle-check" style="color:#4ade80"></i>
+                            <span>Umidjon Qodirov · RESTA asoschisi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard" style="display:none">
                     <!-- Header -->
                     <div class="dash-header">
                         <span class="dash-dot red"></span>
                         <span class="dash-dot yellow"></span>
                         <span class="dash-dot green"></span>
-                        <span class="dash-title">RESTA CRM Dashboard</span>
+                        <span class="dash-title">RESTA Biznes Tizimi</span>
                     </div>
 
                     <!-- Stats row -->
                     <div class="dash-stats">
                         <div class="dash-stat">
-                            <span class="dash-stat-val">+38%</span>
-                            <span class="dash-stat-lbl">Sotuv</span>
+                            <span class="dash-stat-val">+3x</span>
+                            <span class="dash-stat-lbl">Samaradorlik</span>
                         </div>
                         <div class="dash-stat">
-                            <span class="dash-stat-val">142</span>
-                            <span class="dash-stat-lbl">Mijozlar</span>
+                            <span class="dash-stat-val">120+</span>
+                            <span class="dash-stat-lbl">Kompaniya</span>
                         </div>
                         <div class="dash-stat">
-                            <span class="dash-stat-val">96%</span>
-                            <span class="dash-stat-lbl">Konversiya</span>
+                            <span class="dash-stat-val">98%</span>
+                            <span class="dash-stat-lbl">Mamnunlik</span>
                         </div>
                     </div>
 
                     <!-- Chart -->
                     <div class="dash-chart">
-                        <div class="chart-label">Oylik sotuv</div>
+                        <div class="chart-label">Biznes o'sish dinamikasi</div>
                         <div class="chart-bars">
-                            <div class="chart-bar" style="--h:45%"><span>Yan</span></div>
-                            <div class="chart-bar" style="--h:60%"><span>Fev</span></div>
-                            <div class="chart-bar" style="--h:52%"><span>Mar</span></div>
-                            <div class="chart-bar" style="--h:75%"><span>Apr</span></div>
-                            <div class="chart-bar" style="--h:65%"><span>May</span></div>
-                            <div class="chart-bar active" style="--h:90%"><span>Iyn</span></div>
+                            <div class="chart-bar" style="--h:35%"><span>Yan</span></div>
+                            <div class="chart-bar" style="--h:48%"><span>Fev</span></div>
+                            <div class="chart-bar" style="--h:55%"><span>Mar</span></div>
+                            <div class="chart-bar" style="--h:70%"><span>Apr</span></div>
+                            <div class="chart-bar" style="--h:78%"><span>May</span></div>
+                            <div class="chart-bar active" style="--h:95%"><span>Iyn</span></div>
                         </div>
                     </div>
 
                     <!-- Pipeline -->
                     <div class="dash-pipeline">
-                        <div class="pipeline-label">Sotuv voronkasi</div>
+                        <div class="pipeline-label">Tizimlashtirish bosqichlari</div>
                         <div class="pipeline-track">
                             <div class="pipeline-step" style="--w:100%; --c:#3b82f6">
-                                <span>Leads</span><span>48</span>
+                                <span>Audit</span><span>✓</span>
                             </div>
-                            <div class="pipeline-step" style="--w:72%; --c:#8b5cf6">
-                                <span>Muzokara</span><span>35</span>
+                            <div class="pipeline-step" style="--w:80%; --c:#8b5cf6">
+                                <span>Jarayonlar</span><span>✓</span>
                             </div>
-                            <div class="pipeline-step" style="--w:48%; --c:#06b6d4">
-                                <span>Taklif</span><span>23</span>
+                            <div class="pipeline-step" style="--w:60%; --c:#06b6d4">
+                                <span>Avtomatizatsiya</span><span>✓</span>
                             </div>
-                            <div class="pipeline-step" style="--w:28%; --c:#10b981">
-                                <span>Yopildi</span><span>14</span>
+                            <div class="pipeline-step" style="--w:40%; --c:#10b981">
+                                <span>Natija</span><span>✓</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Floating notification cards -->
-                <div class="hero-notif notif-1">
-                    <div class="notif-icon green"><i class="fa fa-check"></i></div>
-                    <div>
-                        <strong>Sotuv yopildi</strong>
-                        <span>+4,200,000 so'm</span>
-                    </div>
-                </div>
-                <div class="hero-notif notif-2">
-                    <div class="notif-icon blue"><i class="fa fa-user-plus"></i></div>
-                    <div>
-                        <strong>Yangi mijoz</strong>
-                        <span>Aziz Karimov qo'shildi</span>
-                    </div>
-                </div>
-                <div class="hero-notif notif-3">
-                    <div class="notif-icon cyan"><i class="fa fa-chart-line"></i></div>
-                    <div>
-                        <strong>Sotuv +38%</strong>
-                        <span>O'tgan oyga nisbatan</span>
-                    </div>
-                </div>
             </div>
         </div>
 

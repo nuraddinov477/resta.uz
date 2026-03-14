@@ -622,6 +622,9 @@
             <button class="nav-item" onclick="switchTab('stats_edit', this)">
                 <i class="fa fa-chart-bar"></i> Natijalar raqamlari
             </button>
+            <button class="nav-item" onclick="switchTab('faq', this)">
+                <i class="fa fa-circle-question"></i> FAQ savollar
+            </button>
         </aside>
 
         <!-- Main -->
@@ -1429,6 +1432,25 @@
                 </div>
             </div>
 
+            <!-- FAQ -->
+            <div class="tab-panel" id="tab-faq">
+                <div class="panel-header">
+                    <h2>FAQ savollar</h2>
+                    <p>Saytdagi "Ko'p beriladigan savollar" bo'limini tahrirlang</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Savollar ro'yxati</div>
+                    <div id="faqAdminList" style="display:flex;flex-direction:column;gap:1rem;"></div>
+                    <button onclick="addFaqItem()" style="margin-top:1.25rem;background:rgba(59,130,246,0.15);border:1px dashed rgba(59,130,246,0.4);color:var(--primary);padding:.65rem 1.25rem;border-radius:10px;font-size:.875rem;font-weight:600;cursor:pointer;width:100%;transition:.2s;">
+                        <i class="fa fa-plus"></i> Yangi savol qo'shish
+                    </button>
+                </div>
+                <div class="save-bar">
+                    <button class="btn-save" onclick="saveFaq()"><i class="fa fa-floppy-disk"></i> Saqlash</button>
+                    <span class="save-msg" id="faqSaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
+                </div>
+            </div>
+
         </main>
     </div>
 </div>
@@ -1950,6 +1972,73 @@ function initDashboard() {
     // Overview
     document.getElementById('ov-font').textContent    = settings.fontFamily || 'Inter';
     document.getElementById('ov-primary').textContent = settings.color_primary || '#1d4ed8';
+
+    // FAQ
+    renderFaqAdmin();
+}
+
+// ==================== FAQ ====================
+const DEFAULT_FAQ = [
+    { q: 'CRM joriy qilish qancha vaqt oladi?',                       a: 'Oddiy loyihalar 2–4 hafta, murakkab jarayonlar esa 1–2 oy ichida to\'liq joriy qilinadi. Biz har bir bosqichda sizga yordam beramiz.' },
+    { q: 'Qaysi CRM tizimlari bilan ishlaydi?',                       a: 'Biz amoCRM, Bitrix24, Linko va boshqa yetakchi CRM tizimlari bilan ishlаymiz. Biznes ehtiyojiga qarab eng mos tizimni tavsiya qilamiz.' },
+    { q: 'Natija kafolati bormi?',                                     a: 'Ha, biz 30 kun ichida o\'lchanadigan natija kafolatlaymiz. Agar natija bo\'lmasa — pulni qaytaramiz.' },
+    { q: 'Xizmat narxi qancha?',                                       a: 'Narx biznesingiz hajmi va xizmat turiga qarab farqlanadi. Bepul konsultatsiyada aniq narxni aytamiz.' },
+    { q: 'Jarayon boshlangandan keyin qo\'llab-quvvatlash bo\'ladimi?',a: 'Ha, loyiha tugaganidan keyin ham 3 oy davomida texnik yordam va maslahat xizmatini bepul taqdim etamiz.' },
+];
+
+function renderFaqAdmin() {
+    const list = document.getElementById('faqAdminList');
+    const items = settings.faqItems || DEFAULT_FAQ;
+    list.innerHTML = '';
+    items.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.style.cssText = 'background:var(--bg3);border-radius:12px;padding:1rem 1.25rem;display:flex;flex-direction:column;gap:.6rem;';
+        div.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.25rem">
+                <span style="font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">Savol ${i+1}</span>
+                <button onclick="deleteFaqItem(${i})" style="background:rgba(239,68,68,0.15);border:none;color:#f87171;width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:.8rem;">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+            <input type="text" value="${escHtml(item.q)}" oninput="updateFaqItem(${i},'q',this.value)"
+                style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;color:var(--text);font-size:.875rem;"
+                placeholder="Savol matni...">
+            <textarea oninput="updateFaqItem(${i},'a',this.value)"
+                style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;color:var(--text);font-size:.875rem;resize:vertical;min-height:80px;"
+                placeholder="Javob matni...">${escHtml(item.a)}</textarea>
+        `;
+        list.appendChild(div);
+    });
+}
+
+function escHtml(str) {
+    return (str || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function updateFaqItem(i, key, val) {
+    if (!settings.faqItems) settings.faqItems = JSON.parse(JSON.stringify(DEFAULT_FAQ));
+    settings.faqItems[i][key] = val;
+}
+
+function deleteFaqItem(i) {
+    if (!settings.faqItems) settings.faqItems = JSON.parse(JSON.stringify(DEFAULT_FAQ));
+    settings.faqItems.splice(i, 1);
+    renderFaqAdmin();
+}
+
+function addFaqItem() {
+    if (!settings.faqItems) settings.faqItems = JSON.parse(JSON.stringify(DEFAULT_FAQ));
+    settings.faqItems.push({ q: '', a: '' });
+    renderFaqAdmin();
+    document.getElementById('faqAdminList').lastElementChild.querySelector('input').focus();
+}
+
+function saveFaq() {
+    if (!settings.faqItems) settings.faqItems = JSON.parse(JSON.stringify(DEFAULT_FAQ));
+    saveSettings();
+    const msg = document.getElementById('faqSaveMsg');
+    msg.style.display = 'inline-flex';
+    setTimeout(() => msg.style.display = 'none', 2500);
 }
 
 // Auto-login if session active
