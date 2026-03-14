@@ -2623,17 +2623,55 @@ body {
     margin: 0 auto;
 }
 
+.mentors-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+}
+
 .mentors-title {
     font-size: clamp(1.8rem, 3vw, 2.5rem);
     font-weight: 800;
     color: var(--dark);
-    margin-bottom: 3rem;
+    margin: 0;
+}
+
+.mentors-nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mentor-nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    color: var(--dark);
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.mentor-nav-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+.mentors-carousel-wrap {
+    overflow: hidden;
 }
 
 .mentors-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
+    transition: transform 0.4s ease;
 }
 
 .mentor-card {
