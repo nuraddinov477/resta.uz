@@ -1109,6 +1109,60 @@ document.addEventListener('DOMContentLoaded', function(){
         </div>
     </section>
 
+    <!-- FAQ -->
+    <section id="faq" class="faq-section fade-in-section">
+        <div class="faq-inner">
+            <h2 class="faq-title">Ko'p beriladigan savollar</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        CRM joriy qilish qancha vaqt oladi?
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Oddiy loyihalar 2–4 hafta, murakkab jarayonlar esa 1–2 oy ichida to'liq joriy qilinadi. Biz har bir bosqichda sizga yordam beramiz.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Qaysi CRM tizimlari bilan ishlaydi?
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Biz amoCRM, Bitrix24, Linko va boshqa yetakchi CRM tizimlari bilan ishlаymiz. Biznes ehtiyojiga qarab eng mos tizimni tavsiya qilamiz.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Natija kafolati bormi?
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ha, biz 30 kun ichida o'lchanadigan natija kafolatlaymiz. Agar natija bo'lmasa — pulni qaytaramiz.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Xizmat narxi qancha?
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Narx biznesingiz hajmi va xizmat turига qarab farqlanadi. Bepul konsultatsiyada aniq narxni aytamiz.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Jarayon boshlangandan keyin qo'llab-quvvatlash bo'ladimi?
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Ha, loyiha tugaganidan keyin ham 3 oy davomida texnik yordam va maslahat xizmatini bepul taqdim etamiz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ALOQA -->
     <section id="contact" class="section contact fade-in-section">
         <div class="section-label">Aloqa</div>
@@ -1118,19 +1172,15 @@ document.addEventListener('DOMContentLoaded', function(){
             <form class="contact-form" id="contactForm">
                 <div class="form-group">
                     <label for="name">Ismingiz <span>*</span></label>
-                    <input type="text" id="name" name="name" placeholder="Aziz Karimov" required>
+                    <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="phone">Telefon <span>*</span></label>
-                    <input type="tel" id="phone" name="phone" placeholder="+998 90 123 45 67" required>
+                    <input type="tel" id="phone" name="phone" required>
                 </div>
                 <div class="form-group">
-                    <label for="company">Kompaniya nomi</label>
-                    <input type="text" id="company" name="company" placeholder="Kompaniya LLC">
-                </div>
-                <div class="form-group">
-                    <label for="message">Xabar</label>
-                    <textarea id="message" name="message" placeholder="Biznesingizdagi asosiy muammo haqida yozing..." rows="4"></textarea>
+                    <label for="telegram">Telegram</label>
+                    <input type="text" id="telegram" name="telegram" placeholder="@username">
                 </div>
                 <button type="submit" class="btn btn-primary btn-full">
                     <i class="fa fa-paper-plane"></i>
@@ -1167,16 +1217,6 @@ document.addEventListener('DOMContentLoaded', function(){
                         <p data-contact="hours">Dushanba–Juma: 09:00 – 18:00</p>
                     </div>
                 </div>
-                <div class="contact-socials">
-                    <a href="https://t.me/yourbot" target="_blank" class="social-btn telegram" data-social="telegram">
-                        <i class="fa-brands fa-telegram"></i>
-                        Telegram
-                    </a>
-                    <a href="https://wa.me/yourphone" target="_blank" class="social-btn whatsapp" data-social="whatsapp">
-                        <i class="fa-brands fa-whatsapp"></i>
-                        WhatsApp
-                    </a>
-                </div>
             </div>
         </div>
     </section>
@@ -1187,12 +1227,36 @@ document.addEventListener('DOMContentLoaded', function(){
             <div class="footer-brand">
                 <img src="images/Лого 1.jpg" alt="RESTA" style="height:90px;object-fit:contain;border-radius:6px;">
                 <p>Biznesni tizimlashtirish va raqamli transformatsiya konsalting kompaniyasi.</p>
+                <p class="footer-follow">Bizni kuzatib boring</p>
+                <div class="footer-socials">
+                    <a href="https://t.me/yourbot" target="_blank" data-social="telegram" class="footer-social-btn">
+                        <i class="fa-brands fa-telegram"></i>
+                    </a>
+                    <a href="https://wa.me/yourphone" target="_blank" data-social="whatsapp" class="footer-social-btn">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="#problems">Muammolar</a>
-                <a href="#solutions">Yechimlar</a>
-                <a href="#cases">Keyslar</a>
-                <a href="#contact">Aloqa</a>
+            <div class="footer-nav-cols">
+                <div class="footer-col">
+                    <div class="footer-col-title">Xizmatlar</div>
+                    <a href="#problems">Muammolar</a>
+                    <a href="#solutions">Yechimlar</a>
+                    <a href="#workflow">Jarayon</a>
+                    <a href="#cases">Keyslar</a>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Kompaniya</div>
+                    <a href="#founder">Asoschi</a>
+                    <a href="#testimonials">Fikrlar</a>
+                    <a href="#stats">Natijalar</a>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-col-title">Bog'lanish</div>
+                    <a href="#contact">Aloqa</a>
+                    <a href="#cta">Konsultatsiya</a>
+                    <a href="#partners">Hamkorlar</a>
+                </div>
             </div>
             <div class="footer-certs">
                 <a href="images/sertifikat.png" target="_blank" class="footer-cert-item">
@@ -1427,6 +1491,16 @@ document.addEventListener('DOMContentLoaded', function(){
             });
         } catch(e) {}
     })();
+    </script>
+    <script>
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
     </script>
 </body>
 </html>
