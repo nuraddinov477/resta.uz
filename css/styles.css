@@ -2509,12 +2509,19 @@ body {
     animation-play-state: paused;
 }
 
-.clients-row-1 { animation-duration: 100s !important; }
-.clients-row-1:hover { animation-play-state: paused; }
+.clients-row-1 {
+    animation: clientsScrollLeft 100s linear infinite !important;
+}
+.clients-row-1:hover { animation-play-state: paused !important; }
 .clients-row-2 {
     animation: clientsScrollRight 100s linear infinite !important;
 }
 .clients-row-2:hover { animation-play-state: paused !important; }
+
+@keyframes clientsScrollLeft {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
 
 #testimonials .partner-logo {
     border: none;
@@ -2550,8 +2557,8 @@ body {
 }
 
 @keyframes partnersScroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0%   { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
 }
 
 .partner-logo {
