@@ -1595,40 +1595,39 @@ document.addEventListener('DOMContentLoaded', function(){
             window.addEventListener('resize', () => { current = Math.min(current, max()); update(); });
         })();
 
-        // Counter animatsiya — hero da ko'rinadi, delay bilan boshlaydi
-        const counters = document.querySelectorAll('.sys-stat-num[data-target]');
-        if (counters.length) {
-            const runCounters = () => counters.forEach(el => {
-                const target = +el.dataset.target, duration = 1800, step = target / (duration / 16);
-                let cur = 0;
+        // Counter + Chart — sahifa to'liq yuklanganidan keyin
+        setTimeout(function() {
+            // Counter animatsiya
+            document.querySelectorAll('.sys-stat-num[data-target]').forEach(function(el) {
+                var target = parseInt(el.getAttribute('data-target'));
+                var duration = 1600;
+                var step = target / (duration / 16);
+                var cur = 0;
                 el.textContent = '0';
-                const t = setInterval(() => {
+                var t = setInterval(function() {
                     cur = Math.min(cur + step, target);
                     el.textContent = Math.floor(cur);
                     if (cur >= target) clearInterval(t);
                 }, 16);
             });
-            setTimeout(runCounters, 900);
-        }
 
-        // Dinamik oylar chart
-        (function() {
+            // Dinamik oylar chart
             var bars = document.getElementById('sysChartBars');
-            if (!bars) return;
-            var months = ['Yan','Fev','Mar','Apr','May','Iyn','Iyl','Avg','Sen','Okt','Noy','Dek'];
-            var heights = [35,50,60,72,80,95];
-            var colors = ['#3b82f6','#3b82f6','#3b82f6','#8b5cf6','#8b5cf6','#10b981'];
-            var now = new Date();
-            var html = '';
-            for (var i = 5; i >= 0; i--) {
-                var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-                var m = months[d.getMonth()];
-                var idx = 5 - i;
-                var isLast = idx === 5;
-                html += '<div class="sys-chart-bar' + (isLast ? ' active' : '') + '" style="--h:' + heights[idx] + '%;--c:' + colors[idx] + '"><span>' + m + '</span></div>';
+            if (bars) {
+                var months = ['Yan','Fev','Mar','Apr','May','Iyn','Iyl','Avg','Sen','Okt','Noy','Dek'];
+                var heights = [35,50,60,72,80,95];
+                var colors = ['#3b82f6','#3b82f6','#3b82f6','#8b5cf6','#8b5cf6','#10b981'];
+                var now = new Date();
+                var html = '';
+                for (var i = 5; i >= 0; i--) {
+                    var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+                    var m = months[d.getMonth()];
+                    var idx = 5 - i;
+                    html += '<div class="sys-chart-bar' + (idx===5?' active':'') + '" style="--h:' + heights[idx] + '%;--c:' + colors[idx] + '"><span>' + m + '</span></div>';
+                }
+                bars.innerHTML = html;
             }
-            bars.innerHTML = html;
-        })();
+        }, 800);
 
         document.querySelector('.faq-list') && document.querySelector('.faq-list').addEventListener('click', function(e) {
             const btn = e.target.closest('.faq-question');
