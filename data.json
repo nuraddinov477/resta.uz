@@ -1,24 +1,28 @@
 {
   "faqItems": [
     {
-      "q": "wjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-      "a": "ooooooooooooooooooooooooooooooooo"
+      "q": "Biznesni tizimlashtirish deganda nima tushuniladi?",
+      "a": "Biznesni tizimlashtirish — bu kompaniyadagi jarayonlarni tartibga solish, vazifalar va mas’uliyatlarni aniq belgilash, boshqaruvni egaga bog‘liq holatdan chiqarish va ishni barqaror ishlaydigan tizimga aylantirish jarayonidir."
     },
     {
-      "q": "Qaysi CRM tizimlari bilan ishlaydi?",
-      "a": "Biz amoCRM, Bitrix24, Linko va boshqa yetakchi CRM tizimlari bilan ishlаymiz. Biznes ehtiyojiga qarab eng mos tizimni tavsiya qilamiz."
+      "q": "Qaysi bizneslarga tizimlashtirish kerak bo‘ladi?",
+      "a": "Tizimlashtirish, ayniqsa, o‘sishni maqsad qilgan, ichki tartibni kuchaytirmoqchi bo‘lgan, xodimlar ishini nazorat qilishda qiyinchilik sezayotgan yoki biznesni egasiz ham ishlaydigan darajaga olib chiqmoqchi bo‘lgan kompaniyalar uchun zarur."
     },
     {
-      "q": "Natija kafolati bormi?",
-      "a": "Ha, biz 30 kun ichida o'lchanadigan natija kafolatlaymiz. Agar natija bo'lmasa — pulni qaytaramiz."
+      "q": "Tizimlashtirish jarayoni nimalarni o‘z ichiga oladi?",
+      "a": "Jarayon biznesni tahlil qilish, muammoli nuqtalarni aniqlash, ish jarayonlarini tartibga solish, bo‘limlar vazifalarini belgilash, ichki reglamentlar yaratish, nazorat tizimini yo‘lga qo‘yish hamda kerak bo‘lsa CRM va avtomatlashtirish yechimlarini joriy qilishni o‘z ichiga oladi."
     },
     {
-      "q": "Xizmat narxi qancha?",
-      "a": "Narx biznesingiz hajmi va xizmat turiga qarab farqlanadi. Bepul konsultatsiyada aniq narxni aytamiz."
+      "q": "Tizimlashtirish qancha vaqt oladi?",
+      "a": "Tizimlashtirish jarayoni biznesning hajmi, ichki tartibi va maqsadlariga qarab farq qiladi. Odatda jarayon 6 oydan boshlab vaqt oladi va ko‘pincha kompaniyalar bilan 6 oydan 12 oygacha muddatga hamkorlik qilamiz. Chunki tizimlashtirish bir martalik ish emas, balki bosqichma-bosqich joriy qilinib, natijasi mustahkamlanadigan jarayondir."
     },
     {
-      "q": "Jarayon boshlangandan keyin qo'llab-quvvatlash bo'ladimi?",
-      "a": "Ha, loyiha tugaganidan keyin ham 3 oy davomida texnik yordam va maslahat xizmatini bepul taqdim etamiz."
+      "q": "Biznesim hali kichik bo‘lsa ham tizimlashtirish kerakmi?",
+      "a": "Ha. Aynan biznes kichik paytda tizimlashtirishni boshlash kelajakdagi chalkashliklar, nazoratsizlik va noto‘g‘ri boshqaruvning oldini oladi. Tizimli poydevor keyingi o‘sish uchun juda muhim."
+    },
+    {
+      "q": "Tizimlashtirishdan keyin qanday natija kutish mumkin?",
+      "a": "Natijada ish jarayonlari aniqroq ishlaydi, xodimlar vazifasi ravshan bo‘ladi, nazorat kuchayadi, xatolar kamayadi, vaqt yo‘qotishlar qisqaradi va rahbarning operatsion ishga ortiqcha aralashuvi kamayadi."
     }
   ]
 }
