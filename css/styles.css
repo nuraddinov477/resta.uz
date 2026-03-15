@@ -240,8 +240,8 @@ body {
 .hero-inner {
     position: relative; z-index: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 2rem;
     align-items: center;
     max-width: 1200px;
     width: 100%;
@@ -353,8 +353,8 @@ body {
 /* Natijalar karta */
 .hero-results-card {
     position: absolute;
-    top: -16px;
-    right: -16px;
+    top: 30px;
+    right: 10px;
     background: rgba(255,255,255,0.14);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
