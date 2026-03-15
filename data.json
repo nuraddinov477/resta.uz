@@ -1,16 +1,16 @@
 {
   "faqItems": [
     {
-      "q": "kkkkkkkkkkkkkkkkkkk",
-      "a": "sssssssssssssssssssssss"
+      "q": "wjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+      "a": "ooooooooooooooooooooooooooooooooo"
     },
     {
-      "q": "Qaysi bizneslarga tizimlashtirish kerak bo‘ladi?",
-      "a": "Tizimlashtirish, ayniqsa, o‘sishni maqsad qilgan, ichki tartibni kuchaytirmoqchi bo‘lgan, xodimlar ishini nazorat qilishda qiyinchilik sezayotgan yoki biznesni egasiz ham ishlaydigan darajaga olib chiqmoqchi bo‘lgan kompaniyalar uchun zarur."
+      "q": "Qaysi CRM tizimlari bilan ishlaydi?",
+      "a": "Biz amoCRM, Bitrix24, Linko va boshqa yetakchi CRM tizimlari bilan ishlаymiz. Biznes ehtiyojiga qarab eng mos tizimni tavsiya qilamiz."
     },
     {
-      "q": "Tizimlashtirish jarayoni nimalarni o‘z ichiga oladi?",
-      "a": "Jarayon biznesni tahlil qilish, muammoli nuqtalarni aniqlash, ish jarayonlarini tartibga solish, bo‘limlar vazifalarini belgilash, ichki reglamentlar yaratish, nazorat tizimini yo‘lga qo‘yish hamda kerak bo‘lsa CRM va avtomatlashtirish yechimlarini joriy qilishni o‘z ichiga oladi."
+      "q": "Natija kafolati bormi?",
+      "a": "Ha, biz 30 kun ichida o'lchanadigan natija kafolatlaymiz. Agar natija bo'lmasa — pulni qaytaramiz."
     },
     {
       "q": "Xizmat narxi qancha?",
