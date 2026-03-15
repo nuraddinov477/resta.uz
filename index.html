@@ -180,50 +180,71 @@ document.addEventListener('DOMContentLoaded', function(){
             <!-- O'ng: vizual -->
             <div class="hero-visual" aria-hidden="true">
 
-                <div class="hero-sys-visual">
-                    <!-- Markaziy karta -->
-                    <div class="sys-center-card">
-                        <div class="sys-center-icon"><i class="fa fa-sitemap"></i></div>
-                        <div class="sys-center-title">Biznes Tizimi</div>
-                        <div class="sys-center-sub">RESTA metodologiyasi</div>
-                        <div class="sys-pulse-ring"></div>
-                        <div class="sys-pulse-ring delay1"></div>
+                <div class="sys-dashboard">
+                    <div class="sys-dash-header">
+                        <div class="sys-dash-dots">
+                            <span style="background:#ff5f57"></span>
+                            <span style="background:#ffbd2e"></span>
+                            <span style="background:#28ca41"></span>
+                        </div>
+                        <span class="sys-dash-title"><i class="fa fa-sitemap"></i> RESTA Biznes Tizimi</span>
+                        <span class="sys-dash-live"><span class="sys-live-dot"></span>Jonli</span>
                     </div>
-
-                    <!-- 4 ta bosqich -->
-                    <div class="sys-step sys-step-1">
-                        <div class="sys-step-icon"><i class="fa fa-magnifying-glass-chart"></i></div>
-                        <div class="sys-step-label">Audit</div>
-                        <div class="sys-step-bar"><div class="sys-step-fill" style="--p:100%;--c:#3b82f6"></div></div>
+                    <div class="sys-stats-row">
+                        <div class="sys-stat-box">
+                            <span class="sys-stat-num" data-target="120">0</span><span class="sys-stat-unit">+</span>
+                            <span class="sys-stat-lbl">Kompaniya</span>
+                        </div>
+                        <div class="sys-stat-box">
+                            <span class="sys-stat-num" data-target="180">0</span><span class="sys-stat-unit">%</span>
+                            <span class="sys-stat-lbl">Samaradorlik</span>
+                        </div>
+                        <div class="sys-stat-box">
+                            <span class="sys-stat-num" data-target="98">0</span><span class="sys-stat-unit">%</span>
+                            <span class="sys-stat-lbl">Mamnunlik</span>
+                        </div>
                     </div>
-                    <div class="sys-step sys-step-2">
-                        <div class="sys-step-icon"><i class="fa fa-arrows-spin"></i></div>
-                        <div class="sys-step-label">Jarayonlar</div>
-                        <div class="sys-step-bar"><div class="sys-step-fill" style="--p:85%;--c:#8b5cf6"></div></div>
+                    <div class="sys-steps-list">
+                        <div class="sys-step-row">
+                            <div class="sys-step-ico" style="background:rgba(59,130,246,0.25);color:#93c5fd"><i class="fa fa-magnifying-glass"></i></div>
+                            <div class="sys-step-info">
+                                <div class="sys-step-name">Audit <i class="fa fa-check-circle" style="color:#4ade80;font-size:.75rem"></i></div>
+                                <div class="sys-step-track"><div class="sys-step-prog" style="--w:100%;--c:#3b82f6;--d:0.3s"></div></div>
+                            </div>
+                            <span class="sys-step-pct">100%</span>
+                        </div>
+                        <div class="sys-step-row">
+                            <div class="sys-step-ico" style="background:rgba(139,92,246,0.25);color:#c4b5fd"><i class="fa fa-gears"></i></div>
+                            <div class="sys-step-info">
+                                <div class="sys-step-name">Jarayonlar <i class="fa fa-check-circle" style="color:#4ade80;font-size:.75rem"></i></div>
+                                <div class="sys-step-track"><div class="sys-step-prog" style="--w:85%;--c:#8b5cf6;--d:0.5s"></div></div>
+                            </div>
+                            <span class="sys-step-pct">85%</span>
+                        </div>
+                        <div class="sys-step-row">
+                            <div class="sys-step-ico" style="background:rgba(6,182,212,0.25);color:#67e8f9"><i class="fa fa-robot"></i></div>
+                            <div class="sys-step-info">
+                                <div class="sys-step-name">Avtomatizatsiya <i class="fa fa-check-circle" style="color:#4ade80;font-size:.75rem"></i></div>
+                                <div class="sys-step-track"><div class="sys-step-prog" style="--w:70%;--c:#06b6d4;--d:0.7s"></div></div>
+                            </div>
+                            <span class="sys-step-pct">70%</span>
+                        </div>
+                        <div class="sys-step-row">
+                            <div class="sys-step-ico" style="background:rgba(16,185,129,0.25);color:#6ee7b7"><i class="fa fa-chart-line"></i></div>
+                            <div class="sys-step-info">
+                                <div class="sys-step-name">O'sish <i class="fa fa-check-circle" style="color:#4ade80;font-size:.75rem"></i></div>
+                                <div class="sys-step-track"><div class="sys-step-prog" style="--w:90%;--c:#10b981;--d:0.9s"></div></div>
+                            </div>
+                            <span class="sys-step-pct">90%</span>
+                        </div>
                     </div>
-                    <div class="sys-step sys-step-3">
-                        <div class="sys-step-icon"><i class="fa fa-robot"></i></div>
-                        <div class="sys-step-label">Avtomatizatsiya</div>
-                        <div class="sys-step-bar"><div class="sys-step-fill" style="--p:70%;--c:#06b6d4"></div></div>
-                    </div>
-                    <div class="sys-step sys-step-4">
-                        <div class="sys-step-icon"><i class="fa fa-chart-line"></i></div>
-                        <div class="sys-step-label">O'sish</div>
-                        <div class="sys-step-bar"><div class="sys-step-fill" style="--p:90%;--c:#10b981"></div></div>
-                    </div>
-
-                    <!-- Suzuvchi stat kartochkalar -->
-                    <div class="sys-float-card sys-float-1">
-                        <i class="fa fa-circle-check" style="color:#4ade80"></i>
-                        <span><strong>120+</strong> kompaniya</span>
-                    </div>
-                    <div class="sys-float-card sys-float-2">
-                        <i class="fa fa-bolt" style="color:#fbbf24"></i>
-                        <span><strong>+180%</strong> samaradorlik</span>
-                    </div>
-                    <div class="sys-float-card sys-float-3">
-                        <i class="fa fa-clock" style="color:#60a5fa"></i>
-                        <span><strong>30 kun</strong> natija</span>
+                    <div class="sys-notification">
+                        <div class="sys-notif-icon"><i class="fa fa-circle-check"></i></div>
+                        <div>
+                            <div class="sys-notif-title">Tizim joriy qilindi</div>
+                            <div class="sys-notif-sub">Milliy Holding · +3x samaradorlik</div>
+                        </div>
+                        <span class="sys-notif-time">hozirgina</span>
                     </div>
                 </div>
 
@@ -1548,6 +1569,22 @@ document.addEventListener('DOMContentLoaded', function(){
             prevBtn.addEventListener('click', () => { if (current > 0) { current--; update(); } });
             window.addEventListener('resize', () => { current = Math.min(current, max()); update(); });
         })();
+
+        // Counter animatsiya
+        const counters = document.querySelectorAll('.sys-stat-num[data-target]');
+        if (counters.length) {
+            const runCounters = () => counters.forEach(el => {
+                const target = +el.dataset.target, duration = 1500, step = target / (duration / 16);
+                let cur = 0;
+                const t = setInterval(() => {
+                    cur = Math.min(cur + step, target);
+                    el.textContent = Math.floor(cur);
+                    if (cur >= target) clearInterval(t);
+                }, 16);
+            });
+            const obs = new IntersectionObserver(entries => { if(entries[0].isIntersecting){ runCounters(); obs.disconnect(); } }, {threshold:.3});
+            obs.observe(counters[0].closest('.sys-dashboard') || counters[0]);
+        }
 
         document.querySelector('.faq-list') && document.querySelector('.faq-list').addEventListener('click', function(e) {
             const btn = e.target.closest('.faq-question');
