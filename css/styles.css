@@ -347,6 +347,146 @@ body {
     animation: visualIn 1s cubic-bezier(0.16,1,0.3,1) 0.2s both;
 }
 
+/* =====================
+   HERO TIZIMLASHTIRISH VIZUAL
+   ===================== */
+.hero-sys-visual {
+    position: relative;
+    width: 420px;
+    height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Markaziy karta */
+.sys-center-card {
+    position: relative;
+    z-index: 3;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    min-width: 160px;
+}
+.sys-center-icon {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: .5rem;
+}
+.sys-center-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #fff;
+}
+.sys-center-sub {
+    font-size: .75rem;
+    color: rgba(255,255,255,0.75);
+    margin-top: .2rem;
+}
+
+/* Pulse animatsiya */
+.sys-pulse-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+    animation: sysPulse 2.5s ease-out infinite;
+    pointer-events: none;
+}
+.sys-pulse-ring.delay1 {
+    width: 240px; height: 240px;
+    animation-delay: 1.2s;
+}
+@keyframes sysPulse {
+    0%   { opacity:.6; transform: translate(-50%,-50%) scale(0.8); }
+    100% { opacity:0;  transform: translate(-50%,-50%) scale(1.4); }
+}
+
+/* 4 ta bosqich */
+.sys-step {
+    position: absolute;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 14px;
+    padding: .7rem 1rem;
+    min-width: 130px;
+    animation: sysStepIn 0.7s cubic-bezier(0.16,1,0.3,1) both;
+}
+.sys-step-1 { top: 10px;   left: 50%; transform: translateX(-50%); animation-delay: .3s; }
+.sys-step-2 { right: 0px;  top: 50%; transform: translateY(-50%);  animation-delay: .5s; }
+.sys-step-3 { bottom: 10px; left: 50%; transform: translateX(-50%); animation-delay: .7s; }
+.sys-step-4 { left: 0px;   top: 50%; transform: translateY(-50%);  animation-delay: .9s; }
+
+@keyframes sysStepIn {
+    from { opacity:0; transform: scale(0.8) translateX(var(--tx,0)) translateY(var(--ty,0)); }
+    to   { opacity:1; }
+}
+.sys-step-1 { --ty: -20px; }
+.sys-step-2 { --tx: 20px; }
+.sys-step-3 { --ty: 20px; }
+.sys-step-4 { --tx: -20px; }
+
+.sys-step-icon {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: .3rem;
+}
+.sys-step-label {
+    font-size: .78rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: .4rem;
+}
+.sys-step-bar {
+    height: 5px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.sys-step-fill {
+    height: 100%;
+    width: 0;
+    background: var(--c);
+    border-radius: 10px;
+    animation: sysBarFill 1.5s cubic-bezier(0.4,0,0.2,1) 1s forwards;
+}
+@keyframes sysBarFill {
+    to { width: var(--p); }
+}
+
+/* Suzuvchi kartochkalar */
+.sys-float-card {
+    position: absolute;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    padding: .5rem .9rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .8rem;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    animation: sysFloatAnim 3s ease-in-out infinite;
+}
+.sys-float-1 { top: -10px; right: -20px; animation-delay: 0s; }
+.sys-float-2 { bottom: 30px; right: -30px; animation-delay: 1s; }
+.sys-float-3 { bottom: -10px; left: -20px; animation-delay: 2s; }
+
+@keyframes sysFloatAnim {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
 @keyframes visualIn {
     from { opacity: 0; transform: translateX(40px) scale(0.95); }
     to   { opacity: 1; transform: translateX(0) scale(1); }
