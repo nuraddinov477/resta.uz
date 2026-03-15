@@ -207,14 +207,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     <!-- Mini bar chart -->
                     <div class="sys-mini-chart">
                         <div class="sys-chart-label">Biznes o'sish dinamikasi</div>
-                        <div class="sys-chart-bars">
-                            <div class="sys-chart-bar" style="--h:35%;--c:#3b82f6"><span>Yan</span></div>
-                            <div class="sys-chart-bar" style="--h:50%;--c:#3b82f6"><span>Fev</span></div>
-                            <div class="sys-chart-bar" style="--h:60%;--c:#3b82f6"><span>Mar</span></div>
-                            <div class="sys-chart-bar" style="--h:72%;--c:#8b5cf6"><span>Apr</span></div>
-                            <div class="sys-chart-bar" style="--h:80%;--c:#8b5cf6"><span>May</span></div>
-                            <div class="sys-chart-bar active" style="--h:95%;--c:#10b981"><span>Iyn</span></div>
-                        </div>
+                        <div class="sys-chart-bars" id="sysChartBars"></div>
                     </div>
 
                     <div class="sys-steps-list">
@@ -1602,21 +1595,40 @@ document.addEventListener('DOMContentLoaded', function(){
             window.addEventListener('resize', () => { current = Math.min(current, max()); update(); });
         })();
 
-        // Counter animatsiya
+        // Counter animatsiya — hero da ko'rinadi, delay bilan boshlaydi
         const counters = document.querySelectorAll('.sys-stat-num[data-target]');
         if (counters.length) {
             const runCounters = () => counters.forEach(el => {
-                const target = +el.dataset.target, duration = 1500, step = target / (duration / 16);
+                const target = +el.dataset.target, duration = 1800, step = target / (duration / 16);
                 let cur = 0;
+                el.textContent = '0';
                 const t = setInterval(() => {
                     cur = Math.min(cur + step, target);
                     el.textContent = Math.floor(cur);
                     if (cur >= target) clearInterval(t);
                 }, 16);
             });
-            const obs = new IntersectionObserver(entries => { if(entries[0].isIntersecting){ runCounters(); obs.disconnect(); } }, {threshold:.3});
-            obs.observe(counters[0].closest('.sys-dashboard') || counters[0]);
+            setTimeout(runCounters, 900);
         }
+
+        // Dinamik oylar chart
+        (function() {
+            var bars = document.getElementById('sysChartBars');
+            if (!bars) return;
+            var months = ['Yan','Fev','Mar','Apr','May','Iyn','Iyl','Avg','Sen','Okt','Noy','Dek'];
+            var heights = [35,50,60,72,80,95];
+            var colors = ['#3b82f6','#3b82f6','#3b82f6','#8b5cf6','#8b5cf6','#10b981'];
+            var now = new Date();
+            var html = '';
+            for (var i = 5; i >= 0; i--) {
+                var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+                var m = months[d.getMonth()];
+                var idx = 5 - i;
+                var isLast = idx === 5;
+                html += '<div class="sys-chart-bar' + (isLast ? ' active' : '') + '" style="--h:' + heights[idx] + '%;--c:' + colors[idx] + '"><span>' + m + '</span></div>';
+            }
+            bars.innerHTML = html;
+        })();
 
         document.querySelector('.faq-list') && document.querySelector('.faq-list').addEventListener('click', function(e) {
             const btn = e.target.closest('.faq-question');
