@@ -2711,10 +2711,13 @@ body {
 }
 
 .footer-social-btn:hover {
-    background: rgba(255,255,255,0.1);
     color: #fff;
-    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
 }
+.footer-soc-tg:hover  { background: #0088cc; border-color: #0088cc; }
+.footer-soc-fb:hover  { background: #1877f2; border-color: #1877f2; }
+.footer-soc-ig:hover  { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); border-color: #cc2366; }
+.footer-soc-yt:hover  { background: #ff0000; border-color: #ff0000; }
 
 .footer-nav-cols {
     display: flex;
