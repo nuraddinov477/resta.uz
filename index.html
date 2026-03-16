@@ -1470,6 +1470,32 @@ document.addEventListener('DOMContentLoaded', function(){
         const btn = this.querySelector('button[type=submit]');
         const s = JSON.parse(localStorage.getItem('resta_settings') || '{}');
 
+        // Make.com webhook ga yuborish
+        const MAKE_WEBHOOK = 'https://hook.eu1.make.com/fmxiw90wqetdup0c6dqkjaiecupnksp1';
+        const formData = {
+            name:    document.getElementById('name').value,
+            phone:   document.getElementById('phone').value,
+            company: document.getElementById('company').value || '—',
+            message: document.getElementById('message').value || '—',
+            source:  'Resta sayt forma',
+            date:    new Date().toLocaleString('uz-UZ')
+        };
+        btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Yuborilmoqda...';
+        btn.disabled = true;
+        try {
+            await fetch(MAKE_WEBHOOK, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+        } catch(err) {
+            console.warn('Webhook xato:', err);
+        }
+        btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
+        btn.style.background = '#16a34a';
+        this.reset();
+        return;
+
         const params = {
             from_name:  document.getElementById('name').value,
             phone:      document.getElementById('phone').value,
