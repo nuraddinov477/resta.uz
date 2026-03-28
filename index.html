@@ -1465,33 +1465,12 @@ document.addEventListener('DOMContentLoaded', function(){
     faders.forEach(f => revealObserver.observe(f));
 
     // Contact form submit
-    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const btn = this.querySelector('button[type=submit]');
-        const s = JSON.parse(localStorage.getItem('resta_settings') || '{}');
-
-        // Make.com webhook → amoCRM
-        const MAKE_WEBHOOK = 'https://hook.eu1.make.com/fmxiw90wqetdup0c6dqkjaiecupnksp1';
-        const formData = {
-            name:     document.getElementById('name').value,
-            phone:    document.getElementById('phone').value,
-            telegram: document.getElementById('telegram').value || '—',
-            source:   'Resta sayt forma',
-            date:     new Date().toLocaleString('uz-UZ')
-        };
-        btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Yuborilmoqda...';
-        btn.disabled = true;
-        try {
-            await fetch(MAKE_WEBHOOK, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
-        } catch(err) {
-            console.warn('Webhook xato:', err);
-        }
         btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
         btn.style.background = '#16a34a';
+        btn.disabled = true;
         this.reset();
     });
 
