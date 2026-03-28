@@ -749,7 +749,7 @@ document.addEventListener('DOMContentLoaded', function(){
     <section id="workflow" class="section workflow fade-in-section">
         <div class="section-label">Jarayon</div>
         <h2>Qanday ishlashimiz</h2>
-        <p class="section-subtitle">7 bosqichli tizimli yondashuv — auditan natijagacha</p>
+        <p class="section-subtitle">7 bosqichli tizimli yondashuv — auditdan natijagacha</p>
         <div class="workflow-steps">
             <div class="workflow-row workflow-row-4">
                 <div class="workflow-step">
@@ -1473,12 +1473,11 @@ document.addEventListener('DOMContentLoaded', function(){
         // Make.com webhook → amoCRM
         const MAKE_WEBHOOK = 'https://hook.eu1.make.com/fmxiw90wqetdup0c6dqkjaiecupnksp1';
         const formData = {
-            name:    document.getElementById('name').value,
-            phone:   document.getElementById('phone').value,
-            company: document.getElementById('company').value || '—',
-            message: document.getElementById('message').value || '—',
-            source:  'Resta sayt forma',
-            date:    new Date().toLocaleString('uz-UZ')
+            name:     document.getElementById('name').value,
+            phone:    document.getElementById('phone').value,
+            telegram: document.getElementById('telegram').value || '—',
+            source:   'Resta sayt forma',
+            date:     new Date().toLocaleString('uz-UZ')
         };
         btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Yuborilmoqda...';
         btn.disabled = true;
@@ -1494,43 +1493,6 @@ document.addEventListener('DOMContentLoaded', function(){
         btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
         btn.style.background = '#16a34a';
         this.reset();
-        return;
-
-        const params = {
-            from_name:  document.getElementById('name').value,
-            phone:      document.getElementById('phone').value,
-            from_email: '',
-            company:    document.getElementById('company').value || '—',
-            message:    document.getElementById('message').value || '—',
-            to_email:   s.ejs_to_email || '',
-        };
-
-        if (s.ejs_service && s.ejs_template && s.ejs_pubkey) {
-            btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Yuborilmoqda...';
-            btn.disabled = true;
-            try {
-                if (!window.emailjs) {
-                    await new Promise((res, rej) => {
-                        const sc = document.createElement('script');
-                        sc.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-                        sc.onload = res; sc.onerror = rej;
-                        document.head.appendChild(sc);
-                    });
-                }
-                emailjs.init({ publicKey: s.ejs_pubkey });
-                await emailjs.send(s.ejs_service, s.ejs_template, params);
-                btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
-                btn.style.background = '#16a34a';
-            } catch(err) {
-                btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
-                btn.style.background = '#16a34a';
-                console.warn('EmailJS xato:', err);
-            }
-        } else {
-            btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
-            btn.style.background = '#16a34a';
-            btn.disabled = true;
-        }
     });
 
     // Solutions tabs
@@ -1587,6 +1549,7 @@ document.addEventListener('DOMContentLoaded', function(){
             if (ct.address) document.querySelectorAll('[data-contact="address"]').forEach(el => el.textContent = ct.address);
             if (ct.hours)   document.querySelectorAll('[data-contact="hours"]').forEach(el => el.textContent = ct.hours);
             if (ct.telegram)  setAttr('a[data-social="telegram"]', 'href', ct.telegram);
+            if (ct.facebook)  setAttr('a[data-social="facebook"]', 'href', ct.facebook);
             if (ct.instagram) setAttr('a[data-social="instagram"]', 'href', ct.instagram);
             if (ct.youtube)   setAttr('a[data-social="youtube"]', 'href', ct.youtube);
             if (ct.linkedin)  setAttr('a[data-social="linkedin"]', 'href', ct.linkedin);
