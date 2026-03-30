@@ -178,7 +178,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 7rem 2.5rem 5rem;
-    background: linear-gradient(110deg, #0c1830 0%, #122860 45%, #1a3878 100%);
+    background: #1a3575;
     overflow: hidden;
 }
 
