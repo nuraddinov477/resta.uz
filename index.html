@@ -181,94 +181,124 @@ document.addEventListener('DOMContentLoaded', function(){
                 </div>
             </div>
 
-            <!-- O'ng: dashboard vizualizatsiya -->
+            <!-- O'ng: AI analitika vizualizatsiya -->
             <div class="hero-visual" aria-hidden="true">
-                <div class="hv-dashboard">
+                <div class="hv2">
 
                     <!-- Header -->
-                    <div class="hv-header">
-                        <div class="hv-dots">
-                            <span style="background:#ff5f57"></span>
-                            <span style="background:#ffbd2e"></span>
-                            <span style="background:#28ca41"></span>
+                    <div class="hv2-header">
+                        <div class="hv2-brand">
+                            <i class="fa fa-microchip"></i>
+                            AI Biznes Analitika
                         </div>
-                        <span class="hv-title"><i class="fa fa-sitemap"></i> RESTA Biznes Tizimi</span>
-                        <span class="hv-live"><span class="hv-live-dot"></span>Jonli</span>
+                        <span class="hv2-live"><span class="hv-live-dot"></span>Real vaqt</span>
                     </div>
 
-                    <!-- KPI qatori -->
-                    <div class="hv-kpi-row">
-                        <div class="hv-kpi">
-                            <span class="hv-kpi-num" data-target="120">0</span><span class="hv-kpi-unit">+</span>
-                            <span class="hv-kpi-lbl">Kompaniya</span>
-                        </div>
-                        <div class="hv-kpi">
-                            <span class="hv-kpi-num" data-target="180">0</span><span class="hv-kpi-unit">%</span>
-                            <span class="hv-kpi-lbl">Samaradorlik</span>
-                        </div>
-                        <div class="hv-kpi">
-                            <span class="hv-kpi-num" data-target="98">0</span><span class="hv-kpi-unit">%</span>
-                            <span class="hv-kpi-lbl">Mamnunlik</span>
-                        </div>
-                    </div>
+                    <!-- Yuqori qator: doira skor + progress barlar -->
+                    <div class="hv2-top">
 
-                    <!-- Bar chart -->
-                    <div class="hv-chart">
-                        <div class="hv-chart-label">Biznes o'sish dinamikasi</div>
-                        <div class="hv-bars">
-                            <div class="hv-bar" style="--h:32%"><span>Yan</span></div>
-                            <div class="hv-bar" style="--h:48%"><span>Fev</span></div>
-                            <div class="hv-bar" style="--h:55%"><span>Mar</span></div>
-                            <div class="hv-bar" style="--h:70%"><span>Apr</span></div>
-                            <div class="hv-bar" style="--h:80%"><span>May</span></div>
-                            <div class="hv-bar active" style="--h:96%"><span>Iyn</span></div>
+                        <!-- Biznes sog'ligi doirasi -->
+                        <div class="hv2-score">
+                            <svg width="130" height="130" viewBox="0 0 130 130">
+                                <defs>
+                                    <linearGradient id="sg" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#2563eb"/>
+                                        <stop offset="100%" stop-color="#38bdf8"/>
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="65" cy="65" r="54" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="9"/>
+                                <circle cx="65" cy="65" r="54" fill="none" stroke="url(#sg)" stroke-width="9"
+                                    stroke-dasharray="339" stroke-dashoffset="20"
+                                    stroke-linecap="round" transform="rotate(-90 65 65)"
+                                    class="hv2-circle-fill"/>
+                            </svg>
+                            <div class="hv2-score-inner">
+                                <span class="hv2-score-num hv-kpi-num" data-target="94">0</span>
+                                <span class="hv2-score-max">/100</span>
+                                <span class="hv2-score-lbl">Biznes<br>sog'ligi</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Jarayon bosqichlari -->
-                    <div class="hv-steps">
-                        <div class="hv-step">
-                            <div class="hv-step-ico" style="background:rgba(59,130,246,.2);color:#93c5fd"><i class="fa fa-magnifying-glass"></i></div>
-                            <div class="hv-step-info">
-                                <div class="hv-step-name">Audit <i class="fa fa-check-circle" style="color:#4ade80;font-size:.7rem"></i></div>
-                                <div class="hv-step-bar"><div class="hv-step-fill" style="--w:100%;--c:#3b82f6;--d:.3s"></div></div>
+                        <!-- Modul progresslari -->
+                        <div class="hv2-modules">
+                            <div class="hv2-mod">
+                                <div class="hv2-mod-top">
+                                    <span><i class="fa fa-database" style="color:#38bdf8"></i> CRM tizimi</span>
+                                    <span>96%</span>
+                                </div>
+                                <div class="hv2-mod-bar"><div class="hv2-mod-fill" style="--w:96%;--c:#38bdf8;--d:.2s"></div></div>
                             </div>
-                            <span class="hv-step-pct">100%</span>
-                        </div>
-                        <div class="hv-step">
-                            <div class="hv-step-ico" style="background:rgba(139,92,246,.2);color:#c4b5fd"><i class="fa fa-gears"></i></div>
-                            <div class="hv-step-info">
-                                <div class="hv-step-name">Jarayonlar <i class="fa fa-check-circle" style="color:#4ade80;font-size:.7rem"></i></div>
-                                <div class="hv-step-bar"><div class="hv-step-fill" style="--w:85%;--c:#8b5cf6;--d:.5s"></div></div>
+                            <div class="hv2-mod">
+                                <div class="hv2-mod-top">
+                                    <span><i class="fa fa-gears" style="color:#a78bfa"></i> Avtomatizatsiya</span>
+                                    <span>88%</span>
+                                </div>
+                                <div class="hv2-mod-bar"><div class="hv2-mod-fill" style="--w:88%;--c:#a78bfa;--d:.4s"></div></div>
                             </div>
-                            <span class="hv-step-pct">85%</span>
-                        </div>
-                        <div class="hv-step">
-                            <div class="hv-step-ico" style="background:rgba(6,182,212,.2);color:#67e8f9"><i class="fa fa-robot"></i></div>
-                            <div class="hv-step-info">
-                                <div class="hv-step-name">Avtomatizatsiya</div>
-                                <div class="hv-step-bar"><div class="hv-step-fill" style="--w:70%;--c:#06b6d4;--d:.7s"></div></div>
+                            <div class="hv2-mod">
+                                <div class="hv2-mod-top">
+                                    <span><i class="fa fa-chart-line" style="color:#34d399"></i> Sotuv analitika</span>
+                                    <span>92%</span>
+                                </div>
+                                <div class="hv2-mod-bar"><div class="hv2-mod-fill" style="--w:92%;--c:#34d399;--d:.6s"></div></div>
                             </div>
-                            <span class="hv-step-pct">70%</span>
-                        </div>
-                        <div class="hv-step">
-                            <div class="hv-step-ico" style="background:rgba(16,185,129,.2);color:#6ee7b7"><i class="fa fa-chart-line"></i></div>
-                            <div class="hv-step-info">
-                                <div class="hv-step-name">O'sish</div>
-                                <div class="hv-step-bar"><div class="hv-step-fill" style="--w:90%;--c:#10b981;--d:.9s"></div></div>
+                            <div class="hv2-mod">
+                                <div class="hv2-mod-top">
+                                    <span><i class="fa fa-users" style="color:#fb923c"></i> Xodimlar tizimi</span>
+                                    <span>79%</span>
+                                </div>
+                                <div class="hv2-mod-bar"><div class="hv2-mod-fill" style="--w:79%;--c:#fb923c;--d:.8s"></div></div>
                             </div>
-                            <span class="hv-step-pct">90%</span>
                         </div>
                     </div>
 
-                    <!-- Bildirishnoma -->
-                    <div class="hv-notif">
-                        <div class="hv-notif-ico"><i class="fa fa-circle-check"></i></div>
-                        <div>
-                            <div class="hv-notif-title">Tizim joriy qilindi</div>
-                            <div class="hv-notif-sub">Milliy Holding · +3x samaradorlik</div>
+                    <!-- Data pipeline -->
+                    <div class="hv2-pipeline">
+                        <div class="hv2-pipe-node">
+                            <div class="hv2-pipe-ico" style="background:rgba(56,189,248,.15);color:#38bdf8"><i class="fa fa-database"></i></div>
+                            <span>Ma'lumot</span>
                         </div>
-                        <span class="hv-notif-time">hozirgina</span>
+                        <div class="hv2-pipe-arrow"><i class="fa fa-chevron-right"></i><div class="hv2-pipe-dot"></div></div>
+                        <div class="hv2-pipe-node">
+                            <div class="hv2-pipe-ico" style="background:rgba(167,139,250,.15);color:#a78bfa"><i class="fa fa-brain"></i></div>
+                            <span>AI Tahlil</span>
+                        </div>
+                        <div class="hv2-pipe-arrow"><i class="fa fa-chevron-right"></i><div class="hv2-pipe-dot"></div></div>
+                        <div class="hv2-pipe-node">
+                            <div class="hv2-pipe-ico" style="background:rgba(52,211,153,.15);color:#34d399"><i class="fa fa-sitemap"></i></div>
+                            <span>Tizim</span>
+                        </div>
+                        <div class="hv2-pipe-arrow"><i class="fa fa-chevron-right"></i><div class="hv2-pipe-dot"></div></div>
+                        <div class="hv2-pipe-node active">
+                            <div class="hv2-pipe-ico" style="background:rgba(251,191,36,.15);color:#fbbf24"><i class="fa fa-rocket"></i></div>
+                            <span>O'sish</span>
+                        </div>
+                    </div>
+
+                    <!-- Pastki: KPI raqamlari + AI tavsiya -->
+                    <div class="hv2-bottom">
+                        <div class="hv2-kpis">
+                            <div class="hv2-kpi">
+                                <span class="hv-kpi-num" data-target="120">0</span><sup>+</sup>
+                                <small>Kompaniya</small>
+                            </div>
+                            <div class="hv2-kpi">
+                                <span class="hv-kpi-num" data-target="180">0</span><sup>%</sup>
+                                <small>Samaradorlik</small>
+                            </div>
+                            <div class="hv2-kpi">
+                                <span class="hv-kpi-num" data-target="98">0</span><sup>%</sup>
+                                <small>Mamnunlik</small>
+                            </div>
+                        </div>
+                        <div class="hv2-ai-rec">
+                            <i class="fa fa-wand-magic-sparkles"></i>
+                            <div>
+                                <strong>AI tavsiya</strong>
+                                <span>Sotuv hunisida 3 ta to'siqlangan bosqich aniqlandi</span>
+                            </div>
+                            <span class="hv2-new-badge">Yangi</span>
+                        </div>
                     </div>
 
                 </div>
