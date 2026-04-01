@@ -355,6 +355,94 @@ body {
 }
 .trust-item i { color: #4ade80; font-size: 0.7rem; }
 
+/* ===== HERO DASHBOARD VISUALIZATION ===== */
+.hv-dashboard {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    animation: visualIn 1s cubic-bezier(0.16,1,0.3,1) 0.2s both;
+}
+
+.hv-header {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.hv-dots { display: flex; gap: .4rem; }
+.hv-dots span { width: 10px; height: 10px; border-radius: 50%; }
+.hv-title { font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.7); flex: 1; display: flex; align-items: center; gap: .4rem; }
+.hv-title i { color: var(--accent); }
+.hv-live { display: flex; align-items: center; gap: .35rem; font-size: .7rem; color: #4ade80; font-weight: 600; }
+.hv-live-dot { width: 7px; height: 7px; background: #4ade80; border-radius: 50%; animation: badgePulse 2s ease-in-out infinite; }
+
+.hv-kpi-row { display: flex; gap: .75rem; }
+.hv-kpi {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: .85rem .75rem;
+    text-align: center;
+}
+.hv-kpi-num { font-size: 1.6rem; font-weight: 900; color: #fff; line-height: 1; }
+.hv-kpi-unit { font-size: 1rem; font-weight: 700; color: var(--accent); }
+.hv-kpi-lbl { display: block; font-size: .65rem; color: rgba(255,255,255,.5); margin-top: .25rem; }
+
+.hv-chart { background: rgba(255,255,255,0.04); border-radius: 12px; padding: .85rem 1rem; }
+.hv-chart-label { font-size: .7rem; color: rgba(255,255,255,.45); margin-bottom: .75rem; }
+.hv-bars { display: flex; align-items: flex-end; gap: .4rem; height: 64px; }
+.hv-bar {
+    flex: 1;
+    background: rgba(59,130,246,0.3);
+    border-radius: 4px 4px 0 0;
+    height: var(--h);
+    position: relative;
+    transition: background .25s;
+    animation: barGrow .8s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hv-bar.active { background: linear-gradient(to top, #2563eb, #38bdf8); }
+.hv-bar span { position: absolute; bottom: -1.1rem; left: 50%; transform: translateX(-50%); font-size: .6rem; color: rgba(255,255,255,.4); white-space: nowrap; }
+@keyframes barGrow { from { transform: scaleY(0); transform-origin: bottom; } to { transform: scaleY(1); } }
+
+.hv-steps { display: flex; flex-direction: column; gap: .6rem; }
+.hv-step { display: flex; align-items: center; gap: .7rem; }
+.hv-step-ico { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: .75rem; flex-shrink: 0; }
+.hv-step-info { flex: 1; }
+.hv-step-name { font-size: .72rem; color: rgba(255,255,255,.75); font-weight: 600; margin-bottom: .25rem; display: flex; align-items: center; gap: .3rem; }
+.hv-step-bar { height: 4px; background: rgba(255,255,255,.1); border-radius: 2px; overflow: hidden; }
+.hv-step-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 2px;
+    background: var(--c);
+    animation: fillBar .9s cubic-bezier(0.16,1,0.3,1) var(--d) both;
+}
+@keyframes fillBar { from { width: 0; } to { width: var(--w); } }
+.hv-step-pct { font-size: .68rem; color: rgba(255,255,255,.45); font-weight: 600; min-width: 2.5rem; text-align: right; }
+
+.hv-notif {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    background: rgba(74,222,128,0.1);
+    border: 1px solid rgba(74,222,128,0.2);
+    border-radius: 10px;
+    padding: .65rem .85rem;
+}
+.hv-notif-ico { color: #4ade80; font-size: 1rem; flex-shrink: 0; }
+.hv-notif-title { font-size: .75rem; font-weight: 700; color: #fff; }
+.hv-notif-sub { font-size: .65rem; color: rgba(255,255,255,.5); }
+.hv-notif-time { font-size: .65rem; color: rgba(255,255,255,.35); margin-left: auto; white-space: nowrap; }
+
 /* Right — dashboard mockup */
 .hero-visual {
     position: relative;
