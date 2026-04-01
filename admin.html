@@ -1001,7 +1001,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Telefon raqami</label>
-                            <input type="text" id="c_phone" placeholder="+998 90 123 45 67">
+                            <input type="text" id="c_phone" placeholder="+998 97 801 55 22">
                         </div>
                         <div class="form-group">
                             <label>Email manzil</label>
@@ -1011,7 +1011,7 @@
                     <div class="form-row single">
                         <div class="form-group">
                             <label>Ofis manzili</label>
-                            <input type="text" id="c_address" placeholder="Toshkent, O'zbekiston">
+                            <input type="text" id="c_address" placeholder="O'zbekiston, Farg'ona shahar">
                         </div>
                     </div>
                     <div class="form-row single">
@@ -1963,10 +1963,10 @@ function initDashboard() {
 
     // Contact
     const ct = settings.contact || {};
-    setVal('c_phone',     ct.phone     || '+998 90 123 45 67');
+    setVal('c_phone',     ct.phone     || '+998 97 801 55 22');
     setVal('c_email',     ct.email     || 'info@resta.uz');
-    setVal('c_address',   ct.address   || 'Toshkent, O\'zbekiston');
-    setVal('c_hours',     ct.hours     || 'Dushanba–Juma: 09:00 – 18:00');
+    setVal('c_address',   ct.address   || "O'zbekiston, Farg'ona shahar");
+    setVal('c_hours',     ct.hours     || 'Dushanba–Shanba: 09:00 – 18:00');
     setVal('c_telegram',  ct.telegram  || 'https://t.me/resta_admin');
     setVal('c_instagram', ct.instagram || '');
     setVal('c_youtube',   ct.youtube   || '');
