@@ -1453,6 +1453,18 @@ document.addEventListener('DOMContentLoaded', function(){
     }, { threshold: 0.5 });
     counters.forEach(c => counterObserver.observe(c));
 
+    // HV2 doira animatsiyasi
+    const hv2Circle = document.querySelector('.hv2-circle-fill');
+    if (hv2Circle) {
+        const obs = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                hv2Circle.style.strokeDashoffset = '20';
+                obs.disconnect();
+            }
+        }, { threshold: 0.3 });
+        obs.observe(hv2Circle);
+    }
+
     // SVG ring animatsiyasi — scroll trigger
     const circumference = 251.33;
     const rings = document.querySelectorAll('.ring-fill');
