@@ -79,6 +79,13 @@ fetch('data.json?v=' + Date.now())
 document.addEventListener('DOMContentLoaded', function(){
     try {
         var s = JSON.parse(localStorage.getItem('resta_settings') || '{}');
+        // Manzilni majburan yangilash
+        if (!s.contact) s.contact = {};
+        s.contact.address = "O'zbekiston, Farg'ona shahar";
+        localStorage.setItem('resta_settings', JSON.stringify(s));
+    } catch(e) {}
+    try {
+        var s = JSON.parse(localStorage.getItem('resta_settings') || '{}');
         // Logo
         var logoEls = document.querySelectorAll('.logo, a.logo');
         logoEls.forEach(function(el) {
@@ -1275,7 +1282,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     <i class="fa fa-location-dot"></i>
                     <div>
                         <strong>Manzil</strong>
-                        <p data-contact="address">Farg'ona shahar</p>
+                        <p data-contact="address">O'zbekiston, Farg'ona shahar</p>
                     </div>
                 </div>
                 <div class="contact-card">
