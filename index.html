@@ -1496,10 +1496,29 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const btn = this.querySelector('button[type=submit]');
-        btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
-        btn.style.background = '#16a34a';
+        const name     = this.querySelector('#name').value.trim();
+        const phone    = this.querySelector('#phone').value.trim();
+        const telegram = (this.querySelector('#telegram') || {}).value || '';
+
+        btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Yuborilmoqda...';
         btn.disabled = true;
-        this.reset();
+
+        fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, phone, message: telegram ? 'Telegram: ' + telegram : '' })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function() {
+            btn.innerHTML = '<i class="fa fa-check"></i> Yuborildi! Tez orada bog\'lanamiz';
+            btn.style.background = '#16a34a';
+            document.getElementById('contactForm').reset();
+        })
+        .catch(function() {
+            btn.innerHTML = '<i class="fa fa-triangle-exclamation"></i> Xatolik. Qayta urinib ko\'ring';
+            btn.style.background = '#dc2626';
+            btn.disabled = false;
+        });
     });
 
     // Solutions tabs
