@@ -629,6 +629,9 @@
             <button class="nav-item" onclick="switchTab('github', this)">
                 <i class="fa fa-code-branch"></i> GitHub sozlama
             </button>
+            <button class="nav-item" onclick="switchTab('integrations', this)">
+                <i class="fa fa-plug"></i> Integratsiyalar
+            </button>
         </aside>
 
         <!-- Main -->
@@ -1494,6 +1497,74 @@
                 </div>
             </div>
 
+            <!-- INTEGRATIONS -->
+            <div class="tab-panel" id="tab-integrations">
+                <div class="panel-header">
+                    <h2>Integratsiyalar</h2>
+                    <p>Telegram, Email va CRM ulanishlarini sozlang — sayt formalaridan xabar qayerga borishi</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title"><i class="fa fa-paper-plane" style="color:#229ed9;margin-right:.4rem"></i> Telegram Bot</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Bot Token <span style="color:var(--muted);font-weight:400">(BotFather dan)</span></label>
+                            <input type="password" id="int_telegram_token" placeholder="123456789:AAxxxxxxxxxxxxxx">
+                            <div style="font-size:.74rem;color:var(--muted);margin-top:.3rem">t.me/BotFather → /newbot → token oling</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Chat ID <span style="color:var(--muted);font-weight:400">(guruh yoki shaxsiy)</span></label>
+                            <input type="text" id="int_telegram_chat_id" placeholder="-100xxxxxxxxxx yoki 12345678">
+                            <div style="font-size:.74rem;color:var(--muted);margin-top:.3rem">t.me/userinfobot ga /start yuboring → ID ni oling</div>
+                        </div>
+                    </div>
+                    <button class="btn-save" style="margin-top:.25rem" onclick="testTelegram()" id="testTgBtn">
+                        <i class="fa fa-paper-plane"></i> Test xabar yuborish
+                    </button>
+                    <span class="save-msg" id="testTgMsg" style="margin-left:.75rem"></span>
+                </div>
+
+                <div class="card">
+                    <div class="card-title"><i class="fa fa-envelope" style="color:#f59e0b;margin-right:.4rem"></i> Email (Formspree)</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email manzil <span style="color:var(--muted);font-weight:400">(xabar keladigan)</span></label>
+                            <input type="email" id="int_email_to" placeholder="siz@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Formspree Form ID <span style="color:var(--muted);font-weight:400">(ixtiyoriy)</span></label>
+                            <input type="text" id="int_formspree_id" placeholder="abcdefgh">
+                            <div style="font-size:.74rem;color:var(--muted);margin-top:.3rem"><a href="https://formspree.io" target="_blank" style="color:var(--accent)">formspree.io</a> → yangi form yarating → ID ni oling</div>
+                        </div>
+                    </div>
+                    <div style="background:rgba(59,130,246,0.07);border:1px solid rgba(59,130,246,0.18);border-radius:10px;padding:1rem;font-size:.82rem;color:var(--muted);line-height:1.65;margin-top:.25rem">
+                        Formspree ID bo'lsa — u orqali yuboriladi. Yo'q bo'lsa — serverda Gmail SMTP ishlatiladi (GMAIL_USER/GMAIL_PASS env sozlangan bo'lsa).
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title"><i class="fa fa-circle-info" style="color:var(--accent);margin-right:.4rem"></i> Qanday ishlaydi?</div>
+                    <div style="font-size:.85rem;color:var(--muted);line-height:1.8">
+                        <div style="margin-bottom:.5rem">Saytdagi aloqa formasi to'ldirilganda:</div>
+                        <ol style="padding-left:1.25rem">
+                            <li style="margin-bottom:.4rem">Telegram botga xabar keladi (agar token/chatId kiritilgan bo'lsa)</li>
+                            <li style="margin-bottom:.4rem">Email yuboriladi — Formspree yoki Gmail SMTP orqali</li>
+                            <li>amoCRM ga yangi lid yaratiladi (agar Vercel da <code style="background:var(--bg3);padding:.1rem .4rem;border-radius:4px">AMOCRM_TOKEN</code> sozlangan bo'lsa)</li>
+                        </ol>
+                        <div style="margin-top:.75rem;padding:.75rem 1rem;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:8px;color:#4ade80">
+                            <i class="fa fa-circle-check"></i> Sozlamalar GitHub repoga saqlanadi va sayt har so'rovda ularni o'qiydi.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="save-bar">
+                    <button class="btn-save" onclick="saveIntegrations()" id="intSaveBtn">
+                        <i class="fa fa-floppy-disk"></i> Saqlash
+                    </button>
+                    <span class="save-msg" id="intSaveMsg"><i class="fa fa-circle-check"></i> Saqlandi!</span>
+                </div>
+            </div>
+
         </main>
     </div>
 </div>
@@ -2021,6 +2092,9 @@ function initDashboard() {
 
     // GitHub
     loadGithubSettings();
+
+    // Integrations
+    loadIntegrations();
 }
 
 // ==================== FAQ ====================
@@ -2219,6 +2293,83 @@ function showToast(msg, type) {
     toast.style.transform = 'translateY(0)';
     clearTimeout(toast._t);
     toast._t = setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateY(10px)'; }, 3000);
+}
+
+// ==================== INTEGRATIONS ====================
+const INT_CONFIG_URL = 'https://raw.githubusercontent.com/nuraddinov477/resta.uz/main/integration-config.json';
+
+async function loadIntegrations() {
+    try {
+        const r = await fetch(INT_CONFIG_URL + '?t=' + Date.now());
+        if (!r.ok) return;
+        const cfg = await r.json();
+        if (cfg.telegram_token)   document.getElementById('int_telegram_token').value   = cfg.telegram_token;
+        if (cfg.telegram_chat_id) document.getElementById('int_telegram_chat_id').value = cfg.telegram_chat_id;
+        if (cfg.email_to)         document.getElementById('int_email_to').value         = cfg.email_to;
+        if (cfg.formspree_id)     document.getElementById('int_formspree_id').value     = cfg.formspree_id;
+    } catch(e) { /* silent */ }
+}
+
+async function saveIntegrations() {
+    const btn = document.getElementById('intSaveBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Saqlanmoqda...';
+    const payload = {
+        telegram_token:   document.getElementById('int_telegram_token').value.trim(),
+        telegram_chat_id: document.getElementById('int_telegram_chat_id').value.trim(),
+        email_to:         document.getElementById('int_email_to').value.trim(),
+        formspree_id:     document.getElementById('int_formspree_id').value.trim(),
+    };
+    try {
+        const r = await fetch('/api/save-config', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        if (r.ok) {
+            showMsg('intSaveMsg');
+        } else {
+            const err = await r.json().catch(() => ({}));
+            showToast('Xato: ' + (err.error || r.status), 'error');
+        }
+    } catch(e) {
+        showToast('Tarmoq xatosi: ' + e.message, 'error');
+    }
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa fa-floppy-disk"></i> Saqlash';
+}
+
+async function testTelegram() {
+    const token  = document.getElementById('int_telegram_token').value.trim();
+    const chatId = document.getElementById('int_telegram_chat_id').value.trim();
+    const btn    = document.getElementById('testTgBtn');
+    const msg    = document.getElementById('testTgMsg');
+    if (!token || !chatId) {
+        msg.style.color = '#f87171'; msg.style.opacity = '1';
+        msg.innerHTML = '<i class="fa fa-circle-xmark"></i> Token va Chat ID ni kiriting!';
+        return;
+    }
+    btn.disabled = true; btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Yuborilmoqda...';
+    try {
+        const r = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: chatId, text: '✅ RESTA sayt integratsiyasi ulandi! Forma xabarlari shu yerga keladi.' })
+        });
+        const d = await r.json();
+        if (d.ok) {
+            msg.style.color = '#4ade80'; msg.style.opacity = '1';
+            msg.innerHTML = '<i class="fa fa-circle-check"></i> Xabar yuborildi!';
+        } else {
+            msg.style.color = '#f87171'; msg.style.opacity = '1';
+            msg.innerHTML = '<i class="fa fa-circle-xmark"></i> ' + (d.description || 'Xato');
+        }
+    } catch(e) {
+        msg.style.color = '#f87171'; msg.style.opacity = '1';
+        msg.innerHTML = '<i class="fa fa-circle-xmark"></i> ' + e.message;
+    }
+    btn.disabled = false; btn.innerHTML = '<i class="fa fa-paper-plane"></i> Test xabar yuborish';
+    setTimeout(() => { msg.style.opacity = '0'; }, 4000);
 }
 
 // Auto-login if session active
