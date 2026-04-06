@@ -1503,9 +1503,9 @@ document.addEventListener('DOMContentLoaded', function(){
         btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Yuborilmoqda...';
         btn.disabled = true;
 
-        fetch('/api/contact', {
+        fetch('https://formspree.io/f/xdapylae', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({ name, phone, message: telegram ? 'Telegram: ' + telegram : '' })
         })
         .then(function(r) { return r.json(); })
