@@ -42,7 +42,7 @@ async function sendEmail(config, name, phone, message) {
         });
         await transporter.sendMail({
             from: `"RESTA Sayt" <${process.env.GMAIL_USER}>`,
-            to: config.email_to || 'abbosmirziyoyev1@gmail.com',
+            to: config.email_to || 'UmidQodir7337@gmail.com',
             subject: `Yangi murojaat: ${name} — ${phone}`,
             html: `<h2 style="color:#1a3575">Yangi murojaat — RESTA sayt</h2>
                    <p><b>Ism:</b> ${name}</p>
